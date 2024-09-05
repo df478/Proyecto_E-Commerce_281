@@ -1,6 +1,6 @@
 # Proyecto_E-Commerce_281
 Gonzalo
-Abraham
+Abraham Chacon
 Alan
 Eleazar
 Eugenio
