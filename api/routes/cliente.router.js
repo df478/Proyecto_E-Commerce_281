@@ -1,18 +1,13 @@
 const express = require('express');
-const CustomersService = require('../services/customers.service');
-const validatorHandler = require('../middlewares/validator.handler');
-const {
-  createCustomerSchema,
-  updateCustomerSchema,
-  getCustomerSchema,
-} = require('../schemas/customer.schema');
-
 const router = express.Router();
-const service = new CustomersService();
+
+const ClienteService = require('../services/cliente.service');
+const service = new ClienteService();
+
 
 router.get('/', async (req, res) => {
-  const customers = await service.find();
-  res.status(200).json(customers);
+  const clientes = await service.find();
+  res.status(200).json(clientes);
 });
 router.get(
   '/:customerId',
