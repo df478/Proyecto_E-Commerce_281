@@ -4,6 +4,7 @@ services:
     environment:
       - MYSQL_DATABASE=my_store
       - MYSQL_USER=grupo
+      - MYSQL_PASSWORD=admin123
       - MYSQL_ROOT_PASSWORD=admin123
       - MYSQL_PORT=3306
     ports:

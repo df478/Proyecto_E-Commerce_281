@@ -11,6 +11,7 @@ const sequelize = new Sequelize(URI, {
   logging: true,
 });
 
+
 setUpModels(sequelize);
 sequelize
   .sync()
