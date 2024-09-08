@@ -4,7 +4,7 @@ const id_producto = Joi.number().integer()
 const id_artesano = Joi.numbre().integer()
 const id_promocion = Joi.number().integer()
 const nombre_producto = Joi.string().min(2).max(50)
-const precio_producto = Joi.number().integer()
+const precio_producto = Joi.number().positive()
 const descripcion_producto = Joi.string().min(10).max(100)
 const stock_producto = Joi.number().integer()
 
