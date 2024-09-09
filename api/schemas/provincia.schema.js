@@ -18,7 +18,7 @@ const obtenerProvinciaSchema = Joi.object({
 })
 
 module.exports = {
-    crearArtesanoSchema,
-    actualizarArtesanoSchema,
-    obtenerArtesanoSchema
+    crearProvinciaSchema,
+    actualizarProvinciaSchema,
+    obtenerProvinciaSchema
 }
