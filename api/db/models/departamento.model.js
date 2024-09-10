@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const DEPARTAMENTO_TABLE = 'categories';
+const DEPARTAMENTO_TABLE = 'departamento';
 const DepartamentoSchema = {
     id_depto: {
         allowNull: false,
