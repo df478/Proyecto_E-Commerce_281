@@ -27,3 +27,8 @@ const obtenerArtesanoSchema = Joi.object({
     id_cliente: id_cliente.required(),
     id_pedido: id_pedido.required(),
 })
+module.exports = {
+    crearArtesanoSchema,
+    actualizarArtesanoSchema,
+    obtenerArtesanoSchema
+}
