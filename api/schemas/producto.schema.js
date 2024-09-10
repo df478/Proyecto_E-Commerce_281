@@ -10,7 +10,6 @@ const stock_producto = Joi.number().integer()
 
 const crearProductoSchema = Joi.object({
     id_artesano:id_artesano.required(),
-    id_producto: id_producto.required(),
     id_promocion: id_promocion.required(),
     nombre_producto: nombre_producto.required(),
     precio_producto: precio_producto.required(),
@@ -20,7 +19,6 @@ const crearProductoSchema = Joi.object({
 
 const actualizarProductoSchema = Joi.object({
     id_artesano:id_artesano,
-    id_producto:id_producto,
     id_producto:id_promocion,
     nombre_producto: nombre_producto,
     precio_producto: precio_producto,
@@ -30,8 +28,6 @@ const actualizarProductoSchema = Joi.object({
 
 const obtenerProductoSchema = Joi.object({
     id_producto: id_producto.required(),
-    id_artesano:id_artesano.required(),
-    id_promocion:id_promocion.required()
 })
 
 module.exports = {
