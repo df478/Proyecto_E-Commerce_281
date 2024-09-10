@@ -2,18 +2,18 @@ const Joi = require('joi');
 
 const id_carrito = Joi.number().integer();
 
-const crearArtesanoSchema = Joi.object({
+const crearCarritoSchema = Joi.object({
 })
 
-const actualizarArtesanoSchema = Joi.object({
+const actualizarCarritoSchema = Joi.object({
 })
 
-const obtenerArtesanoSchema = Joi.object({
+const obtenerCarritoSchema = Joi.object({
     id_carrito: id_carrito.required()
 })
 
 module.exports = {
-    crearArtesanoSchema,
-    actualizarArtesanoSchema,
-    obtenerArtesanoSchema
+    crearCarritoSchema,
+    actualizarCarritoSchema,
+    obtenerCarritoSchema
 }

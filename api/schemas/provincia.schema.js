@@ -1,11 +1,12 @@
 const Joi = require('joi');
 
 const id_provincia = Joi.number().integer();
-const nombre_provincia = Joi.string().min(1).max(30);
+const nombre_provincia = Joi.string().min(2).max(30);
 const id_departamento = Joi.number().integer();
 
 const crearProvinciaSchema = Joi.object({
-    nombre_provincia: nombre_provincia.required(),  
+    nombre_provincia: nombre_provincia.required(),
+    id_departamento: id_departamento.required()
 })
 
 const actualizarProvinciaSchema = Joi.object({
