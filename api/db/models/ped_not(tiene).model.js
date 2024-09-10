@@ -27,7 +27,6 @@ const ped_notSchema = {
 
 class Ped_Not extends Model {
     static associate(models) {
-      
     }
 
     static config(sequelize) {
