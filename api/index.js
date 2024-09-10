@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
+const sequelize = require('./libs/sequelize');
 
 // const {
 //   logErrors,
@@ -13,6 +14,9 @@ const app = express();
 const port = process.env.PORT || 3000; //puerto del servidor
 
 app.use(express.json());
+
+
+// sequelize.authenticate();
 
 const whitelist = [
   'http://localhost:5500',

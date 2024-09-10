@@ -1,53 +1,53 @@
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
 
-const ClienteService = require('../services/cliente.service');
-const service = new ClienteService();
+// const ClienteService = require('../services/cliente.service');
+// const service = new ClienteService();
 
 
-router.get('/', async (req, res) => {
-  const clientes = await service.find();
-  res.status(200).json(clientes);
-});
-router.get(
-  '/:customerId',
-  validatorHandler(getCustomerSchema, 'params'),
-  async (req, res, next) => {
-    try {
-      const { customerId } = req.params;
-      const customer = await service.findOne(customerId);
-      res.status(200).json(customer);
-    } catch (error) {
-      next(error);
-    }
-  },
-);
-router.post(
-  '/',
-  validatorHandler(createCustomerSchema, 'body'),
-  async (req, res) => {
-    const body = req.body;
-    const newCustomer = await service.create(body);
-    res.status(201).json(newCustomer);
-  },
-);
+// router.get('/', async (req, res) => {
+//   const clientes = await service.find();
+//   res.status(200).json(clientes);
+// });
+// // router.get(
+// //   '/:customerId',
+// //   validatorHandler(getCustomerSchema, 'params'),
+// //   async (req, res, next) => {
+// //     try {
+// //       const { customerId } = req.params;
+// //       const customer = await service.findOne(customerId);
+// //       res.status(200).json(customer);
+// //     } catch (error) {
+// //       next(error);
+// //     }
+// //   },
+// // );
+// // router.post(
+// //   '/',
+// //   validatorHandler(createCustomerSchema, 'body'),
+// //   async (req, res) => {
+// //     const body = req.body;
+// //     const newCustomer = await service.create(body);
+// //     res.status(201).json(newCustomer);
+// //   },
+// // );
 
-router.patch(
-  '/:customerId',
-  validatorHandler(getCustomerSchema, 'params'),
-  validatorHandler(updateCustomerSchema, 'body'),
-  async (req, res) => {
-    const { customerId } = req.params;
-    const body = req.body;
-    const customer = await service.update(customerId, body);
-    res.status(200).json(customer);
-  },
-);
+// // router.patch(
+// //   '/:customerId',
+// //   validatorHandler(getCustomerSchema, 'params'),
+// //   validatorHandler(updateCustomerSchema, 'body'),
+// //   async (req, res) => {
+// //     const { customerId } = req.params;
+// //     const body = req.body;
+// //     const customer = await service.update(customerId, body);
+// //     res.status(200).json(customer);
+// //   },
+// // );
 
-router.delete('/:customerId', async (req, res) => {
-  const { customerId } = req.params;
-  const result = await service.delete(customerId);
-  res.status(200).json(result);
-});
+// // router.delete('/:customerId', async (req, res) => {
+// //   const { customerId } = req.params;
+// //   const result = await service.delete(customerId);
+// //   res.status(200).json(result);
+// // });
 
-module.exports = router;
+// module.exports = router;
