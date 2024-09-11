@@ -1,86 +1,66 @@
 const express = require('express');
+const UsuarioService = require('./../services/usuario.service');
 const router = express.Router();
-
-const UsuarioService = require('../services/usuario.service');
 const service = new UsuarioService();
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
     try {
         const usuarios = await service.find();
-        res.status(200).json(usuarios);
+        res.json(usuarios);
     } catch (error) {
-        next(error);
+        res.status(500).json({ message: 'Error al obtener los usuarios', error });
     }
 });
 
-router.get(
-    '/:id_usuario',
-    validatorHandler(getUsuarioSchema, 'params'),
-    async (req, res, next) => {
-        try {
-            const { id_usuario } = req.params;
-            const usuario = await service.findOne(id_usuario);
-            if (usuario) {
-                res.status(200).json(usuario);
-            } else {
-                res.status(404).json({ message: 'Usuario no encontrado' });
-            }
-        } catch (error) {
-            next(error);
+router.get('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const usuario = await service.findOne(id);
+        if (!usuario) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
         }
+        res.json(usuario);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener el usuario', error });
     }
-);
+});
 
-router.post(
-    '/',
-    validatorHandler(createUsuarioSchema, 'body'),
-    async (req, res, next) => {
-        try {
-            const body = req.body;
-            const newUsuario = await service.create(body);
-            res.status(201).json(newUsuario);
-        } catch (error) {
-            next(error);
-        }
-    }
-);
+router.post('/', async (req, res) => {
+    try {
+        const body = req.body;
 
-router.patch(
-    '/:id_usuario',
-    validatorHandler(getUsuarioSchema, 'params'),
-    validatorHandler(updateUsuarioSchema, 'body'),
-    async (req, res, next) => {
-        try {
-            const { id_usuario } = req.params;
-            const body = req.body;
-            const updatedUsuario = await service.update(id_usuario, body);
-            if (updatedUsuario) {
-                res.status(200).json(updatedUsuario);
-            } else {
-                res.status(404).json({ message: 'Usuario no encontrado' });
-            }
-        } catch (error) {
-            next(error);
-        }
+        const nuevoUsuario = await service.create(body);
+        res.status(201).json(nuevoUsuario);
+    } catch (error) {
+        res.status(400).json({ message: 'Error al crear el usuario', error });
     }
-);
+});
 
-router.delete(
-    '/:id_usuario',
-    validatorHandler(getUsuarioSchema, 'params'),
-    async (req, res, next) => {
-        try {
-            const { id_usuario } = req.params;
-            const result = await service.delete(id_usuario);
-            if (result) {
-                res.status(200).json(result);
-            } else {
-                res.status(404).json({ message: 'Usuario no encontrado' });
-            }
-        } catch (error) {
-            next(error);
+router.patch('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const body = req.body;
+        const usuario = await service.update(id, body);
+        if (!usuario) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
         }
+        res.json(usuario);
+    } catch (error) {
+        res.status(400).json({ message: 'Error al actualizar el usuario', error });
     }
-);
+});
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const rta = await service.delete(id);
+        if (!rta) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+        res.json(rta);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al eliminar el usuario', error });
+    }
+});
 
 module.exports = router;
