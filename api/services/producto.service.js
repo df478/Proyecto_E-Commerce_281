@@ -1,4 +1,5 @@
 const { faker } = require("@faker-js/faker");
+const UsuarioService = require("./usuario.service");
 
 class ProductoService {
   constructor() {
@@ -50,3 +51,5 @@ class ProductoService {
     return { id };
   }
 }
+
+module.exports = ProductoService
