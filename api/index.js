@@ -4,7 +4,7 @@ const routerApi = require("./routes");
 // const sequelize = require('./libs/sequelize');
 
 const app = express();
-const port = process.env.PORT || 3000; //puerto del servidor
+const port = process.env.PORT || 5000; //puerto del servidor
 
 app.use(express.json());
 
@@ -64,6 +64,7 @@ app.get("/queriesxd", (req, res) => {
     res.send("No hay parametros D:")
   }
 });
+
 
 routerApi(app);
 app.use(cors(options));
