@@ -16,7 +16,11 @@ class ProductoService {
         precio_producto: parseInt(faker.commerce.price(), 10),
         descripcion_producto: faker.commerce.productDescription(),
         stock_producto: parseInt(Math.random() * 1000),
+<<<<<<< HEAD
         imagen_producto: faker.image.url()
+=======
+        imagen_producto: faker.image.url
+>>>>>>> 7a30b15f88e9e5e0fa041691865ad1b2dcfbb9bd
       });
     }
   }
@@ -52,4 +56,4 @@ class ProductoService {
   }
 }
 
-module.exports = ProductoService
+module.exports = ProductoService;
