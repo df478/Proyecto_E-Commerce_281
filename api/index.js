@@ -13,16 +13,24 @@ const whitelist = [
   "https://myapp.co",
   "http://localhost:3000",
   "http://localhost:5050",
+  "http://localhost:5000",
 ];
-const options = {
-  origin: (origin, callback) => {
-    if (whitelist.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("no permitido"));
-    }
-  },
-};
+// const options = {
+//   origin: (origin, callback) => {
+//     if (whitelist.includes(origin) || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("no permitido"));
+//     }
+//   },
+// };
+
+const corsOptions = {
+  origin:'http://localhost:3000', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 app.get("/api", (req, res) => {
   res.send("Hola mi server en express");
@@ -67,7 +75,8 @@ app.get("/queriesxd", (req, res) => {
 
 
 routerApi(app);
-app.use(cors(options));
+// app.use(cors(options));
+
 
 app.listen(port, () => {
   console.log("Mi port " + port);
