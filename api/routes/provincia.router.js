@@ -3,7 +3,7 @@ const ProvinciaService = require('./../services/provincia.service');
 const router = express.Router();
 const service = new ProvinciaService();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const provincias = service.find();
         res.json(provincias);
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const provincia = service.findOne(id);
@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
     }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const body = req.body;
         const nuevaProvincia = service.create(body);
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
     }
 });
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const body = req.body;
@@ -49,7 +49,7 @@ router.patch('/:id', (req, res) => {
     }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const rta = service.delete(id);
