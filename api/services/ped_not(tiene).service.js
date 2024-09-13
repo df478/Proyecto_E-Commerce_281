@@ -1,56 +1,63 @@
-const { faker } = require("@faker-js/faker");
+const { faker } = require('@faker-js/faker');
 
-class Ped_NotService {
+class PedNotService {
   constructor() {
-    this.ped_Not = [];
+    this.pedNot = [];
     this.generate();
   }
 
   generate() {
-    const limite = 100;
+    const limite = 1000;
     for (let index = 0; index < limite; index++) {
-      this.ped_Not.push({
-        id_pedido: index,
-        id_notificacion: parseInt(Math.random() * 100), // Suponiendo que las notificaciones tienen IDs del 0 al 99
-        fecha_ped_not: faker.date.recent(30).toISOString().split('T')[0],  // Fecha reciente en formato YYYY-MM-DD
+      this.pedNot.push({
+        id_pedido: faker.number.int({ min: 1, max: 1000 }), // Assuming id_pedido is an integer FK
+        id_notificacion: faker.number.int({ min: 1, max: 1000 }), // Assuming id_notificacion is an integer FK
+        fecha_ped_not: faker.date.recent(),
       });
     }
   }
 
   create(data) {
-    const nuevoPed_Not = {
-      id_pedido: this.ped_Not.length,
-      ...data,
+    const nuevoPedNot = {
+      id_pedido: data.id_pedido,
+      id_notificacion: data.id_notificacion,
+      fecha_ped_not: data.fecha_ped_not || faker.date.recent(),
     };
-    this.ped_Not.push(nuevoPed_Not);
-    return nuevoPed_Not;
+    this.pedNot.push(nuevoPedNot);
+    return nuevoPedNot;
   }
 
-  find() {  
-    return this.ped_Not;
+  find() {
+    return this.pedNot;
   }
 
-  findOne(id) {
-    return this.ped_Not.find(item => item.id_pedido === id);
+  findOne(id_pedido, id_notificacion) {
+    return this.pedNot.find(
+      (item) => item.id_pedido === id_pedido && item.id_notificacion === id_notificacion
+    );
   }
 
-  update(id, cambios) {
-    const index = this.ped_Not.findIndex(item => item.id_pedido === id);
+  update(id_pedido, id_notificacion, cambios) {
+    const index = this.pedNot.findIndex(
+      (item) => item.id_pedido === id_pedido && item.id_notificacion === id_notificacion
+    );
     if (index === -1) {
-        throw new Error('Relación de pedido-notificación no encontrada');
+      throw new Error('Registro de pedido-notificación no encontrado');
     }
-    this.ped_Not[index] = { ...this.ped_Not[index], ...cambios };
-    return this.ped_Not[index];
+    this.pedNot[index] = { ...this.pedNot[index], ...cambios };
+    return this.pedNot[index];
   }
 
-  delete(id) {
-    const index = this.ped_Not.findIndex(item => item.id_pedido === id);
+  delete(id_pedido, id_notificacion) {
+    const index = this.pedNot.findIndex(
+      (item) => item.id_pedido === id_pedido && item.id_notificacion === id_notificacion
+    );
     if (index === -1) {
-        throw new Error('Relación de pedido-notificación no encontrada');
+      throw new Error('Registro de pedido-notificación no encontrado');
     }
-    this.ped_Not.splice(index, 1);
-    return { id_pedido: id };
+    this.pedNot.splice(index, 1);
+    return { id_pedido, id_notificacion };
   }
 }
 
-module.exports = Ped_NotService;
+module.exports = PedNotService;
