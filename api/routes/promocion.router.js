@@ -1,37 +1,65 @@
-const express = require('express')
+const express = require('express');
+const PromocionService = require('./../services/promocion.service');
+const router = express.Router();
+const service = new PromocionService();
 
-const PromocionService = require('./../services/promocion.service')
-const router = express.Router()
-const service = new PromocionService()
+router.get('/', async (req, res) => {
+    try {
+        const promociones = await service.find();
+        res.json(promociones);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener las promociones', error });
+    }
+});
 
-router.get('/', (req, res) => {
-    const promociones = service.find()
-    res.json(promociones)
-})
+router.get('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const promocion = await service.findOne(id);
+        if (!promocion) {
+            return res.status(404).json({ message: 'Promoción no encontrada' });
+        }
+        res.json(promocion);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener la promoción', error });
+    }
+});
 
-router.get('/:id', (req, res) => {
-    const { id } = req.params
-    const promocion = service.findOne(id)
-    res.json(promocion)
-})
+router.post('/', async (req, res) => {
+    try {
+        const body = req.body;
+        const nuevaPromocion = await service.create(body);
+        res.status(201).json(nuevaPromocion);
+    } catch (error) {
+        res.status(400).json({ message: 'Error al crear la promoción', error });
+    }
+});
 
-router.post('/', (req, res) => {
-    const body = req.body
-    const nuevoPromocion = service.create(body)
-    res.status(201).json(nuevoPromocion)
-})
+router.patch('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const body = req.body;
+        const promocion = await service.update(id, body);
+        if (!promocion) {
+            return res.status(404).json({ message: 'Promoción no encontrada' });
+        }
+        res.json(promocion);
+    } catch (error) {
+        res.status(400).json({ message: 'Error al actualizar la promoción', error });
+    }
+});
 
-router.patch('/:id', (req, res) => {
-    const { id } = req.params
-    const body = req.body
-    const promocionActualizada = service.update(id, body)
-    res.json(promocionActualizada)
-})
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const rta = await service.delete(id);
+        if (!rta) {
+            return res.status(404).json({ message: 'Promoción no encontrada' });
+        }
+        res.json(rta);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al eliminar la promoción', error });
+    }
+});
 
-router.delete('/:id', (req, res) => {
-    const { id } = req.params
-    const rta = service.delete(id)
-    res.json(rta)
-})
-
-module.exports = router
+module.exports = router;
