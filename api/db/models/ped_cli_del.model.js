@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize')
 
 const PED_CLI_DEL_TABLE = 'ped_cli_del'
 
-const ped_cli_delSchema = {
+const Ped_cli_delSchema = {
     id_pedido: {  
         type: DataTypes.INTEGER,
         references: {
@@ -54,4 +54,4 @@ class Ped_Cli_Del extends Model {
     }
 }
 
-module.exports = { Ped_Cli_Del, ped_cli_delSchema,PED_CLI_DEL_TABLE}
+module.exports = { Ped_Cli_Del, Ped_cli_delSchema,PED_CLI_DEL_TABLE}

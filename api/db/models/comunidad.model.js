@@ -15,7 +15,7 @@ const ComunidadSchema = {
   },
   id_municipio: {
     type: DataTypes.INTEGER,
-    allowNull: true,             
+    allowNull: true,
     references: {
       model: 'municipios',       
       key: 'id_municipio',       

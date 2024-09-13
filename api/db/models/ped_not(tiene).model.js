@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize')
 
 const PED_NOT_TABLE = 'ped_not'
 
-const ped_notSchema = {
+const Ped_notSchema = {
     id_pedido: {  
         type: DataTypes.INTEGER,
         references: {
@@ -39,4 +39,4 @@ class Ped_Not extends Model {
     }
 }
 
-module.exports = { Ped_Not, ped_notSchema,PED_NOT_TABLE}
+module.exports = { Ped_Not, Ped_notSchema,PED_NOT_TABLE}

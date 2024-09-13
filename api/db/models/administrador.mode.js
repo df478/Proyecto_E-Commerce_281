@@ -32,16 +32,16 @@ const AdministradorSchema = {
   },
 };
 
-class Provincia extends Model {
+class Administrador extends Model {
   static associate(models) {}
   static config(sequelize) {
     return {
       sequelize,
-      tableName: PROVINCIA_TABLE,
-      modelName: "Provincia",
+      tableName: ADMINISTRADOR_TABLE,
+      modelName: "Administrador",
       timestamps: false,
     };
   }
 }
 
-module.exports = { Provincia, ProvinciaSchema, PROVINCIA_TABLE };
+module.exports = { Administrador,AdministradorSchema, ADMINISTRADOR_TABLE};

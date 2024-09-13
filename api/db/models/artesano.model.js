@@ -1,31 +1,71 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const DEPARTAMENTO_TABLE = 'categories';
-const DepartamentoSchema = {
-    id_depto: {
+const ARTESANO_TABLE = 'artesano';
+const ArtesanoSchema = {
+    
+    id_usuario: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
-    }, 
-    ndepto: {
+    },
+    nombre_usuario: {
         type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: [3, 50]
+        }
+    },
+    email_usuario: {
+        type: DataTypes.STRING,
+        allowNull: false,
         unique: true,
+        validate: {
+            isEmail: true
+        }
+    },
+    password_usuario: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: [8, 20]
+        }
+    },
+    tipo_usuario: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isIn: [['cliente']]
+        }
+    },
+    especialidad: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    calificacion: {
+        type: DataTypes.INTEGER,
+        defaultValue: 10,
+        validate: {
+            min: 1
+        }
+    },
+    id_comunidad: {
+        type:DataTypes.INTEGER,
         allowNull: false,
     }
 }
 
-class Departamento extends Model {
+class Artesano extends Model {
     static associate(models) {
 
     }
     static config(sequelize) {
         return {
             sequelize,
-            tableName: DEPARTAMENTO_TABLE,
-            modelName: 'Departamento',
+            tableName: ARTESANO_TABLE,
+            modelName: 'Artesano',
             timestamps: false,
         }
     }
 }
 
-module.exports = { Departamento, DepartamentoSchema, DEPARTAMENTO_TABLE}
+module.exports = { Artesano,ArtesanoSchema,ARTESANO_TABLE}

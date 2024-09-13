@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const PAGO_TABLE = 'pago';
 
-const pagoSchema = {
+const PagoSchema = {
     id_pago: {
         allowNull: false,
         autoIncrement: true,
@@ -45,4 +45,4 @@ class Pago extends Model {
     }
 }
 
-module.exports = { Pago, pagoSchema, PAGO_TABLE };
+module.exports = { Pago, PagoSchema, PAGO_TABLE };
