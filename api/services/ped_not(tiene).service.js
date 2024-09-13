@@ -7,12 +7,12 @@ class PedNotService {
   }
 
   generate() {
-    const limite = 1000;
+    const limite = 100;
     for (let index = 0; index < limite; index++) {
       this.pedNot.push({
-        id_pedido: faker.number.int({ min: 1, max: 1000 }), // Assuming id_pedido is an integer FK
-        id_notificacion: faker.number.int({ min: 1, max: 1000 }), // Assuming id_notificacion is an integer FK
-        fecha_ped_not: faker.date.recent(),
+        id_pedido: faker.number.int({ min: 1, max: 100 }), // Assuming id_pedido is an integer FK
+        id_notificacion: faker.number.int({ min: 1, max: 100 }), // Assuming id_notificacion is an integer FK
+        fecha_ped_not: faker.date.recent().toISOString().split('T')[0],
       });
     }
   }

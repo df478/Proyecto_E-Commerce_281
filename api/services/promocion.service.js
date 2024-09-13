@@ -12,9 +12,9 @@ class PromocionService {
         this.promociones.push({
         id_promocion: index,
         nombre_promocion: faker.commerce.productName(),
-        descuento_promocion: faker.number.float({ min: 5, max: 50, precision: 0.01 }), // Discounts between 5% and 50%
-        fecha_ini: faker.date.past(),
-        fecha_fin: faker.date.future(),
+        descuento_promocion: parseFloat(faker.number.float({ min: 5, max: 50, precision: 0.01 })).toFixed(1), // Discounts between 5% and 50%
+        fecha_ini: faker.date.past().toISOString().split('T')[0],
+        fecha_fin: faker.date.future().toISOString().split('T')[0],
       });
     }
   }
