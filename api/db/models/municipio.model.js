@@ -10,8 +10,12 @@ const MunicipioSchema = {
     type: DataTypes.INTEGER,
   },
   nombre_municipio: {
-    type: DataTypes.STRING(100), 
-    allowNull: true,             
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
+    validate: {
+        len: [3, 50]
+    }        
   },
   id_provincia: {
     type: DataTypes.INTEGER,
@@ -30,8 +34,6 @@ class Municipio extends Model {
       foreignKey: 'id_provincia',
       as: 'provincia'
     });
-
-   
   }
 
   static config(sequelize) {

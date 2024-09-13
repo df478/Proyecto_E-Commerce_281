@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const DELIVERY_TABLE = 'delivery';
 
-const deliverySchema = {
+const DeliverySchema = {
     id_usuario: {
         allowNull: false,
         autoIncrement: true,
@@ -61,4 +61,4 @@ class Delivery extends Model {
     }
 }
 
-module.exports = { Delivery, deliverySchema, DELIVERY_TABLE };
+module.exports = { Delivery, DeliverySchema, DELIVERY_TABLE };

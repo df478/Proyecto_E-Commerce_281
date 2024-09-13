@@ -11,11 +11,11 @@ const notificacionSchema = {
     },
     descripcion_notificacion: {  
         type: DataTypes.STRING,
-        allowNull: false,  
+        allowNull: false,
     },
     tipo_notificacion: {  
         type: DataTypes.STRING,
-        allowNull: false,  
+        allowNull: false,
     }
 }
 
