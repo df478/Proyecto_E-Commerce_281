@@ -32,16 +32,14 @@ class PedNotService {
   }
 
   findOne(id_pedido, id_notificacion) {
-    return this.pedNot.find(
-      (item) => item.id_pedido === id_pedido && item.id_notificacion === id_notificacion
-    );
+    return this.pedNot.find((item) => item.id_pedido == id_pedido && item.id_notificacion == id_notificacion);
   }
 
   update(id_pedido, id_notificacion, cambios) {
     const index = this.pedNot.findIndex(
-      (item) => item.id_pedido === id_pedido && item.id_notificacion === id_notificacion
+      (item) => item.id_pedido == id_pedido && item.id_notificacion == id_notificacion
     );
-    if (index === -1) {
+    if (index == -1) {
       throw new Error('Registro de pedido-notificación no encontrado');
     }
     this.pedNot[index] = { ...this.pedNot[index], ...cambios };
@@ -50,9 +48,9 @@ class PedNotService {
 
   delete(id_pedido, id_notificacion) {
     const index = this.pedNot.findIndex(
-      (item) => item.id_pedido === id_pedido && item.id_notificacion === id_notificacion
+      (item) => item.id_pedido == id_pedido && item.id_notificacion == id_notificacion
     );
-    if (index === -1) {
+    if (index == -1) {
       throw new Error('Registro de pedido-notificación no encontrado');
     }
     this.pedNot.splice(index, 1);

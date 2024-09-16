@@ -33,12 +33,12 @@ class PromocionService {
   }
 
   findOne(id_promocion) {
-    return this.promociones.find(item => item.id_promocion === id_promocion);
+    return this.promociones.find(item => item.id_promocion == id_promocion);
   }
 
   update(id_promocion, cambios) {
-    const index = this.promociones.findIndex(item => item.id_promocion === id_promocion);
-    if (index === -1) {
+    const index = this.promociones.findIndex(item => item.id_promocion == id_promocion);
+    if (index == -1) {
       throw new Error('Promoción no encontrada');
     }
     this.promociones[index] = { ...this.promociones[index], ...cambios };
@@ -46,8 +46,8 @@ class PromocionService {
   }
 
   delete(id_promocion) {
-    const index = this.promociones.findIndex(item => item.id_promocion === id_promocion);
-    if (index === -1) {
+    const index = this.promociones.findIndex(item => item.id_promocion == id_promocion);
+    if (index == -1) {
       throw new Error('Promoción no encontrada');
     }
     this.promociones.splice(index, 1);

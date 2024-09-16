@@ -2,7 +2,7 @@ const express = require('express');
 const PedNotService = require('./../services/ped_not(tiene).service');
 const router = express.Router();
 const service = new PedNotService();
-
+//despliega
 router.get('/', async (req, res) => {
     try {
         const pedNot = await service.find();
@@ -11,20 +11,21 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Error al obtener PedNot', error });
     }
 });
-
-router.get('/:id', async (req, res) => {
+//busca por id
+router.get('/:id_ped/:id_not', async (req, res) => {
     try {
-        const { id } = req.params;
-        const pedNot = await service.findOne(id);
+        const { id_ped,id_not } = req.params;
+        const pedNot = await service.findOne(id_ped, id_not);
         if (!pedNot) {
             return res.status(404).json({ message: 'PedNot no encontrado' });
         }
         res.json(pedNot);
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener PedNot', error });
+        console.error('Error al obtener PedNot:', error);
+        res.status(500).json({ message: 'Error al obtener PedNot', error: error.message });
     }
 });
-
+//agregar
 router.post('/', async (req, res) => {
     try {
         const body = req.body;
@@ -34,12 +35,12 @@ router.post('/', async (req, res) => {
         res.status(400).json({ message: 'Error al crear PedNot', error });
     }
 });
-
-router.patch('/:id', async (req, res) => {
+//modifica una parte o un atributo de pedNot
+router.patch('/:id_ped/:id_not', async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id_ped,id_not } = req.params;
         const body = req.body;
-        const pedNotActualizado = await service.update(id, body);
+        const pedNotActualizado = await service.update(id_ped,id_not, body);
         if (!pedNotActualizado) {
             return res.status(404).json({ message: 'PedNot no encontrado' });
         }
@@ -48,7 +49,7 @@ router.patch('/:id', async (req, res) => {
         res.status(400).json({ message: 'Error al actualizar PedNot', error });
     }
 });
-
+//elimina un pdNot con un id identificado
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;

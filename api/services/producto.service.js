@@ -31,20 +31,20 @@ class ProductoService {
   find() {  
     return this.products;
   }
-  findOne(id) {
-    return this.products.find(item => item.id);
+  findOne(id_producto) {
+    return this.products.find(item => item.id_producto == id_producto);
   }
   update(id, cambios) {
-    const index = this.products.findIndex(item => item.id === id);
-    if(index === -1) {
+    const index = this.products.findIndex(item => item.id == id);
+    if(index == -1) {
         throw new Error('Producto no encontrado');
     }
     this.products[index] = cambios;
     return this.products[index];
   }
   delete(id) {
-    const index = this.products.findIndex(item => item.id === id);
-    if(index === -1) {
+    const index = this.products.findIndex(item => item.id == id);
+    if(index == -1) {
         throw new Error('Producto no encontrado');
     }
     this.products.splice(index,1);
