@@ -29,8 +29,12 @@ const promocionSchema = {
 
 class Promocion extends Model {
     static associate(models) {
+        // Una promoción tiene muchos productos (1 : n)
+        this.hasMany(models.Producto, {
+            foreignKey: 'id_promocion',
+            as: 'producto'
+        });
     }
-
     static config(sequelize) {
         return {
             sequelize,

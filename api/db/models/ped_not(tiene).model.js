@@ -1,8 +1,8 @@
-const { Model, DataTypes, Sequelize } = require('sequelize')
+const { Model, DataTypes } = require('sequelize');
 
-const PED_NOT_TABLE = 'ped_not'
+const PED_NOT_TABLE = 'pedNot'; //nombre de la tabla
 
-const Ped_notSchema = {
+const PedNotSchema = {
     id_pedido: {  
         type: DataTypes.INTEGER,
         references: {
@@ -15,7 +15,7 @@ const Ped_notSchema = {
         type: DataTypes.INTEGER,
         references: {
             model: 'notificacion',  
-            key: 'id_notificacion' 
+            key: 'id_notificacion'
         },
         allowNull: false,
     },
@@ -23,20 +23,22 @@ const Ped_notSchema = {
         type: DataTypes.DATE,
         allowNull: false,
     }
-}
+};
 
-class Ped_Not extends Model {
+class PedNot extends Model {
+    // No es necesario definir asociaciones en el método associate aquí
     static associate(models) {
+        // Las asociaciones se definen en los modelos que utilizan esta tabla intermedia
     }
 
     static config(sequelize) {
         return {
             sequelize,
             tableName: PED_NOT_TABLE,  
-            modelName: 'Ped_Not',
+            modelName: 'PedNot', // Nombre del modelo exportado
             timestamps: false,  
-        }
+        };
     }
 }
 
-module.exports = { Ped_Not, Ped_notSchema,PED_NOT_TABLE}
+module.exports = { PedNot, PedNotSchema, PED_NOT_TABLE };

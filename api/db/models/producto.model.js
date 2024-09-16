@@ -45,7 +45,16 @@ const productoSchema = {
 
 class Producto extends Model {
     static associate(models) {
-        
+        // Una promoción tiene muchos productos (1 : n)
+        this.belongsTo(models.Promocion, {
+            foreignKey: 'id_promocion',
+            as: 'promocion'
+        });
+        // Una artesano tiene muchos productos (1 : n)
+        this.belongsTo(models.Artesano, {
+            foreignKey: 'id_artesano',
+            as: 'artesano'
+        })
     }
 
     static config(sequelize) {
