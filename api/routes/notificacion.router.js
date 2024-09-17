@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         const notificaciones = await service.find();
         res.json(notificaciones);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al obetener las notificaciones', error  });
     }
 });
 
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
         }
         res.json(notificacion);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al obtener la notificacion', error  });
     }
 });
 
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
         const nuevaNotificacion = await service.create(body);
         res.status(201).json(nuevaNotificacion);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al crear la notificacion', error  });
     }
 });
 
@@ -45,7 +45,7 @@ router.patch('/:id', async (req, res) => {
         }
         res.json(notificacionActualizada);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al actualizar la notificacion', error  });
     }
 });
 
@@ -58,7 +58,7 @@ router.delete('/:id', async (req, res) => {
         }
         res.json(rta);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({  message: 'Error al eliminar la notificacion', error });
     }
 });
 

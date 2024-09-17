@@ -28,7 +28,10 @@ const ProvinciaSchema = {
 };
 
 class Provincia extends Model {
-  static associate(models) {}
+  static associate(models) {
+
+    
+  }
   static config(sequelize) {
     return {
       sequelize,

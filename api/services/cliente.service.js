@@ -35,7 +35,7 @@ class ClienteService {
   }
 
   findOne(id_usuario) {
-    return this.clientes.find(item => item.id_usuario === id_usuario);
+    return this.clientes.find(item => item.id_usuario == id_usuario);
   }
 
   update(id_usuario, cambios) {

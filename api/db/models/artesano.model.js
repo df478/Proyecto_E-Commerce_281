@@ -1,4 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { COMUNIDAD_TABLE } = require("./comunidad.model");
+
+
 const ARTESANO_TABLE = 'artesano';
 const ArtesanoSchema = {
     
@@ -34,7 +37,7 @@ const ArtesanoSchema = {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            isIn: [['cliente']]
+            isIn: [['artesano']]
         }
     },
     especialidad: {
@@ -51,12 +54,21 @@ const ArtesanoSchema = {
     id_comunidad: {
         type:DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: COMUNIDAD_TABLE,
+            key: "id_comunidad",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
     }
 }
 
 class Artesano extends Model {
     static associate(models) {
-
+        this.belongsTo(models.Pedido, {
+            foreignKey: 'id_comunidad',
+            as: 'comunidad'
+        });
     }
     static config(sequelize) {
         return {
