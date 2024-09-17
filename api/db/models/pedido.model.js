@@ -11,7 +11,11 @@ const pedidoSchema = {
     },
     id_carrito: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'carrito',
+            key: 'id_carrito'
+        }
     },
     fecha_pedido: {
         type: DataTypes.DATE,
@@ -32,6 +36,12 @@ const pedidoSchema = {
 
 class Pedido extends Model {
     static associate(models) {
+        
+        this.belongsTo(models.Carrito, {
+            foreignKey: 'id_carrito',
+            as: 'carrito'
+        });
+
     }
 
     static config(sequelize) {
