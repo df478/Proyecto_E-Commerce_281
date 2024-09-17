@@ -50,10 +50,10 @@ router.patch('/:id_ped/:id_not', async (req, res) => {
     }
 });
 //elimina un pdNot con un id identificado
-router.delete('/:id', async (req, res) => {
+router.delete('/:id_ped/:id_not', async (req, res) => {
     try {
-        const { id } = req.params;
-        const rta = await service.delete(id);
+        const { id_ped,id_not } = req.params;
+        const rta = await service.delete(id_ped,id_not);
         if (!rta) {
             return res.status(404).json({ message: 'PedNot no encontrado' });
         }
