@@ -39,7 +39,7 @@ class ClienteService {
   }
 
   update(id_usuario, cambios) {
-    const index = this.clientes.findIndex(item => item.id_usuario === id_usuario);
+    const index = this.clientes.findIndex(item => item.id_usuario === parseInt(id_usuario));
     if (index === -1) {
       throw new Error('Cliente no encontrado');
     }

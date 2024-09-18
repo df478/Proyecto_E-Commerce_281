@@ -19,12 +19,12 @@ router.get("/", async (req, res) => {
 });
 
 router.get(
-  "/:id",
+  "/:id_usuario",
   validatorHandler(obtenerClienteSchema, "params"),
   async (req, res) => {
     try {
-      const { id } = req.params;
-      const cliente = await service.findOne(id);
+      const { id_usuario } = req.params;
+      const cliente = await service.findOne(id_usuario);
       if (!cliente) {
         return res.status(404).json({ message: "Cliente no encontrado" });
       }
@@ -50,22 +50,26 @@ router.post(
 );
 
 router.patch(
-  "/:id",
+  "/:id_usuario",
   validatorHandler(obtenerClienteSchema, "params"),
   validatorHandler(actualizarClienteSchema, "body"),
   async (req, res) => {
     try {
-      const { id } = req.params;
+      const { id_usuario } = req.params;
       const body = req.body;
-      const cliente = await service.update(id, body);
+      const cliente = await service.update(id_usuario, body);
       if (!cliente) {
         return res.status(404).json({ message: "Cliente no encontrado" });
       }
       res.json(cliente);
     } catch (error) {
+      console.error(error); // Imprimir el error para depuración
       res
         .status(400)
-        .json({ message: "Error al actualizar el cliente", error });
+        .json({
+          message: "Error al actualizar el cliente",
+          error: error.message || error,
+        });
     }
   }
 );

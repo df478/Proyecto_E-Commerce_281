@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const routerApi = require("./routes");
+const { logErrors, boomErrorHandler, errorHandler, ormErrorHandler } = require("./middlewares/error.handler");
 // const sequelize = require('./libs/sequelize');
 
 const app = express();
@@ -76,7 +77,10 @@ app.get("/queriesxd", (req, res) => {
 
 routerApi(app);
 // app.use(cors(options));
-
+app.use(logErrors);
+app.use(boomErrorHandler);
+app.use(ormErrorHandler);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log("Mi port " + port);

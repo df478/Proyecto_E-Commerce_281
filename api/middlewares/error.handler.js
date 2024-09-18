@@ -1,4 +1,4 @@
-const { ValidationError } = require("require");
+const { ValidationError } = require("sequelize");
 function logErrors(err, req, res, next) {
   console.log("log errors");
   console.error(err);
@@ -22,7 +22,7 @@ function boomErrorHandler(err, req, res, next) {
   }
 }
 
-function ormErrorHandler(params) {
+function ormErrorHandler(err, req, res, next) {
   if (err instanceof ValidationError) {
     res.status(409).json({
       statusCode: 409,
