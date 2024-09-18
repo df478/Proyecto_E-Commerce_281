@@ -38,6 +38,10 @@ class ClienteService {
     return this.clientes.find(item => item.id_usuario == parseInt(id_usuario));
   }
 
+  findByEmail() {
+    
+  }
+
   update(id_usuario, cambios) {
     const index = this.clientes.findIndex(item => item.id_usuario === parseInt(id_usuario));
     if (index === -1) {
