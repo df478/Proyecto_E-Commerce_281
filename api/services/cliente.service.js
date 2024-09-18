@@ -35,7 +35,7 @@ class ClienteService {
   }
 
   findOne(id_usuario) {
-    return this.clientes.find(item => item.id_usuario == id_usuario);
+    return this.clientes.find(item => item.id_usuario == parseInt(id_usuario));
   }
 
   update(id_usuario, cambios) {
@@ -48,7 +48,7 @@ class ClienteService {
   }
 
   delete(id_usuario) {
-    const index = this.clientes.findIndex(item => item.id_usuario === id_usuario);
+    const index = this.clientes.findIndex(item => item.id_usuario === parseInt(id_usuario));
     if (index === -1) {
       throw new Error('Cliente no encontrado');
     }
