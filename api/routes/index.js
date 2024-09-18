@@ -1,7 +1,7 @@
 const express = require('express');
 
 
-const administradorRouter = requite('./administrador.router');
+const administradorRouter = require('./administrador.router');
 const carritoRouter = require('./producto.router');
 const clienteRouter = require('./cliente.router');
 const comunidadRouter = require('./comunidad.router');
@@ -9,7 +9,7 @@ const deliveryRouter = require('./delivery.router');
 const municipioRouter = require('./municipio.router');
 const notificacionRouter = require('./notificacion.router')
 const pagoRouter = require('./pago.router');
-const pedCliDelRouter = require('./ped_cli_del.router');
+//const pedCliDelRouter = require('./ped_cli_del.router');
 const pedNotRouter = require('./ped_not(tiene).router');
 const pedidoRouter = require('./pedido.router');
 const proPromCliCarRouter = require('./pro_prom_cli_car.router');
@@ -33,7 +33,7 @@ function routerApi(app) {
   router.use('/notificiacion', notificacionRouter);
   router.use('/cliente', clienteRouter);
   router.use('/pago', pagoRouter);
-  router.use('/pedCliDel', pedCliDelRouter);
+  //router.use('/pedCliDel', pedCliDelRouter);
   router.use('/pedNot',pedNotRouter);
   router.use('/pedido', pedidoRouter);
   router.use('/proPromCliCar', proPromCliCarRouter);

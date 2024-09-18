@@ -2,7 +2,7 @@ const { faker } = require("@faker-js/faker");
 
 class AdministradorService {
   constructor() {
-    this.administrador = [];
+    this.clientes = [];
     this.generate();
   }
 

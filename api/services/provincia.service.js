@@ -9,7 +9,7 @@ class ProvinciaService {
   generate() {
     const limite = 100;
     for (let index = 0; index < limite; index++) {
-      this.clientes.push({
+      this.provincia.push({
         id_provincia: index,
         nombre_provincia: faker.location.state(),
         id_departamento: parseInt(Math.random() * 100),

@@ -9,7 +9,7 @@ class ProPromCliCarService {
   generate() {
     const limite = 100;
     for (let index = 0; index < limite; index++) {
-      this.clientes.push({
+      this.aniade.push({
         id_producto: parseInt(Math.random() * 500),
         id_carrito: parseInt(Math.random() * 500),
         id_cliente: parseInt(Math.random() * 500),

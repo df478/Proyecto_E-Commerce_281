@@ -11,7 +11,7 @@ class NotificacionService {
     for (let index = 0; index < limite; index++) {
       this.notificacion.push({
         id_notificacion: index,
-        descripcion_notificacion: faker.hacker.phraase(),
+        descripcion_notificacion: faker.commerce.productDescription(),
         tipo_notificacion: faker.helpers.arrayElement(['success', 'info', 'warning', 'error'])
 
 
