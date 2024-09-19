@@ -5,7 +5,6 @@ const service = new AuthService();
 
 const router = express.Router();
 
-//Categories
 router.post(
   '/login',
   passport.authenticate('local', { session: false }),

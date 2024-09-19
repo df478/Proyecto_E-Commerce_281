@@ -1,6 +1,6 @@
 const express = require("express");
 const ReseniaService = require("./../services/resenia.service"); 
-const validatorHandler = require( "./../middlewares/validator.handle");
+const validatorHandler = require( "./../middlewares/validator.handler");
 const router = express.Router();
 const service = new ReseniaService();
 

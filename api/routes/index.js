@@ -16,8 +16,8 @@ const proPromCliCarRouter = require('./pro_prom_cli_car.router');
 const productoRouter = require('./producto.router');
 const promocionRouter = require('./promocion.router');
 const provinciaRouter = require('./provincia.router');
-const reseniaRouter = require('./resenia.router');
-const usuNorAdminRouter = require('./usu_nor_Admin.router');
+//const reseniaRouter = require('./resenia.router');
+//const usuNorAdminRouter = require('./usu_nor_Admin.router');
 const usuarioRouter = require('./usuario.router');
 
 
@@ -40,8 +40,8 @@ function routerApi(app) {
   router.use('/producto', productoRouter);
   router.use('/promocion',promocionRouter);
   router.use('/provincia', provinciaRouter);
-  router.use('/resenia', reseniaRouter);
-  router.use('/usuNorAdmin', usuNorAdminRouter);
+  //router.use('/resenia', reseniaRouter);
+  //router.use('/usuNorAdmin', usuNorAdminRouter);
   router.use('/usuario', usuarioRouter);
 
 

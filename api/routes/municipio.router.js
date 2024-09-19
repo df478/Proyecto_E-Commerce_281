@@ -6,9 +6,9 @@ const service = new MunicipioService();
 
 const {
     crearMunicipioSchema,
-    actualizaMunicipioSchema,
+    actualizarMunicipioSchema,
     obtenerMunicipioSchema
-  } = require( "./../schemas/municipio.schema ");
+  } = require( "../schemas/municipio.schema");
   
   router.get( "/ ", async (req, res) => {
     try {
