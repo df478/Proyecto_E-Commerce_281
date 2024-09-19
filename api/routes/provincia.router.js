@@ -1,7 +1,13 @@
 const express = require('express');
 const ProvinciaService = require('./../services/provincia.service'); 
+const validatorHandler = require("../middlewares/validator.handler");
 const router = express.Router();
 const service = new ProvinciaService();
+const {
+    obtenerProvinciaSchema,
+    crearProvinciaSchema,
+    actualizarProvinciaSchema,
+  } = require("../schemas/provincia.schema");
 
 router.get('/', async (req, res) => {
     try {
@@ -12,10 +18,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id_provincia', 
+    validatorHandler(obtenerProvinciaSchema, "params"),
+    async (req, res) => {
     try {
-        const { id } = req.params;
-        const provincia = service.findOne(id);
+        const { id_provincia } = req.params;
+        const provincia = service.findOne(id_provincia);
         if (!provincia) {
             return res.status(404).json({ message: 'provincia no encontrado' });
         }
@@ -25,7 +33,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', 
+    validatorHandler(crearProvinciaSchema, "body"),
+    async (req, res) => {
     try {
         const body = req.body;
         const nuevaProvincia = service.create(body);
@@ -35,11 +45,14 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id_provincia',
+    validatorHandler(obtenerProvinciaSchema, "params"),
+    validatorHandler(actualizarProvinciaSchema, "body"),
+    async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id_provincia } = req.params;
         const body = req.body;
-        const provincia = service.update(id, body);
+        const provincia = service.update(id_provincia, body);
         if (!provincia) {
             return res.status(404).json({ message: 'provincia no encontrado' });
         }
@@ -49,10 +62,12 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id_provincia',
+    validatorHandler(obtenerProvinciaSchema, "params"),
+    async (req, res) => {
     try {
-        const { id } = req.params;
-        const rta = service.delete(id);
+        const { id_provincia } = req.params;
+        const rta = service.delete(id_provincia);
         if (!rta) {
             return res.status(404).json({ message: 'provincia no encontrado' });
         }

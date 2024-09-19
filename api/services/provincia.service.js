@@ -1,4 +1,6 @@
 const { faker } = require("@faker-js/faker");
+const boom = require('@hapi/boom');
+const bcrypt = require('bcrypt');
 
 class ProvinciaService {
   constructor() {
@@ -31,12 +33,12 @@ class ProvinciaService {
   }
 
   findOne(id_provincia) {
-    return this.provincia.find((item) => item.id_provincia === id_provincia);
+    return this.provincia.find((item) => item.id_provincia === parseInt(id_provincia));
   }
 
   update(id_provincia, cambios) {
     const index = this.provincia.findIndex(
-      (item) => item.id_provincia === id_provincia
+      (item) => item.id_provincia === parseInt(id_provincia)
     );
     if (index === -1) {
       throw new Error("Cliente no encontrado");
@@ -47,8 +49,8 @@ class ProvinciaService {
 
   delete(id_provincia) {
     const index = this.provincia.findIndex(
-      (item) => item.id_provincia === id_provincia
-    );
+      (item) => item.id_provincia === parseInt(id_provincia
+    ));
     if (index === -1) {
       throw new Error("Cliente no encontrado");
     }

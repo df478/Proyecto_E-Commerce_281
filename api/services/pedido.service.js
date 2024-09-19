@@ -33,11 +33,11 @@ class PedidoService {
   }
 
   findOne(id_pedido) {
-    return this.pedidos.find(item => item.id_pedido === id_pedido);
+    return this.pedidos.find(item => item.id_pedido === parseInt(id_pedido));
   }
 
   update(id_pedido, cambios) {
-    const index = this.pedidos.findIndex(item => item.id_pedido === id_pedido);
+    const index = this.pedidos.findIndex(item => item.id_pedido === parseInt(id_pedido));
     if (index === -1) {
       throw new Error('Pedido no encontrado');
     }
@@ -47,7 +47,7 @@ class PedidoService {
   }
 
   delete(id_pedido) {
-    const index = this.pedidos.findIndex(item => item.id_pedido === id_pedido);
+    const index = this.pedidos.findIndex(item => item.id_pedido === parseInt(id_pedido));
     if (index === -1) {
       throw new Error('Pedido no encontrado');
     }
