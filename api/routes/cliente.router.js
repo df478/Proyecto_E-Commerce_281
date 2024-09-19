@@ -74,7 +74,9 @@ router.patch(
   }
 );
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", 
+  validatorHandler(obtenerClienteSchema, "params"),
+  async (req, res) => {
   try {
     const { id } = req.params;
     const rta = await service.delete(id);

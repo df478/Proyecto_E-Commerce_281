@@ -1,4 +1,7 @@
 const { faker } = require('@faker-js/faker');
+const boom = require('@hapi/boom');
+const bcrypt = require('bcrypt');
+
 
 class PagoService {
   constructor() {
@@ -34,11 +37,11 @@ class PagoService {
   }
 
   findOne(id_pago) {
-    return this.pagos.find(item => item.id_pago === id_pago);
+    return this.pagos.find(item => item.id_pago === parseInt(id_pago));
   }
 
   update(id_pago, cambios) {
-    const index = this.pagos.findIndex(item => item.id_pago === id_pago);
+    const index = this.pagos.findIndex(item => item.id_pago === parseInt(id_pago));
     if (index === -1) {
       throw new Error('Pago no encontrado');
     }
@@ -47,7 +50,7 @@ class PagoService {
   }
 
   delete(id_pago) {
-    const index = this.pagos.findIndex(item => item.id_pago === id_pago);
+    const index = this.pagos.findIndex(item => item.id_pago === parseInt(id_pago));
     if (index === -1) {
       throw new Error('Pago no encontrado');
     }

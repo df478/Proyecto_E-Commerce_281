@@ -1,8 +1,14 @@
 const express = require('express');
 const PagoService = require('./../services/pago.service');
+const validatorHandler = require("../middlewares/validator.handler");
 const router = express.Router();
 const service = new PagoService();
-
+const {
+    obtenerPagoSchema,
+    crearPagoSchema,
+    actualizarPagoSchema,
+  } = require("../schemas/pago.schema");
+  
 router.get('/', async (req, res) => {
     try {
         const pagos = await service.find();
@@ -12,10 +18,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id_pago', 
+    validatorHandler(obtenerPagoSchema, "params"),
+    async (req, res) => {
     try {
-        const { id } = req.params;
-        const pago = await service.findOne(id);
+        const { id_pago } = req.params;
+        const pago = await service.findOne(id_pago);
         if (!pago) {
             return res.status(404).json({ message: 'Pago no encontrado' });
         }
@@ -25,7 +33,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/',
+    validatorHandler(crearPagoSchema, "body"),
+    async (req, res) => {
     try {
         const body = req.body;
         const nuevoPago = await service.create(body);
@@ -35,11 +45,14 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id_pago', 
+    validatorHandler(obtenerPagoSchema, "params"),
+    validatorHandler(actualizarPagoSchema, "body"),
+    async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id_pago } = req.params;
         const body = req.body;
-        const pago = await service.update(id, body);
+        const pago = await service.update(id_pago, body);
         if (!pago) {
             return res.status(404).json({ message: 'Pago no encontrado' });
         }
@@ -49,10 +62,12 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id_pago', 
+    validatorHandler(obtenerPagoSchema, "params"),
+    async (req, res) => {
     try {
-        const { id } = req.params;
-        const rta = await service.delete(id);
+        const { id_pago } = req.params;
+        const rta = await service.delete(id_pago);
         if (!rta) {
             return res.status(404).json({ message: 'Pago no encontrado' });
         }
