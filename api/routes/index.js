@@ -28,6 +28,7 @@ const authRouter = require('./auth.router');
 function routerApi(app) {
   const router = express.Router();
   app.use('/api/v1', router);
+  router.use('/auth', authRouter);
   router.use('/administrador', administradorRouter);
   router.use('/carrito', carritoRouter);
   router.use('/cliente', clienteRouter);
