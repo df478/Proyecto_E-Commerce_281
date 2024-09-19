@@ -1,4 +1,6 @@
 const { faker } = require('@faker-js/faker');
+const boom = require('@hapi/boom');
+const bcrypt = require('bcrypt');
 
 class ClienteService {
   constructor() {
@@ -6,14 +8,16 @@ class ClienteService {
     this.generate();
   }
 
-  generate() {
+  async generate() {
     const limite = 100;
     for (let index = 0; index < limite; index++) {
+      const hash =  await bcrypt.hash(faker.internet.password(), 10);
+
       this.clientes.push({
         id_usuario: index,
         nombre_usuario: faker.person.fullName(),
         email_usuario: faker.internet.email(),
-        password_usuario: faker.internet.password(),
+        password_usuario: hash,
         tipo_usuario: faker.helpers.arrayElement(['cliente']),
         fecha_registro: faker.date.past(),
         nro_compras: parseInt(Math.random() * 100),
@@ -21,10 +25,13 @@ class ClienteService {
     }
   }
 
-  create(data) {
+  async create(data) {
+    const hash = await bcrypt.hash(data.password, 10);
+
     const nuevoCliente = {
       id_usuario: this.clientes.length,
       ...data,
+      password_usuario: hash
     };
     this.clientes.push(nuevoCliente);
     return nuevoCliente;
