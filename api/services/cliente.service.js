@@ -38,8 +38,8 @@ class ClienteService {
     return this.clientes.find(item => item.id_usuario == parseInt(id_usuario));
   }
 
-  findByEmail() {
-    
+  findByEmail(email) {
+    return this.clientes.find(item => item.email === email);
   }
 
   update(id_usuario, cambios) {

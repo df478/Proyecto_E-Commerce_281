@@ -5,7 +5,7 @@ const { logErrors, boomErrorHandler, errorHandler, ormErrorHandler } = require("
 // const sequelize = require('./libs/sequelize');
 
 const app = express();
-const port = process.env.PORT || 5000; //puerto del servidor
+const port = process.env.PORT || 3000; //puerto del servidor
 
 app.use(express.json());
 

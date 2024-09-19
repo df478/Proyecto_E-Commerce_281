@@ -11,6 +11,8 @@ router.post(
   async (req, res, next) => {
     try {
       const user = req.user;
+      const tipo_usuario = req.tipo_usuario;
+      service.defineService(tipo_usuario);
       res.json(service.signToken(user));
     } catch (error) {
       next(error);

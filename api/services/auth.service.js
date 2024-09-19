@@ -5,10 +5,33 @@ const nodemailer = require('nodemailer');
 
 const { config } = require('../config/config');
 
-const UserService = require('./users.service');
-const service = new UserService();
+// const UserService = require('./users.service');
+// const service = new UserService();
+
+const clienteService = require('./cliente.service');
+const deliveryService = require('./delivery.service');
+// const artesanoService = require('./artesano.service');
+const administradorService = require('./administrador.service');
+
+const clienteServiceToUse = new clienteService();
+const deliveryServiceToUse = new deliveryService();
+// const artesanoService = new artesanoService();
+const administradorServiceToUse = new administradorService();
+let service;
 
 class AuthService {
+
+  defineService(tipo_usuario) {
+    if(tipo_usuario === "cliente") {
+      service = clienteServiceToUse;
+    } else if(tipo_usuario === "delivery") {
+      service = deliveryServiceToUse;
+    } else if(tipo_usuario === "administrador") {
+      service = administradorServiceToUse;
+    }
+  }
+
+
   async getUser(email, password) {
     const user = await service.findByEmail(email);
     if (!user) {

@@ -21,6 +21,10 @@ const provinciaRouter = require('./provincia.router');
 const usuarioRouter = require('./usuario.router');
 
 
+//authentication
+const authRouter = require('./auth.router');
+
+
 function routerApi(app) {
   const router = express.Router();
   app.use('/api/v1', router);
