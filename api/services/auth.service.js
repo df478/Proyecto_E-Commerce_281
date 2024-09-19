@@ -13,31 +13,25 @@ const deliveryService = require('./delivery.service');
 // const artesanoService = require('./artesano.service');
 const administradorService = require('./administrador.service');
 
-const clienteServiceToUse = new clienteService();
-const deliveryServiceToUse = new deliveryService();
-// const artesanoService = new artesanoService();
-const administradorServiceToUse = new administradorService();
-let service;
-
 class AuthService {
-
-  defineService(tipo_usuario) {
+  constructor(tipo_usuario) {
     if(tipo_usuario === "cliente") {
-      service = clienteServiceToUse;
+      this.service = new clienteService();;
     } else if(tipo_usuario === "delivery") {
-      service = deliveryServiceToUse;
+      this.service = new deliveryService();
     } else if(tipo_usuario === "administrador") {
-      service = administradorServiceToUse;
+      this.service = new administradorService();
     }
   }
 
-
   async getUser(email, password) {
-    const user = await service.findByEmail(email);
+    
+    const user = await this.service.findByEmail(email);
+    console.log(user);
     if (!user) {
       throw boom.unauthorized();
     }
-
+    
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       throw boom.unauthorized();
@@ -48,8 +42,8 @@ class AuthService {
 
   signToken(user) {
     const payload = {
-      sub: user.id,
-      role: user.role,
+      sub: user.id_usuario,
+      role: user.tipo_usuario,
     };
     const token = jwt.sign(payload, config.jwtSecret);
     return {
@@ -59,14 +53,14 @@ class AuthService {
   }
 
   async sendRecovery(email) {
-    const user = await service.findByEmail(email);
+    const user = await this.service.findByEmail(email);
     if (!user) {
       throw boom.unauthorized();
     }
     const payload = { sub: user.id };
     const token = jwt.sign(payload, config.jwtSecret, {expiresIn: '15min'});
     const link = `http://myfrontend.com/recovery?token=${token}`;
-    await service.update(user.id, {recoveryToken: token});
+    await this.service.update(user.id, {recoveryToken: token});
     const mail = {
       from: config.smtpEmail,
       to: `${user.email}`,
@@ -79,12 +73,12 @@ class AuthService {
   async changePassword(token, newPassword) {
     try {
       const payload = jwt.verify(token, config.jwtSecret);
-      const user = await service.findOne(payload.sub);
+      const user = await this.service.findOne(payload.sub);
       if (user.recoveryToken !== token) {
         throw boom.unauthorized();
       }
       const hash = await bcrypt.hash(newPassword, 10);
-      await service.update(user.id, {recoveryToken: null, password: hash});
+      await this.service.update(user.id, {recoveryToken: null, password: hash});
       return { message: 'password changed' };
     } catch (error) {
       throw boom.unauthorized();

@@ -32,6 +32,7 @@ const corsOptions = {
   optionSuccessStatus:200
 }
 app.use(cors(corsOptions));
+require('./utils/auth')
 
 app.get("/api", (req, res) => {
   res.send("Hola mi server en express");

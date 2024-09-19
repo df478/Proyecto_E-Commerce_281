@@ -42,11 +42,13 @@ class ClienteService {
   }
 
   findOne(id_usuario) {
-    return this.clientes.find(item => item.id_usuario == parseInt(id_usuario));
+    return this.clientes.find(item => item.id_usuario === parseInt(id_usuario));
   }
 
-  findByEmail(email) {
-    return this.clientes.find(item => item.email === email);
+  async findByEmail(email) {
+    console.log(this.clientes);
+    
+    return this.clientes.find(item => item.email_usuario === email);
   }
 
   update(id_usuario, cambios) {
