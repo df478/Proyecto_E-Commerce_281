@@ -44,4 +44,4 @@ class Administrador extends Model {
   }
 }
 
-module.exports = { Administrador,AdministradorSchema, ADMINISTRADOR_TABLE};
+module.exports = { Administrador, AdministradorSchema, ADMINISTRADOR_TABLE };

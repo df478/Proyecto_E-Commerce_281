@@ -32,6 +32,15 @@ class Provincia extends Model {
     this.belongsTo(models.Departamento, {
       as: "departamento",
     });
+
+    this.hasMany(
+      models.Municipio,
+      {
+          as:'municipio',
+          foreignKey: 'id_municipio'
+      }
+  )
+
   }
   static config(sequelize) {
     return {

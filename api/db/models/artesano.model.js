@@ -52,8 +52,9 @@ const ArtesanoSchema = {
         }
     },
     id_comunidad: {
+        field: "id_comunidad",
+        allowNull: true,
         type:DataTypes.INTEGER,
-        allowNull: false,
         references: {
             model: COMUNIDAD_TABLE,
             key: "id_comunidad",
@@ -66,7 +67,6 @@ const ArtesanoSchema = {
 class Artesano extends Model {
     static associate(models) {
         this.belongsTo(models.Pedido, {
-            foreignKey: 'id_comunidad',
             as: 'comunidad'
         });
     }
