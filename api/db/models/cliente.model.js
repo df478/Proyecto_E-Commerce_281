@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const CLIENTE_TABLE = 'cliente';
 
-const clienteSchema = {
+const ClienteSchema = {
     id_usuario: {
         allowNull: false,
         autoIncrement: true,
@@ -53,6 +53,7 @@ const clienteSchema = {
 
 class Cliente extends Model {
     static associate(models) {
+        this.hasMany()
     }
 
     static config(sequelize) {
@@ -65,4 +66,4 @@ class Cliente extends Model {
     }
 }
 
-module.exports = { Cliente, clienteSchema, CLIENTE_TABLE };
+module.exports = { Cliente, ClienteSchema, CLIENTE_TABLE };

@@ -14,14 +14,14 @@ const ProvinciaSchema = {
     unique: true,
     allowNull: false,
   },
-  id_departamento: {
-    allowNull: false,
+  id_depto: {
+    field: "id_depto",
+    allowNull: true,
     type: DataTypes.INTEGER,
     references: {
       model: DEPARTAMENTO_TABLE,
-      key: "id_departamento",
+      key: "id_depto",
     },
-    allowNull: false,
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
   },
@@ -29,8 +29,9 @@ const ProvinciaSchema = {
 
 class Provincia extends Model {
   static associate(models) {
-
-    
+    this.belongsTo(models.Departamento, {
+      as: "departamento",
+    });
   }
   static config(sequelize) {
     return {

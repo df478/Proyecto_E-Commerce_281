@@ -19,7 +19,13 @@ const DepartamentoSchema = {
 
 class Departamento extends Model {
     static associate(models) {
-
+        this.hasMany(
+            models.Provincia,
+            {
+                as:'provincia',
+                foreignKey: 'id_depto'
+            }
+        )
     }
     static config(sequelize) {
         return {
