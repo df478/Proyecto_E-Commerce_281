@@ -29,8 +29,8 @@ class ClienteService {
     const hash = await bcrypt.hash(data.password_usuario, 10);
     const nuevoCliente = {
       id_usuario: this.clientes.length,
-      password_usuario: hash,
       ...data,
+      password_usuario: hash,
     };
     this.clientes.push(nuevoCliente);
     //TODO delete returninG the password
