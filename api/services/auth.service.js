@@ -27,12 +27,11 @@ class AuthService {
   async getUser(email, password) {
     
     const user = await this.service.findByEmail(email);
-    console.log(user);
     if (!user) {
       throw boom.unauthorized();
     }
+    const isMatch = await bcrypt.compare(password, user.password_usuario);
     
-    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       throw boom.unauthorized();
     }

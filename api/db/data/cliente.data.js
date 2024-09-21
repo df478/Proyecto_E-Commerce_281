@@ -32,10 +32,3 @@ module.exports = {
   generateAndExport,
 };
 
-// Usage example (optional)
-if (require.main === module) {
-  (async () => {
-    const clienteData = await generateAndExport();
-    console.log(clienteData);
-  })();
-}

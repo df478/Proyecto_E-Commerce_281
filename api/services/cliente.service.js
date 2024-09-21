@@ -22,17 +22,17 @@ class ClienteService {
 
   async findOne(id_usuario) {
     const cliente = await models.Cliente.findByPk(id_usuario);
-    if (!rta) {
+    if (!cliente) {
       throw boom.notFound("Cliente no encontrado");
     }
     return cliente;
   }
 
-  async findByEmail(email) {
+  async findByEmail(email_usuario) {
     const cliente = await models.Cliente.findOne({
-      where: { email },
+      where: { email_usuario },
     });
-    if (!rta) {
+    if (!cliente) {
       throw boom.notFound("Cliente no encontrado");
     }
     return cliente;

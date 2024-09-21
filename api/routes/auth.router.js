@@ -12,6 +12,7 @@ router.post(
     try {
       const user = req.user;
       const service = new AuthService(user.tipo_usuario);
+      
       res.json(service.signToken(user));
     } catch (error) {
       next(error);

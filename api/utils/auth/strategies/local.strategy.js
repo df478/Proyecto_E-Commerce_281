@@ -10,6 +10,7 @@ const LocalStrategy = new Strategy(
   },
   async (req, email, password, done) => {
     try {
+      
       const role = req.body.tipo_usuario; // Access the role from the request context
       const service = new AuthService(role)
       const user = await service.getUser(email, password)
