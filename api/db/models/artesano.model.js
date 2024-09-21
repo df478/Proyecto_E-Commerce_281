@@ -66,7 +66,7 @@ const ArtesanoSchema = {
 
 class Artesano extends Model {
     static associate(models) {
-        this.belongsTo(models.Pedido, {
+        this.belongsTo(models.Comunidad, {
             as: 'comunidad'
         });
     }

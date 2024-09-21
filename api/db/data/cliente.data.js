@@ -1,13 +1,13 @@
 const { faker } = require("@faker-js/faker");
-const boom = require("@hapi/boom");
 const bcrypt = require("bcrypt");
 
-let clientes = [];
 const limite = 100;
-async function generate(limit) {
-  for (let index = 0; index < limite; index++) {
-    const hash = await bcrypt.hash(faker.internet.password(), 10);
 
+async function generate(limit) {
+  let clientes = [];
+  for (let index = 0; index < limit; index++) {
+    const hash = await bcrypt.hash(faker.internet.password(), 10);
+    
     clientes.push({
       id_usuario: index,
       nombre_usuario: faker.person.fullName(),
@@ -18,6 +18,24 @@ async function generate(limit) {
       nro_compras: parseInt(Math.random() * 100),
     });
   }
+  return clientes;
 }
-console.log(generate(limite));
 
+// Function to generate and export the data
+async function generateAndExport() {
+  const clienteData = await generate(limite);
+  return clienteData;
+}
+
+// Export the function
+module.exports = {
+  generateAndExport,
+};
+
+// Usage example (optional)
+if (require.main === module) {
+  (async () => {
+    const clienteData = await generateAndExport();
+    console.log(clienteData);
+  })();
+}

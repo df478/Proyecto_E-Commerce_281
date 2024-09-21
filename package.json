@@ -14,7 +14,8 @@
     "migrations:debug": "sequelize-cli db:migrate --debug",
     "seeds:generate": "sequelize-cli seed:generate --name",
     "seeds:run": "sequelize-cli db:seed:all",
-    "seeds:revert": "sequelize-cli db:seed:undo"
+    "seeds:revert": "sequelize-cli db:seed:undo",
+    "seeds:debug": "sequelize-cli db:seed:all --debug"
   },
   "author": "",
   "license": "MIT",
