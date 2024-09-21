@@ -1,71 +1,52 @@
-const { faker } = require('@faker-js/faker');
-const boom = require('@hapi/boom');
-const bcrypt = require('bcrypt');
+const boom = require("@hapi/boom");
+const bcrypt = require("bcrypt");
+const { models } = require("../libs/sequelize");
 
 class ClienteService {
-  constructor() {
-    this.clientes = [];
-    this.generate();
-  }
-
-  async generate() {
-    const limite = 100;
-    for (let index = 0; index < limite; index++) {
-      const hash =  await bcrypt.hash(faker.internet.password(), 10);
-
-      this.clientes.push({
-        id_usuario: index,
-        nombre_usuario: faker.person.fullName(),
-        email_usuario: faker.internet.email(),
-        password_usuario: hash,
-        tipo_usuario: faker.helpers.arrayElement(['cliente']),
-        fecha_registro: faker.date.past(),
-        nro_compras: parseInt(Math.random() * 100),
-      });
-    }
-  }
+  constructor() {}
 
   async create(data) {
     const hash = await bcrypt.hash(data.password_usuario, 10);
-    const nuevoCliente = {
-      id_usuario: this.clientes.length,
+    const nuevoData = {
       ...data,
       password_usuario: hash,
     };
-    this.clientes.push(nuevoCliente);
-    //TODO delete returninG the password
+    const nuevoCliente = await models.Cliente.create(nuevoData);
     return nuevoCliente;
   }
 
-  find() {
-    return this.clientes;
+  async find() {
+    const rta = await models.Cliente.findAll();
+    return rta;
   }
 
-  findOne(id_usuario) {
-    return this.clientes.find(item => item.id_usuario === parseInt(id_usuario));
+  async findOne(id_usuario) {
+    const cliente = await models.Cliente.findByPk(id_usuario);
+    if (!rta) {
+      throw boom.notFound("Cliente no encontrado");
+    }
+    return cliente;
   }
 
   async findByEmail(email) {
-    console.log(this.clientes);
-    
-    return this.clientes.find(item => item.email_usuario === email);
+    const cliente = await models.Cliente.findOne({
+      where: { email },
+    });
+    if (!rta) {
+      throw boom.notFound("Cliente no encontrado");
+    }
+    return cliente;
   }
 
-  update(id_usuario, cambios) {
-    const index = this.clientes.findIndex(item => item.id_usuario === parseInt(id_usuario));
-    if (index === -1) {
-      throw new Error('Cliente no encontrado');
-    }
-    this.clientes[index] = { ...this.clientes[index], ...cambios };
-    return this.clientes[index];
+  async update(id_usuario, cambios) {
+    const cliente = await this.findOne(id_usuario);
+    const rta = await cliente.update(cambios);
+    return rta;
   }
 
-  delete(id_usuario) {
-    const index = this.clientes.findIndex(item => item.id_usuario === parseInt(id_usuario));
-    if (index === -1) {
-      throw new Error('Cliente no encontrado');
-    }
-    this.clientes.splice(index, 1);
+  async delete(id_usuario) {
+    const cliente = await this.findOne(id_usuario);
+    await cliente.destroy();
     return { id_usuario };
   }
 }
