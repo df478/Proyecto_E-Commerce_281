@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize')
 
 const PED_CLI_DEL_TABLE = 'ped_cli_del'
 
-const Ped_cli_delSchema = {
+const PedCliDelSchema = {
     id_pedido: {  
         type: DataTypes.INTEGER,
         references: {
@@ -15,7 +15,7 @@ const Ped_cli_delSchema = {
         type: DataTypes.INTEGER,
         references: {
             model: 'cliente',  
-            key: 'id_cliente' 
+            key: 'id_usuario' 
         },
         allowNull: false,
     },
@@ -23,7 +23,7 @@ const Ped_cli_delSchema = {
         type: DataTypes.INTEGER,
         references: {
             model: 'delivery',  
-            key: 'id_delivery' 
+            key: 'id_usuario' 
         },
         allowNull: false,
     },
@@ -40,18 +40,27 @@ const Ped_cli_delSchema = {
     }
 }
 
-class Ped_Cli_Del extends Model {
+class PedCliDel extends Model {
     static associate(models) {
+        this.belongsTo(models.Pedido, {
+            as: "pedido",
+        });
+        this.belongsTo(models.Cliente, {
+            as: "cliente",
+        });
+        this.belongsTo(models.Delivery, {
+            as: "delivery",
+        });
     }
 
     static config(sequelize) {
         return {
             sequelize,
             tableName: PED_CLI_DEL_TABLE,  
-            modelName: 'Ped_Cli_Del',
+            modelName: 'PedCliDel',
             timestamps: false,  
         }
     }
 }
 
-module.exports = { Ped_Cli_Del, Ped_cli_delSchema,PED_CLI_DEL_TABLE}
+module.exports = { PedCliDel, PedCliDelSchema,PED_CLI_DEL_TABLE}

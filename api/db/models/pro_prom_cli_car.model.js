@@ -1,6 +1,5 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
 
-
 const PRO_PROM_CLI_CAR_TABLE = "pro_prom_cli_car";
 const ProPromCliCarSchema = {
   id_producto: {
@@ -22,8 +21,8 @@ const ProPromCliCarSchema = {
   id_cliente: {
     allowNull: false,
     references: {
-        model: 'carrito',
-        key: 'id_carrito'
+        model: 'cliente',
+        key: 'id_usuario'
     },
     type: DataTypes.INTEGER,
   },

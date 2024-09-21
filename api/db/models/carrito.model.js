@@ -13,7 +13,14 @@ const carritoSchema = {
 
 class Carrito extends Model {
     static associate(models) {
-        
+        this.hasMany(models.Pedido, {
+            as: "pedido",
+            foreignKey: "id_carrito",
+        });
+        this.hasMany(models.ProPromCliCar, {
+            as: "ProPromCliCar",
+            foreignKey: "id_carrito",
+        });
     }
 
     static config(sequelize) {

@@ -49,6 +49,14 @@ const DeliverySchema = {
 
 class Delivery extends Model {
     static associate(models) {
+        this.hasMany(models.Pago, {
+            as: "pago",
+            foreignKey: "id_usuario",
+        });
+        this.hasMany(models.PedCliDel, {
+            as: "pedCliDel",
+            foreignKey: "id_usuario",
+        });
     }
 
     static config(sequelize) {
