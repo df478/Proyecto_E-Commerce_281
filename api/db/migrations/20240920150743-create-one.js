@@ -16,8 +16,8 @@ module.exports = {
     await queryInterface.createTable(MUNICIPIO_TABLE, MunicipioSchema);
     await queryInterface.createTable(COMUNIDAD_TABLE, ComunidadSchema);
 
+    await queryInterface.createTable(ARTESANO_TABLE, ArtesanoSchema);
     await queryInterface.createTable(CLIENTE_TABLE, ClienteSchema);
-    // await queryInterface.createTable(ARTESANO_TABLE, ArtesanoSchema);
     await queryInterface.createTable(DELIVERY_TABLE, DeliverySchema);
     await queryInterface.createTable(ADMINISTRADOR_TABLE, AdministradorSchema);
   },
@@ -25,8 +25,8 @@ module.exports = {
   async down (queryInterface) {
     await queryInterface.dropTable(ADMINISTRADOR_TABLE);
     await queryInterface.dropTable(DELIVERY_TABLE);
-    // await queryInterface.dropTable(ARTESANO_TABLE);
     await queryInterface.dropTable(CLIENTE_TABLE);
+    await queryInterface.dropTable(ARTESANO_TABLE);
 
     await queryInterface.dropTable(COMUNIDAD_TABLE);
     await queryInterface.dropTable(MUNICIPIO_TABLE);

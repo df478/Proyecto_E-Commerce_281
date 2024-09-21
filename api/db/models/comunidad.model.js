@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
-const MUNICIPIO_TABLE = require("./municipio.model");
+const { MUNICIPIO_TABLE } = require("./municipio.model");
+
 
 const COMUNIDAD_TABLE = "comunidad";
 
@@ -17,7 +18,8 @@ const ComunidadSchema = {
   id_municipio: {
     field: "id_municipio",
     allowNull: true,
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER(11),
+    unique: true,
     references: {
       model: MUNICIPIO_TABLE,
       key: "id_municipio",
@@ -31,6 +33,7 @@ class Comunidad extends Model {
   static associate(models) {
     this.belongsTo(models.Municipio, {
       as: "municipio",
+      foreignKey: "id_municipio", // Asegúrate de definir el foreignKey
     });
 
     this.hasMany(models.Artesano, {

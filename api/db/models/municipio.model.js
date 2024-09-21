@@ -8,7 +8,7 @@ const MunicipioSchema = {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER(11),
   },
   nombre_municipio: {
     type: DataTypes.STRING,

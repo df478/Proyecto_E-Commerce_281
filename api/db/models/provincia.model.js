@@ -37,7 +37,7 @@ class Provincia extends Model {
       models.Municipio,
       {
           as:'municipio',
-          foreignKey: 'id_municipio'
+          foreignKey: 'id_provincia'
       }
   )
 
