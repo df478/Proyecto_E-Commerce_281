@@ -12,7 +12,7 @@ router.post(
     try {
       const user = req.user;
       const service = new AuthService(user.tipo_usuario);
-      
+
       res.json(service.signToken(user));
     } catch (error) {
       next(error);
@@ -22,9 +22,9 @@ router.post(
 
 router.post("/recovery", async (req, res, next) => {
   try {
-    const { email, tipo_usuario } = req.body;
-    service.defineService(tipo_usuario);
-    const rta = await service.sendRecovery(email);
+    const { email_usuario, tipo_usuario } = req.body;
+    const service = new AuthService(tipo_usuario);
+    const rta = await service.sendRecovery(email_usuario);
     res.json(rta);
   } catch (error) {
     next(error);
@@ -34,6 +34,7 @@ router.post("/recovery", async (req, res, next) => {
 router.post("/change-password", async (req, res, next) => {
   try {
     const { token, newPassword, tipo_usuario } = req.body;
+    const service = new AuthService(tipo_usuario);
     service.defineService(tipo_usuario);
     const rta = await service.changePassword(token, newPassword);
     res.json(rta);

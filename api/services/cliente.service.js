@@ -39,6 +39,8 @@ class ClienteService {
   }
 
   async update(id_usuario, cambios) {
+    console.log(id_usuario, cambios);
+    
     const cliente = await this.findOne(id_usuario);
     const rta = await cliente.update(cambios);
     return rta;
