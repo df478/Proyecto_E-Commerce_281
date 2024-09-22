@@ -1,59 +1,54 @@
-const { faker } = require("@faker-js/faker");
+const boom = require("@hapi/boom");
+const bcrypt = require("bcrypt");
+const { models } = require("../libs/sequelize");
 
 class AdministradorService {
-  constructor() {
-    this.clientes = [];
-    this.generate();
-  }
+  constructor() {}
 
-  generate() {
-    const limite = 100;
-    for (let index = 0; index < limite; index++) {
-      this.clientes.push({
-        id_usuario: index,
-        nombre_usuario: faker.person.fullName(),
-        email_usuario: faker.internet.email(),
-        password_usuario: faker.internet.password(),
-      });
-    }
-  }
-
-  create(data) {
-    const nuevoCliente = {
-      id_usuario: this.administrador.length,
+  async create(data) {
+    const hash = await bcrypt.hash(data.password_usuario, 10);
+    const nuevoData = {
       ...data,
+      password_usuario: hash,
     };
-    this.administrador.push(nuevoCliente);
-    return nuevoCliente;
+    const nuevoAdministrador = await models.Administrador.create(nuevoData);
+    return nuevoAdministrador;
   }
 
-  find() {
-    return this.administrador;
+  async find() {
+    const rta = await models.Administrador.findAll();
+    return rta;
   }
 
-  findOne(id_usuario) {
-    return this.administrador.find((item) => item.id_usuario === id_usuario);
-  }
-
-  update(id_usuario, cambios) {
-    const index = this.administrador.findIndex(
-      (item) => item.id_usuario === id_usuario
-    );
-    if (index === -1) {
-      throw new Error("Cliente no encontrado");
+  async findOne(id_usuario) {
+    const administrador = await models.Administrador.findByPk(id_usuario);
+    if (!administrador) {
+      throw boom.notFound("Administrador no encontrado");
     }
-    this.administrador[index] = { ...this.administrador[index], ...cambios };
-    return this.administrador[index];
+    return administrador;
   }
 
-  delete(id_usuario) {
-    const index = this.administrador.findIndex(
-      (item) => item.id_usuario === id_usuario
-    );
-    if (index === -1) {
-      throw new Error("Cliente no encontrado");
+  async findByEmail(email_usuario) {
+    const administrador = await models.Administrador.findOne({
+      where: { email_usuario },
+    });
+    if (!administrador) {
+      throw boom.notFound("Administrador no encontrado");
     }
-    this.administrador.splice(index, 1);
+    return administrador;
+  }
+
+  async update(id_usuario, cambios) {
+    console.log(id_usuario, cambios);
+    
+    const administrador = await this.findOne(id_usuario);
+    const rta = await administrador.update(cambios);
+    return rta;
+  }
+
+  async delete(id_usuario) {
+    const administrador = await this.findOne(id_usuario);
+    await administrador.destroy();
     return { id_usuario };
   }
 }

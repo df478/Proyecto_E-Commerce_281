@@ -53,7 +53,27 @@ const ClienteSchema = {
 
 class Cliente extends Model {
     static associate(models) {
-        this.hasMany()
+        
+        this.hasMany(models.Resenia, {
+            as: "resenia",
+            foreignKey: "id_usuario",
+        });
+        this.hasMany(models.PedCliDel, {
+            as: "pedCliDel",
+            foreignKey: "id_usuario",
+        });
+        this.hasMany(models.ProPromCliCar, {
+            as: "proPromCliCar",
+            foreignKey: "id_usuario",
+        });
+        this.hasMany(models.Pago, {
+            as: "pago",
+            foreignKey: "id_usuario",
+        });
+        this.hasMany(models.UsuNorAdmin, {
+            as: "usuNorAdmin",
+            foreignKey: "id_usuario",
+        });
     }
 
     static config(sequelize) {

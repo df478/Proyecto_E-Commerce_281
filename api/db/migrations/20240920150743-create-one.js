@@ -9,6 +9,11 @@ const { ArtesanoSchema, ARTESANO_TABLE } = require('./../models/artesano.model')
 const { DeliverySchema, DELIVERY_TABLE } = require('./../models/delivery.model')
 const { AdministradorSchema, ADMINISTRADOR_TABLE } = require('./../models/administrador.model')
 
+const { PromocionSchema, PROMOCION_TABLE } = require('./../models/promocion.model')
+const { ProductoSchema, PRODUCTO_TABLE } = require('./../models/producto.model')
+
+
+
 module.exports = {
   async up (queryInterface) {
     await queryInterface.createTable(DEPARTAMENTO_TABLE, DepartamentoSchema);
@@ -20,6 +25,10 @@ module.exports = {
     await queryInterface.createTable(CLIENTE_TABLE, ClienteSchema);
     await queryInterface.createTable(DELIVERY_TABLE, DeliverySchema);
     await queryInterface.createTable(ADMINISTRADOR_TABLE, AdministradorSchema);
+
+    await queryInterface.createTable(PROMOCION_TABLE, PromocionSchema);
+    await queryInterface.createTable(PRODUCTO_TABLE, ProductoSchema);
+
   },
 
   async down (queryInterface) {
@@ -32,5 +41,9 @@ module.exports = {
     await queryInterface.dropTable(MUNICIPIO_TABLE);
     await queryInterface.dropTable(PROVINCIA_TABLE);
     await queryInterface.dropTable(DEPARTAMENTO_TABLE);
+
+    await queryInterface.dropTable(PROMOCION_TABLE);
+    await queryInterface.dropTable(PRODUCTO_TABLE);
+
   }
 };

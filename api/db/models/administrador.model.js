@@ -33,7 +33,13 @@ const AdministradorSchema = {
 };
 
 class Administrador extends Model {
-  static associate(models) {}
+  static associate(models) {
+    
+    this.hasMany(models.UsuNorAdmin, {
+      as: "usuNorAdmin",
+      foreignKey: "id_usuario",
+    });
+  }
   static config(sequelize) {
     return {
       sequelize,

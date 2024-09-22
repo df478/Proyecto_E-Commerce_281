@@ -74,6 +74,14 @@ class Artesano extends Model {
             as: "producto",
             foreignKey: "id_usuario",
         });
+        this.hasMany(models.Pago, {
+            as: "pago",
+            foreignKey: "id_usuario",
+        });
+        this.hasMany(models.UsuNorAdmin, {
+            as: "usuNorAdmin",
+            foreignKey: "id_usuario",
+        });
         
     }
     static config(sequelize) {

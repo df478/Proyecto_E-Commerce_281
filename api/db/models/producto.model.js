@@ -1,8 +1,12 @@
 const { Model, DataTypes, Sequelize } = require('sequelize')
+const { PROMOCION_TABLE } = require("./promocion.model");
+const { ARTESANO_TABLE } = require("./artesano.model");
+
+
 
 const PRODUCTO_TABLE = 'producto'
 
-const productoSchema = {
+const ProductoSchema = {
     id_producto: {  
         allowNull: false,
         autoIncrement: true,
@@ -10,20 +14,26 @@ const productoSchema = {
         type: DataTypes.INTEGER
     },
     id_artesano: {  
+        field: "id_artesano",
+        allowNull: true,
         type: DataTypes.INTEGER,
         references: {
-            model: 'artesano',  
-            key: 'id_artesano'  
+            model: ARTESANO_TABLE,
+            key: "id_usuario",
         },
-        allowNull: false,
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
     },
     id_promocion: {  
+        field: "id_promocion",
+        allowNull: true,
         type: DataTypes.INTEGER,
         references: {
-            model: 'promocion',  
-            key: 'id_promocion'  
+            model: PROMOCION_TABLE,
+            key: "id_promocion",
         },
-        allowNull: false,  
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
     },
     nombre_producto: {  
         type: DataTypes.STRING,
@@ -47,14 +57,20 @@ class Producto extends Model {
     static associate(models) {
         // Una promoción tiene muchos productos (1 : n)
         this.belongsTo(models.Promocion, {
-            foreignKey: 'id_promocion',
             as: 'promocion'
         });
         // Una artesano tiene muchos productos (1 : n)
         this.belongsTo(models.Artesano, {
-            foreignKey: 'id_usuario',
             as: 'artesano'
-        })
+        });
+        this.hasMany(models.Resenia, {
+            as: "resenia",
+            foreignKey: "id_producto",
+        });
+        this.hasMany(models.ProPromCliCar, {
+            as: "proPromCliCar",
+            foreignKey: "id_producto",
+        });
     }
 
     static config(sequelize) {
@@ -67,4 +83,4 @@ class Producto extends Model {
     }
 }
 
-module.exports = { Producto, productoSchema, PRODUCTO_TABLE };
+module.exports = { Producto, ProductoSchema, PRODUCTO_TABLE };
