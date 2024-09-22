@@ -1,7 +1,7 @@
 const Joi = require('joi')
 
 const id_producto = Joi.number().integer()
-const id_artesano = Joi.numbre().integer()
+const id_artesano = Joi.number().integer()
 const id_promocion = Joi.number().integer()
 const nombre_producto = Joi.string().min(2).max(50)
 const precio_producto = Joi.number().positive()
