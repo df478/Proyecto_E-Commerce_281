@@ -16,6 +16,10 @@ const { PAGO_TABLE, PagoSchema } = require('../models/pago.model');
 const { NOTIFICACION_TABLE, notificacionSchema } = require('../models/notificacion.model');
 const { CARRITO_TABLE, CarritoSchema } = require('../models/carrito.model');
 const { PEDIDO_TABLE, pedidoSchema } = require('../models/pedido.model');
+const { TIENE_TABLE, TieneSchema } = require('../models/tiene.model');
+const { SUPERVISADO_TABLE, SupervisadoSchema } = require('../models/supervisado.model');
+const { ENTREGA_TABLE, EntregaSchema } = require('../models/entrega.model');
+const { ANIADE_TABLE, AniadeSchema } = require('../models/aniade.model');
 
 
 
@@ -39,10 +43,22 @@ module.exports = {
     await queryInterface.createTable(PEDIDO_TABLE, pedidoSchema);
     await queryInterface.createTable(PAGO_TABLE, PagoSchema);
     await queryInterface.createTable(NOTIFICACION_TABLE, notificacionSchema);
+    await queryInterface.createTable(TIENE_TABLE, TieneSchema);
+    await queryInterface.createTable(ENTREGA_TABLE, EntregaSchema);
+    await queryInterface.createTable(SUPERVISADO_TABLE, SupervisadoSchema);
+    await queryInterface.createTable(ANIADE_TABLE, AniadeSchema);
 
   },
 
   async down (queryInterface) {
+
+    await queryInterface.dropTable(TIENE_TABLE);
+    await queryInterface.dropTable(ENTREGA_TABLE);
+    await queryInterface.dropTable(SUPERVISADO_TABLE);
+    await queryInterface.dropTable(ANIADE_TABLE);
+
+
+
     await queryInterface.dropTable(NOTIFICACION_TABLE);
 
 

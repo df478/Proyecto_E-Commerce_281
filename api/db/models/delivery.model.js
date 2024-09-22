@@ -53,12 +53,12 @@ class Delivery extends Model {
             as: "pago",
             foreignKey: "id_usuario",
         });
-        this.hasMany(models.PedCliDel, {
-            as: "PedCliDel",
+        this.hasMany(models.Entrega, {
+            as: "entrega",
             foreignKey: "id_usuario",
         });
-        this.hasMany(models.UsuNorAdmin, {
-            as: "usuNorAdmin",
+        this.hasMany(models.Supervisado, {
+            as: "supervisado",
             foreignKey: "id_usuario",
         });
     }

@@ -1,31 +1,43 @@
 const { Model, DataTypes, Sequelize } = require('sequelize')
+const { PEDIDO_TABLE } = require("./pedido.model");
+const { CLIENTE_TABLE } = require("./cliente.model");
+const { DELIVERY_TABLE } = require("./delivery.model");
 
-const PED_CLI_DEL_TABLE = 'ped_cli_del'
+const ENTREGA_TABLE = 'entrega'
 
-const PedCliDelSchema = {
+const EntregaSchema = {
     id_pedido: {  
+        field: "id_pedido",
+        allowNull: true,
         type: DataTypes.INTEGER,
         references: {
-            model: 'pedido',  
-            key: 'id_pedido'
+            model: PEDIDO_TABLE,
+            key: "id_pedido",
         },
-        allowNull: false,
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
     },
     id_cliente: {  
+        field: "id_cliente",
+        allowNull: true,
         type: DataTypes.INTEGER,
         references: {
-            model: 'cliente',  
-            key: 'id_usuario' 
+            model: CLIENTE_TABLE,
+            key: "id_usuario",
         },
-        allowNull: false,
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
     },
     id_delivery: {  
+        field: "id_delivery",
+        allowNull: true,
         type: DataTypes.INTEGER,
         references: {
-            model: 'delivery',  
-            key: 'id_usuario' 
+            model: DELIVERY_TABLE,
+            key: "id_usuario",
         },
-        allowNull: false,
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
     },
     estado_entrega: {  
         type: DataTypes.STRING,
@@ -40,7 +52,7 @@ const PedCliDelSchema = {
     }
 }
 
-class PedCliDel extends Model {
+class Entrega extends Model {
     static associate(models) {
         this.belongsTo(models.Pedido, {
             as: "pedido",
@@ -56,11 +68,11 @@ class PedCliDel extends Model {
     static config(sequelize) {
         return {
             sequelize,
-            tableName: PED_CLI_DEL_TABLE,  
-            modelName: 'PedCliDel',
+            tableName: ENTREGA_TABLE,  
+            modelName: 'Entrega',
             timestamps: false,  
         }
     }
 }
 
-module.exports = { PedCliDel, PedCliDelSchema,PED_CLI_DEL_TABLE}
+module.exports = { Entrega, EntregaSchema,ENTREGA_TABLE}

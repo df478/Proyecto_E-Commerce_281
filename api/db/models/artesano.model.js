@@ -78,8 +78,8 @@ class Artesano extends Model {
             as: "pago",
             foreignKey: "id_usuario",
         });
-        this.hasMany(models.UsuNorAdmin, {
-            as: "usuNorAdmin",
+        this.hasMany(models.Supervisado, {
+            as: "supervisado",
             foreignKey: "id_usuario",
         });
         

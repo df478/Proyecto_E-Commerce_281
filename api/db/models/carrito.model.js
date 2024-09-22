@@ -17,8 +17,8 @@ class Carrito extends Model {
             as: "pedido",
             foreignKey: "id_carrito",
         });
-        this.hasMany(models.ProPromCliCar, {
-            as: "ProPromCliCar",
+        this.hasMany(models.Aniade, {
+            as: "aniade",
             foreignKey: "id_carrito",
         });
     }

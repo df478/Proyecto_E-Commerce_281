@@ -58,20 +58,20 @@ class Cliente extends Model {
             as: "resenia",
             foreignKey: "id_usuario",
         });
-        this.hasMany(models.PedCliDel, {
-            as: "pedCliDel",
+        this.hasMany(models.Entrega, {
+            as: "entrega",
             foreignKey: "id_usuario",
         });
-        this.hasMany(models.ProPromCliCar, {
-            as: "proPromCliCar",
+        this.hasMany(models.Aniade, {
+            as: "aniade",
             foreignKey: "id_usuario",
         });
         this.hasMany(models.Pago, {
             as: "pago",
             foreignKey: "id_usuario",
         });
-        this.hasMany(models.UsuNorAdmin, {
-            as: "usuNorAdmin",
+        this.hasMany(models.Supervisado, {
+            as: "supervisado",
             foreignKey: "id_usuario",
         });
     }

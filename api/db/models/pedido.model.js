@@ -47,7 +47,17 @@ class Pedido extends Model {
         });
         this.hasOne(models.Pago, {
             as: "pago",
-            foreignKey: "id_pago",
+            foreignKey: "id_pedido",
+        });
+        
+        this.hasMany(models.Tiene, {
+            as: "tiene",
+            foreignKey: "id_pedido",
+        });
+        
+        this.hasMany(models.Entrega, {
+            as: "entrega",
+            foreignKey: "id_pedido",
         });
 
     }

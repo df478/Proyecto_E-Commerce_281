@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
 
-const USU_NOR_ADMIN_TABLE = "usu_nor_admin";
+const SUPERVISADO_TABLE = "supervisado";
 
-const UsuNorAdminSchema = {
+const SupervisadoSchema = {
   id_supervisado: {
     allowNull: false,
     autoIncrement: true,
@@ -52,7 +52,7 @@ const UsuNorAdminSchema = {
   },
 };
 
-class UsuNorAdmin extends Model {
+class Supervisado extends Model {
   static associate(models) {
     
     this.belongsTo(models.Artesano, {
@@ -75,11 +75,11 @@ class UsuNorAdmin extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: USU_NOR_ADMIN_TABLE,
-      modelName: "UsuNorAdmin",
+      tableName: SUPERVISADO_TABLE,
+      modelName: "Supervisado",
       timestamps: false,          
     };
   }
 }
 
-module.exports = { UsuNorAdmin, UsuNorAdminSchema, USU_NOR_ADMIN_TABLE };
+module.exports = { Supervisado, SupervisadoSchema, SUPERVISADO_TABLE };

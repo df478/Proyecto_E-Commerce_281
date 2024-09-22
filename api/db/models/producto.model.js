@@ -67,8 +67,8 @@ class Producto extends Model {
             as: "resenia",
             foreignKey: "id_producto",
         });
-        this.hasMany(models.ProPromCliCar, {
-            as: "proPromCliCar",
+        this.hasMany(models.Aniade, {
+            as: "aniade",
             foreignKey: "id_producto",
         });
     }

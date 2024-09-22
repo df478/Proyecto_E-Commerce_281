@@ -35,8 +35,8 @@ const AdministradorSchema = {
 class Administrador extends Model {
   static associate(models) {
     
-    this.hasMany(models.UsuNorAdmin, {
-      as: "usuNorAdmin",
+    this.hasMany(models.Supervisado, {
+      as: "supervisado",
       foreignKey: "id_usuario",
     });
   }
