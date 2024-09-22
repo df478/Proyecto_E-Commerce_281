@@ -1,4 +1,8 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
+const { ADMINISTRADOR_TABLE } = require("./administrador.model");
+const { ARTESANO_TABLE } = require("./artesano.model");
+const { CLIENTE_TABLE } = require("./cliente.model");
+const { DELIVERY_TABLE } = require("./delivery.model");
 
 const SUPERVISADO_TABLE = "supervisado";
 
@@ -14,7 +18,7 @@ const SupervisadoSchema = {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
-      model: 'administrador',         
+      model: ADMINISTRADOR_TABLE,         
       key: 'id_usuario',         
     },
     onUpdate: "CASCADE",
@@ -24,7 +28,7 @@ const SupervisadoSchema = {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
-      model: 'artesano',         
+      model: ARTESANO_TABLE,         
       key: 'id_usuario',          
     },
     onUpdate: "CASCADE",
@@ -34,7 +38,7 @@ const SupervisadoSchema = {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
-      model: 'cliente',         
+      model: CLIENTE_TABLE,         
       key: 'id_usuario',          
     },
     onUpdate: "CASCADE",
@@ -44,7 +48,7 @@ const SupervisadoSchema = {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
-      model: 'delivery',         
+      model: DELIVERY_TABLE,         
       key: 'id_usuario',          
     },
     onUpdate: "CASCADE",
@@ -56,19 +60,19 @@ class Supervisado extends Model {
   static associate(models) {
     
     this.belongsTo(models.Artesano, {
-      as: 'artesano'
+      as: 'artesano',
     });
 
     this.belongsTo(models.Cliente, {
-      as: 'cliente'
+      as: 'cliente',
     });
 
-    this.belongsTo(models.Admintrador, {
-      as: 'administrador'
+    this.belongsTo(models.Administrador, {
+      as: 'administrador',
     });
 
     this.belongsTo(models.Delivery, {
-      as: 'delivery'
+      as: 'delivery',
     });
   }
 

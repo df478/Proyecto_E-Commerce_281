@@ -57,8 +57,6 @@ module.exports = {
     await queryInterface.dropTable(SUPERVISADO_TABLE);
     await queryInterface.dropTable(ANIADE_TABLE);
 
-
-
     await queryInterface.dropTable(NOTIFICACION_TABLE);
 
 
@@ -80,7 +78,5 @@ module.exports = {
     await queryInterface.dropTable(MUNICIPIO_TABLE);
     await queryInterface.dropTable(PROVINCIA_TABLE);
     await queryInterface.dropTable(DEPARTAMENTO_TABLE);
-
-
   }
 };
