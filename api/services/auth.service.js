@@ -10,7 +10,7 @@ const { config } = require("../config/config");
 
 const clienteService = require("./cliente.service");
 const deliveryService = require("./delivery.service");
-// const artesanoService = require('./artesano.service');
+const artesanoService = require('./artesano.service');
 const administradorService = require("./administrador.service");
 
 class AuthService {
@@ -21,6 +21,8 @@ class AuthService {
       this.service = new deliveryService();
     } else if (tipo_usuario === "administrador") {
       this.service = new administradorService();
+    } else if (tipo_usuario === "artesano") {
+      this.service = new artesanoService();
     }
   }
 

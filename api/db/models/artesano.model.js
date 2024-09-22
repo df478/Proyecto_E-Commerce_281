@@ -1,4 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { COMUNIDAD_TABLE } = require("./comunidad.model");
+
 
 const ARTESANO_TABLE = 'artesano';
 const ArtesanoSchema = {
@@ -50,15 +52,16 @@ const ArtesanoSchema = {
         }
     },
     id_comunidad: {
-        type:DataTypes.INTEGER,
-        allowNull: false,
+        field: "id_comunidad",
+        allowNull: true,
+        type: DataTypes.INTEGER,
         references: {
-            model: "Comunidad",
+            model: COMUNIDAD_TABLE,
             key: "id_comunidad",
         },
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
-    }
+    },
 }
 
 class Artesano extends Model {
@@ -66,18 +69,18 @@ class Artesano extends Model {
     static associate(models) {
         this.belongsTo(models.Comunidad, {
             as: "comunidad",
-            foreignKey: "id_comunidad",
         });
         this.hasMany(models.Producto, {
             as: "producto",
             foreignKey: "id_usuario",
         });
+        
     }
     static config(sequelize) {
         return {
             sequelize,
             tableName: ARTESANO_TABLE,
-            modelName: 'Artesano',
+            modelName: "Artesano",
             timestamps: false,
         }
     }
