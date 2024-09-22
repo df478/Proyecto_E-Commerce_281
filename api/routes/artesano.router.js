@@ -2,7 +2,7 @@ const express = require("express");
 const ArtesanoService = require("./../services/artesano.service");
 const validatorHandler = require("../middlewares/validator.handler");
 const router = express.Router();
-const service = new artesanoService();
+const service = new ArtesanoService();
 const {
   obtenerArtesanoSchema,
   crearArtesanoSchema,

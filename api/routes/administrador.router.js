@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     const administradors = await service.find();
     res.json(administradors);
   } catch (error) {
-    res.status(500).json({ message: "Error al obtener los administradors", error });
+    res.status(500).json({ message: "Error al obtener los administradores", error });
   }
 });
 

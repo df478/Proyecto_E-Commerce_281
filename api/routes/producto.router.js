@@ -2,6 +2,13 @@ const express = require('express');
 const ProductoService = require('./../services/producto.service');
 const router = express.Router();
 const service = new ProductoService();
+const validatorHandler = require("../middlewares/validator.handler");
+const {
+    crearProductoSchema,
+    actualizarProductoSchema,
+    obtenerProductoSchema
+    } = require("../schemas/producto.schema");
+
 
 router.get('/', async (req, res) => {
     try {
@@ -12,12 +19,14 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', 
+    validatorHandler(obtenerProductoSchema, "params"), 
+    async (req, res) => {
     try {
         const { id } = req.params;
         const producto = await service.findOne(id);
         if (!producto) {
-            return res.status(404).json({ message: 'Producto no encontrado' });
+            return res.status(404).json({ message: 'producto no encontrado' });
         }
         res.json(producto);
     } catch (error) {
@@ -25,7 +34,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', 
+    validatorHandler(crearProductoSchema, "body"),
+    async (req, res) => {
     try {
         const body = req.body;
         const nuevoProducto = await service.create(body);
@@ -35,13 +46,16 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', 
+    validatorHandler(obtenerProductoSchema, "params"),
+    validatorHandler(actualizarProductoSchema, "body"),
+    async (req, res) => {
     try {
         const { id } = req.params;
         const body = req.body;
         const producto = await service.update(id, body);
         if (!producto) {
-            return res.status(404).json({ message: 'Producto no encontrado' });
+            return res.status(404).json({ message: 'producto no encontrado' });
         }
         res.json(producto);
     } catch (error) {
@@ -54,7 +68,7 @@ router.delete('/:id', async (req, res) => {
         const { id } = req.params;
         const rta = await service.delete(id);
         if (!rta) {
-            return res.status(404).json({ message: 'Producto no encontrado' });
+            return res.status(404).json({ message: 'producto no encontrado' });
         }
         res.json(rta);
     } catch (error) {
