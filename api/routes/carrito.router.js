@@ -2,6 +2,12 @@ const express = require('express');
 const CarritoService = require('./../services/carrito.service');
 const router = express.Router();
 const service = new CarritoService();
+const validatorHandler = require("../middlewares/validator.handler");
+const {
+    crearCarritoSchema,
+    actualizarCarritoSchema,
+    obtenerCarritoSchema
+    } = require("../schemas/carrito.schema");
 
 
 router.get('/', async (req, res) => {
@@ -13,7 +19,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', 
+    validatorHandler(obtenerCarritoSchema, "params"), 
+    async (req, res) => {
     try {
         const { id } = req.params;
         const carrito = await service.findOne(id);
@@ -26,7 +34,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', 
+    validatorHandler(crearCarritoSchema, "body"),
+    async (req, res) => {
     try {
         const body = req.body;
         const nuevoCarrito = await service.create(body);
@@ -36,7 +46,10 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', 
+    validatorHandler(obtenerCarritoSchema, "params"),
+    validatorHandler(actualizarCarritoSchema, "body"),
+    async (req, res) => {
     try {
         const { id } = req.params;
         const body = req.body;

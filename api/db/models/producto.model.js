@@ -52,7 +52,7 @@ class Producto extends Model {
         });
         // Una artesano tiene muchos productos (1 : n)
         this.belongsTo(models.Artesano, {
-            foreignKey: 'id_artesano',
+            foreignKey: 'id_usuario',
             as: 'artesano'
         })
     }

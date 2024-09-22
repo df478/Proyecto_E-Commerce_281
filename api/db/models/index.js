@@ -23,7 +23,6 @@ function setUpModels(sequelize) {
   Provincia.associate(sequelize.models);
   Municipio.associate(sequelize.models);
   Comunidad.associate(sequelize.models);
-  Artesano.associate(sequelize.models);
 }
 
 module.exports = { setUpModels };

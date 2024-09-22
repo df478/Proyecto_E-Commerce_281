@@ -1,6 +1,6 @@
 const Joi=require('joi')
 
-const id_notificacion = Joi.numbre().integer()
+const id_notificacion = Joi.number().integer()
 const descripcion_notificacion = Joi.string().min(5).max(50)
 const tipo_notificacion = Joi.string().min(5).max(30)
 

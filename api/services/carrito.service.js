@@ -1,56 +1,46 @@
-const { faker } = require("@faker-js/faker");
-
+const boom = require("@hapi/boom");
+const bcrypt = require("bcrypt");
+const { models } = require("../libs/sequelize");
 class CarritoService {
   constructor() {
-    this.carrito = [];
-    this.generate();
+
   }
 
-  generate() {
-    const limite = 100;
-    for (let index = 0; index < limite; index++) {
-      this.carrito.push({
-        id_carrito: index
-      });
-    }
-  }
-
-  create(data) {
-    const nuevocarrito = {
-      id_carrito: this.carrito.length,
+  async create(data) {
+    const nuevoData = {
       ...data,
     };
-    this.carrito.push(nuevocarrito);
-    return nuevocarrito;
+    const nuevoCarrito = await models.Carrito.create(nuevoData);
+    return nuevoCarrito;
   }
 
-  find() {
-    return this.carrito;
+  async find() {
+    const rta = await models.Carrito.findAll();
+
+    return rta;
   }
 
-  findOne(id_carrito) {
-    return this.carrito.find((item) => item.id_carrito === id_carrito);
-  }
-
-  update(id_carrito, cambios) {
-    const index = this.carrito.findIndex(
-      (item) => item.id_carrito === id_carrito
-    );
-    if (index === -1) {
-      throw new Error("carrito no encontrado");
+  async findOne(id_carrito) {
+    
+    const carrito = await models.Carrito.findByPk(id_carrito);
+    if (!carrito) {
+      throw boom.notFound("Carrito no encontrado");
     }
-    this.carrito[index] = { ...this.carrito[index], ...cambios };
-    return this.carrito[index];
+    return carrito;
   }
 
-  delete(id_carrito) {
-    const index = this.carrito.findIndex(
-      (item) => item.id_carrito === id_carrito
-    );
-    if (index === -1) {
-      throw new Error("carrito no encontrado");
-    }
-    this.carrito.splice(index, 1);
+  async update(id_carrito, cambios) {
+    
+    console.log(id_carrito, cambios);
+    
+    const carrito = await this.findOne(id_carrito);
+    const rta = await carrito.update(cambios);
+    return rta;
+  }
+
+  async delete(id_carrito) {
+    const carrito = await this.findOne(id_carrito);
+    await carrito.destroy();
     return { id_carrito };
   }
 }
