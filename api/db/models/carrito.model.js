@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize')
 
 const CARRITO_TABLE = 'carrito'
 
-const carritoSchema = {
+const CarritoSchema = {
     id_carrito: {  
         allowNull: false,
         autoIncrement: true,
@@ -13,7 +13,7 @@ const carritoSchema = {
 
 class Carrito extends Model {
     static associate(models) {
-        this.hasMany(models.Pedido, {
+        this.hasOne(models.Pedido, {
             as: "pedido",
             foreignKey: "id_carrito",
         });
@@ -33,4 +33,4 @@ class Carrito extends Model {
     }
 }
 
-module.exports = { Carrito, carritoSchema, CARRITO_TABLE }
+module.exports = { Carrito, CarritoSchema, CARRITO_TABLE }

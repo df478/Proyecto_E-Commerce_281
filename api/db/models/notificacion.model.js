@@ -21,7 +21,10 @@ const notificacionSchema = {
 
 class Notificacion extends Model {
     static associate(models) {
-        
+        this.hasMany(models.PedNot, {
+            as: "pedNot",
+            foreignKey: "id_notificacion",
+        });
     }
 
     static config(sequelize) {

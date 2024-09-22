@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { CARRITO_TABLE } = require("./carrito.model");
 
 const PEDIDO_TABLE = 'pedido';
 
@@ -10,12 +11,16 @@ const pedidoSchema = {
         type: DataTypes.INTEGER
     },
     id_carrito: {
+        field: "id_carrito",
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        unique: true,  
         references: {
-            model: 'carrito',
+            model: CARRITO_TABLE,
             key: 'id_carrito'
-        }
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
     },
     fecha_pedido: {
         type: DataTypes.DATE,
@@ -38,8 +43,11 @@ class Pedido extends Model {
     static associate(models) {
         
         this.belongsTo(models.Carrito, {
-            foreignKey: 'id_carrito',
             as: 'carrito'
+        });
+        this.hasOne(models.Pago, {
+            as: "pago",
+            foreignKey: "id_pago",
         });
 
     }

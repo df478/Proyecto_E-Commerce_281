@@ -1,4 +1,6 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
+const { CLIENTE_TABLE } = require("./cliente.model");
+const { PRODUCTO_TABLE } = require("./producto.model");
 
 const RESENIA_TABLE = "resenia";
 
@@ -10,20 +12,26 @@ const ReseniaSchema = {
     type: DataTypes.INTEGER,
   },
   id_producto: {
+    field: "id_producto",
+    allowNull: true,
     type: DataTypes.INTEGER,
-    allowNull: true,             
     references: {
-      model: 'productos',        
-      key: 'id_producto',        
-    }
+        model: PRODUCTO_TABLE,
+        key: "id_producto",
+    },
+    onUpdate: "CASCADE",
+    onDelete: "SET NULL",
   },
-  id_cliente: {
+  id_usuario: {
+    field: "id_usuario",
+    allowNull: true,
     type: DataTypes.INTEGER,
-    allowNull: true,             
     references: {
-      model: 'clientes',         
-      key: 'id_cliente',         
-    }
+        model: CLIENTE_TABLE,
+        key: "id_usuario",
+    },
+    onUpdate: "CASCADE",
+    onDelete: "SET NULL",
   },
   descripcion_resenia: {
     type: DataTypes.TEXT,        
@@ -39,12 +47,10 @@ class Resenia extends Model {
   static associate(models) {
     
     this.belongsTo(models.Producto, {
-      foreignKey: 'id_producto',
       as: 'producto'
     });
 
     this.belongsTo(models.Cliente, {
-      foreignKey: 'id_cliente',
       as: 'cliente'
     });
   }

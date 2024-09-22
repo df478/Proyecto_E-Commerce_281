@@ -11,6 +11,11 @@ const { AdministradorSchema, ADMINISTRADOR_TABLE } = require('./../models/admini
 
 const { PromocionSchema, PROMOCION_TABLE } = require('./../models/promocion.model')
 const { ProductoSchema, PRODUCTO_TABLE } = require('./../models/producto.model')
+const { RESENIA_TABLE, ReseniaSchema } = require('../models/resenia.model');
+const { PAGO_TABLE, PagoSchema } = require('../models/pago.model');
+const { NOTIFICACION_TABLE, notificacionSchema } = require('../models/notificacion.model');
+const { CARRITO_TABLE, CarritoSchema } = require('../models/carrito.model');
+const { PEDIDO_TABLE, pedidoSchema } = require('../models/pedido.model');
 
 
 
@@ -28,10 +33,28 @@ module.exports = {
 
     await queryInterface.createTable(PROMOCION_TABLE, PromocionSchema);
     await queryInterface.createTable(PRODUCTO_TABLE, ProductoSchema);
+    await queryInterface.createTable(RESENIA_TABLE, ReseniaSchema);
+    
+    await queryInterface.createTable(CARRITO_TABLE, CarritoSchema);
+    await queryInterface.createTable(PEDIDO_TABLE, pedidoSchema);
+    await queryInterface.createTable(PAGO_TABLE, PagoSchema);
+    await queryInterface.createTable(NOTIFICACION_TABLE, notificacionSchema);
 
   },
 
   async down (queryInterface) {
+    await queryInterface.dropTable(NOTIFICACION_TABLE);
+
+
+    await queryInterface.dropTable(PAGO_TABLE);
+    await queryInterface.dropTable(PEDIDO_TABLE);
+    await queryInterface.dropTable(CARRITO_TABLE)
+
+    await queryInterface.dropTable(RESENIA_TABLE);
+    await queryInterface.dropTable(PRODUCTO_TABLE);
+    await queryInterface.dropTable(PROMOCION_TABLE);
+
+
     await queryInterface.dropTable(ADMINISTRADOR_TABLE);
     await queryInterface.dropTable(DELIVERY_TABLE);
     await queryInterface.dropTable(CLIENTE_TABLE);
@@ -42,8 +65,6 @@ module.exports = {
     await queryInterface.dropTable(PROVINCIA_TABLE);
     await queryInterface.dropTable(DEPARTAMENTO_TABLE);
 
-    await queryInterface.dropTable(PROMOCION_TABLE);
-    await queryInterface.dropTable(PRODUCTO_TABLE);
 
   }
 };
