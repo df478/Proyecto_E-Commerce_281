@@ -6,7 +6,7 @@ const id_delivery = Joi.number().integer();
 const estado_entrega = Joi.string().min(2).max(20);
 const fecha_entrega = Joi.date()
 
-const crearPed_Cli_DelSchema = Joi.object({
+const crearEntregaSchema = Joi.object({
     id_delivery: id_delivery.required(),  
     id_cliente: id_cliente.required(),
     id_pedido: id_pedido.required(),
@@ -14,7 +14,7 @@ const crearPed_Cli_DelSchema = Joi.object({
     fecha_entrega: fecha_entrega.required(),
 })
 
-const actualizarPed_Cli_DelSchema = Joi.object({
+const actualizarEntregaSchema = Joi.object({
     id_delivery: id_delivery,  
     id_cliente: id_cliente,
     id_pedido: id_pedido,
@@ -22,13 +22,13 @@ const actualizarPed_Cli_DelSchema = Joi.object({
     fecha_entrega: fecha_entrega,
 })
 
-const obtenerPed_Cli_DelSchema = Joi.object({
+const obtenerEntregaSchema = Joi.object({
     id_delivery: id_delivery.required(),  
     id_cliente: id_cliente.required(),
     id_pedido: id_pedido.required(),
 })
 module.exports = {
-    crearPed_Cli_DelSchema,
-    actualizarPed_Cli_DelSchema,
-    obtenerPed_Cli_DelSchema
+    crearEntregaSchema,
+    actualizarEntregaSchema,
+    obtenerEntregaSchema
 }
