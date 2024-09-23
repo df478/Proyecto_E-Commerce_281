@@ -5,6 +5,12 @@ const { PEDIDO_TABLE } = require("./pedido.model");
 const TIENE_TABLE = 'tiene'; //nombre de la tabla
 
 const TieneSchema = {
+    id_tiene: {
+        allowNull: false,
+        autoIncrement: true,         
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
     id_pedido: {  
         field: "id_pedido",
         allowNull: true,

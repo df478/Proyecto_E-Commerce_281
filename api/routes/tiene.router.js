@@ -2,7 +2,8 @@ const express = require('express');
 const TieneService = require('./../services/tiene.service');
 const validatorHandler = require("../middlewares/validator.handler");
 const router = express.Router();
-const service = new TieneService();
+const service = new TieneService(); // Corregido el nombre de la clase
+
 const {
     obtenerTieneSchema,
     crearTieneSchema,
@@ -11,24 +12,21 @@ const {
 
 router.get('/', async (req, res) => {
     try {
-        const aniadidos = await service.find();
-        res.json(aniadidos);
+        const tiene = await service.find();
+        res.json(tiene);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error al obtener los añadidos', error: error.message });
+        res.status(500).json({ message: 'Error al obtener los registros de tiene', error: error.message });
     }
 });
 
-router.get('/:id_producto/:id_notificacion', 
+router.get('/:id_tiene', 
     validatorHandler(obtenerTieneSchema, "params"),
     async (req, res) => {
         try {
-            const { id_producto, id_notificacion } = req.params;
-            const aniadido = await service.findOne(id_producto, id_notificacion);
-            if (!aniadido) {
-                return res.status(404).json({ message: 'Tiene no encontrado' });
-            }
-            res.json(aniadido);
+            const { id_tiene } = req.params;
+            const tiene = await service.findOne(id_tiene);
+            res.json(tiene);
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Error al obtener la tiene', error: error.message });
@@ -41,8 +39,8 @@ router.post('/',
     async (req, res) => {
         try {
             const body = req.body;
-            const nuevoAniadido = await service.create(body);
-            res.status(201).json(nuevoAniadido);
+            const nuevoTiene = await service.create(body);
+            res.status(201).json(nuevoTiene);
         } catch (error) {
             console.error(error);
             res.status(400).json({ message: 'Error al crear la tiene', error: error.message });
@@ -50,18 +48,15 @@ router.post('/',
     }
 );
 
-router.patch('/:id_producto/:id_notificacion', 
+router.patch('/:id_tiene', 
     validatorHandler(obtenerTieneSchema, "params"),
     validatorHandler(actualizarTieneSchema, "body"),
     async (req, res) => {
         try {
-            const { id_producto, id_notificacion } = req.params;
+            const { id_tiene } = req.params;
             const body = req.body;
-            const aniadido = await service.update(id_producto, id_notificacion, body);
-            if (!aniadido) {
-                return res.status(404).json({ message: 'Tiene no encontrada' });
-            }
-            res.json(aniadido);
+            const tiene = await service.update(id_tiene, body);
+            res.json(tiene);
         } catch (error) {
             console.error(error);
             res.status(400).json({ message: 'Error al actualizar la tiene', error: error.message });
@@ -69,15 +64,12 @@ router.patch('/:id_producto/:id_notificacion',
     }
 );
 
-router.delete('/:id_producto/:id_notificacion', 
+router.delete('/:id_tiene', 
     validatorHandler(obtenerTieneSchema, "params"),
     async (req, res) => {
         try {
-            const { id_producto, id_notificacion } = req.params;
-            const rta = await service.delete(id_producto, id_notificacion);
-            if (!rta) {
-                return res.status(404).json({ message: 'Tiene no encontrada' });
-            }
+            const { id_tiene } = req.params;
+            const rta = await service.delete(id_tiene);
             res.json(rta);
         } catch (error) {
             console.error(error);

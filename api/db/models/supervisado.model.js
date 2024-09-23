@@ -12,7 +12,6 @@ const SupervisadoSchema = {
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER
-
   },
   id_usuario_admin: {
     allowNull: true,

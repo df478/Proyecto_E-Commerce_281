@@ -19,12 +19,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id_producto/:id_carrito/:id_cliente', 
+router.get('/:id_aniade', 
     validatorHandler(obtenerAniadeSchema, "params"),
     async (req, res) => {
         try {
-            const { id_producto, id_carrito, id_cliente } = req.params;
-            const aniadido = await service.findOne(id_producto, id_carrito, id_cliente);
+            const { id_aniade } = req.params;
+            const aniadido = await service.findOne(id_aniade);
             if (!aniadido) {
                 return res.status(404).json({ message: 'Aniade no encontrado' });
             }
@@ -50,14 +50,14 @@ router.post('/',
     }
 );
 
-router.patch('/:id_producto/:id_carrito/:id_cliente', 
+router.patch('/:id_aniade', 
     validatorHandler(obtenerAniadeSchema, "params"),
     validatorHandler(actualizarAniadeSchema, "body"),
     async (req, res) => {
         try {
-            const { id_producto, id_carrito, id_cliente } = req.params;
+            const { id_aniade } = req.params;
             const body = req.body;
-            const aniadido = await service.update(id_producto, id_carrito, id_cliente, body);
+            const aniadido = await service.update(id_aniade, body);
             if (!aniadido) {
                 return res.status(404).json({ message: 'Aniade no encontrada' });
             }
@@ -69,12 +69,12 @@ router.patch('/:id_producto/:id_carrito/:id_cliente',
     }
 );
 
-router.delete('/:id_producto/:id_carrito/:id_cliente', 
+router.delete('/:id_aniade', 
     validatorHandler(obtenerAniadeSchema, "params"),
     async (req, res) => {
         try {
-            const { id_producto, id_carrito, id_cliente } = req.params;
-            const rta = await service.delete(id_producto, id_carrito, id_cliente);
+            const { id_aniade } = req.params;
+            const rta = await service.delete(id_aniade);
             if (!rta) {
                 return res.status(404).json({ message: 'Aniade no encontrada' });
             }
