@@ -6,10 +6,8 @@ const limite = 100;
 async function generate(limit) {
   let clientes = [];
   for (let index = 0; index < limit; index++) {
-    const hash = await bcrypt.hash(faker.internet.password(), 10);
-    
+    const hash = await bcrypt.hash(faker.internet.password(), 10);    
     clientes.push({
-      id_usuario: index,
       nombre_usuario: faker.person.fullName(),
       email_usuario: faker.internet.email(),
       password_usuario: hash,
