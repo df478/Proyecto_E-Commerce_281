@@ -8,6 +8,8 @@ const {
   crearClienteSchema,
   actualizarClienteSchema,
 } = require("../schemas/cliente.schema");
+const AuthService = require("./../services/auth.service");
+const authService = new AuthService("cliente");
 
 router.get("/", async (req, res) => {
   try {
@@ -42,6 +44,8 @@ router.post(
     try {
       const body = req.body;
       const nuevoCliente = await service.create(body);
+      console.log(nuevoCliente);
+      await authService.sendVerificationEmail(nuevoCliente);
       res.status(201).json(nuevoCliente);
     } catch (error) {
       res.status(400).json({ message: "Error al crear el cliente", error });
@@ -64,29 +68,29 @@ router.patch(
       res.json(cliente);
     } catch (error) {
       console.error(error); // Imprimir el error para depuración
-      res
-        .status(400)
-        .json({
-          message: "Error al actualizar el cliente",
-          error: error.message || error,
-        });
+      res.status(400).json({
+        message: "Error al actualizar el cliente",
+        error: error.message || error,
+      });
     }
   }
 );
 
-router.delete("/:id", 
+router.delete(
+  "/:id",
   validatorHandler(obtenerClienteSchema, "params"),
   async (req, res) => {
-  try {
-    const { id } = req.params;
-    const rta = await service.delete(id);
-    if (!rta) {
-      return res.status(404).json({ message: "Cliente no encontrado" });
+    try {
+      const { id } = req.params;
+      const rta = await service.delete(id);
+      if (!rta) {
+        return res.status(404).json({ message: "Cliente no encontrado" });
+      }
+      res.json(rta);
+    } catch (error) {
+      res.status(500).json({ message: "Error al eliminar el cliente", error });
     }
-    res.json(rta);
-  } catch (error) {
-    res.status(500).json({ message: "Error al eliminar el cliente", error });
   }
-});
+);
 
 module.exports = router;
