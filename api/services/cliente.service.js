@@ -39,10 +39,16 @@ class ClienteService {
   }
 
   async update(id_usuario, cambios) {
-    console.log(id_usuario, cambios);
-    
+
+    const hash = await bcrypt.hash(cambios.password_usuario, 10);
+    const nuevoCambios = {
+      ...data,
+      password_usuario: hash,
+    };
+
+    console.log(id_usuario, nuevoCambios);
     const cliente = await this.findOne(id_usuario);
-    const rta = await cliente.update(cambios);
+    const rta = await cliente.update(nuevoCambios);
     return rta;
   }
 
