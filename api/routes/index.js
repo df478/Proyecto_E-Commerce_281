@@ -2,10 +2,11 @@ const express = require('express');
 
 
 const administradorRouter = require('./administrador.router');
-const carritoRouter = require('./producto.router');
 const clienteRouter = require('./cliente.router');
-const comunidadRouter = require('./comunidad.router');
+const artesanoRouter = require('./artesano.router');
 const deliveryRouter = require('./delivery.router');
+const carritoRouter = require('./producto.router');
+const comunidadRouter = require('./comunidad.router');
 const municipioRouter = require('./municipio.router');
 const notificacionRouter = require('./notificacion.router')
 const pagoRouter = require('./pago.router');
@@ -30,10 +31,11 @@ function routerApi(app) {
   app.use('/api/v1', router);
   router.use('/auth', authRouter);
   router.use('/administrador', administradorRouter);
-  router.use('/carrito', carritoRouter);
+  router.use('/artesano', artesanoRouter);
   router.use('/cliente', clienteRouter);
-  router.use('/comunidad', comunidadRouter);
   router.use('/delivery', deliveryRouter);
+  router.use('/carrito', carritoRouter);
+  router.use('/comunidad', comunidadRouter);
   router.use('/municipio', municipioRouter);
   router.use('/notificiacion', notificacionRouter);
   router.use('/cliente', clienteRouter);
