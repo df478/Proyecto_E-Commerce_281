@@ -40,7 +40,8 @@ const DeliverySchema = {
     },
     estado_delivery: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 'inactivo',
         validate: {
             len: [3, 50]
         }

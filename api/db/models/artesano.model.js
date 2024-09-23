@@ -42,7 +42,8 @@ const ArtesanoSchema = {
     },
     especialidad: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true,
+        defaultValue: 'sin especialidad' 
     },
     calificacion: {
         type: DataTypes.INTEGER,
