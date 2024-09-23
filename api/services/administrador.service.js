@@ -39,6 +39,14 @@ class AdministradorService {
   }
 
   async update(id_usuario, cambios) {
+    if(cambios.password_usuario!=null){
+      const hash = await bcrypt.hash(cambios.password_usuario, 10);
+      const newCambios = {
+        ...cambios,
+        password_usuario: hash,
+      };
+      cambios=newCambios
+    }
     console.log(id_usuario, cambios);
     
     const administrador = await this.findOne(id_usuario);
