@@ -28,7 +28,7 @@ const DeliverySchema = {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [8, 20]
+            len: [8, 200]
         }
     },
     tipo_usuario: {
@@ -40,7 +40,8 @@ const DeliverySchema = {
     },
     estado_delivery: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 'inactivo',
         validate: {
             len: [3, 50]
         }

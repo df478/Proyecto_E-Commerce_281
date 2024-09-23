@@ -30,7 +30,7 @@ const ArtesanoSchema = {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [8, 20]
+            len: [8, 200]
         }
     },
     tipo_usuario: {
@@ -42,7 +42,8 @@ const ArtesanoSchema = {
     },
     especialidad: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true,
+        defaultValue: 'sin especialidad' 
     },
     calificacion: {
         type: DataTypes.INTEGER,
