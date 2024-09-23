@@ -74,12 +74,12 @@ router.patch(
   }
 );
 
-router.delete("/:id", 
+router.delete("/:id_usuario", 
   validatorHandler(obtenerAdministradorSchema, "params"),
   async (req, res) => {
   try {
-    const { id } = req.params;
-    const rta = await service.delete(id);
+    const { id_usuario } = req.params;
+    const rta = await service.delete(id_usuario);
     if (!rta) {
       return res.status(404).json({ message: "Administrador no encontrado" });
     }
