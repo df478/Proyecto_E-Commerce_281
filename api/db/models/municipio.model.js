@@ -35,6 +35,7 @@ class Municipio extends Model {
   static associate(models) {
     this.belongsTo(models.Provincia, {
       as: "provincia",
+      foreignKey: "id_provincia"
     });
 
     this.hasMany(models.Comunidad, {

@@ -31,6 +31,11 @@ const ClienteSchema = {
             len: [8, 200]
         }
     },
+    recovery_token: {
+        field: 'recovery_token',
+        allowNull: true,
+        type: DataTypes.STRING,
+    },
     tipo_usuario: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -56,23 +61,23 @@ class Cliente extends Model {
         
         this.hasMany(models.Resenia, {
             as: "resenia",
-            foreignKey: "id_usuario",
+            foreignKey: "id_cliente",
         });
         this.hasMany(models.Entrega, {
             as: "entrega",
-            foreignKey: "id_usuario",
+            foreignKey: 'id_cliente'
         });
         this.hasMany(models.Aniade, {
             as: "aniade",
-            foreignKey: "id_usuario",
+            foreignKey: "id_cliente",
         });
         this.hasMany(models.Pago, {
             as: "pago",
-            foreignKey: "id_usuario",
+            foreignKey: 'id_cliente'
         });
         this.hasMany(models.Supervisado, {
             as: "supervisado",
-            foreignKey: "id_usuario",
+            foreignKey: 'id_cliente'
         });
     }
 

@@ -10,15 +10,11 @@ const password_usuario = Joi.string()
   .pattern(new RegExp("(?=.*[A-Z])"))
   .pattern(new RegExp("(?=.*[0-9])"))
   .pattern(new RegExp("(?=.*[!@#$%^&*])"));
-const tipo_usuario = Joi.string().valid("administrador");
-const fecha_registro = Joi.date();
 
 const crearAdministradorSchema = Joi.object({
   nombre_usuario: nombre_usuario.required(),
   email_usuario: email_usuario.required(),
   password_usuario: password_usuario.required(),
-  tipo_usuario: tipo_usuario.required(),
-  fecha_registro: fecha_registro.required(),
 });
 
 const actualizarAdministradorSchema = Joi.object({

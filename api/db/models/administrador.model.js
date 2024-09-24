@@ -30,14 +30,18 @@ const AdministradorSchema = {
       len: [8, 200],
     },
   },
+  recovery_token: {
+    field: "recovery_token",
+    allowNull: true,
+    type: DataTypes.STRING,
+  },
 };
 
 class Administrador extends Model {
   static associate(models) {
-    
     this.hasMany(models.Supervisado, {
       as: "supervisado",
-      foreignKey: "id_usuario",
+      foreignKey: "id_administrador",
     });
   }
   static config(sequelize) {
@@ -50,4 +54,4 @@ class Administrador extends Model {
   }
 }
 
-module.exports = { Administrador, AdministradorSchema, ADMINISTRADOR_TABLE }
+module.exports = { Administrador, AdministradorSchema, ADMINISTRADOR_TABLE };

@@ -47,11 +47,13 @@ class Resenia extends Model {
   static associate(models) {
     
     this.belongsTo(models.Producto, {
-      as: 'producto'
+      as: 'producto',
+      foreignKey: "id_producto"
     });
 
     this.belongsTo(models.Cliente, {
-      as: 'cliente'
+      as: 'cliente',
+      foreignKey: "id_cliente"
     });
   }
 

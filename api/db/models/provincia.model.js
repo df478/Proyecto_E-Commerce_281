@@ -14,13 +14,13 @@ const ProvinciaSchema = {
     unique: true,
     allowNull: false,
   },
-  id_depto: {
-    field: "id_depto",
+  id_departamento: {
+    field: "id_departamento",
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
       model: DEPARTAMENTO_TABLE,
-      key: "id_depto",
+      key: "id_departamento",
     },
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
@@ -31,6 +31,7 @@ class Provincia extends Model {
   static associate(models) {
     this.belongsTo(models.Departamento, {
       as: "departamento",
+      foreignKey: "id_departamento"
     });
 
     this.hasMany(

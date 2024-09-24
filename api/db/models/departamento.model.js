@@ -1,13 +1,13 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const DEPARTAMENTO_TABLE = 'departamento';
 const DepartamentoSchema = {
-    id_depto: {
+    id_departamento: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
     }, 
-    ndepto: {
+    nombre_departamento: {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
@@ -23,7 +23,7 @@ class Departamento extends Model {
             models.Provincia,
             {
                 as:'provincia',
-                foreignKey: 'id_depto'
+                foreignKey: 'id_departamento'
             }
         )
     }

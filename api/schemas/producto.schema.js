@@ -7,6 +7,7 @@ const nombre_producto = Joi.string().min(2).max(50)
 const precio_producto = Joi.number().positive()
 const descripcion_producto = Joi.string().min(10).max(100)
 const stock_producto = Joi.number().integer()
+const url_producto = Joi.string().uri()
 
 const crearProductoSchema = Joi.object({
     id_artesano:id_artesano.required(),
@@ -14,7 +15,8 @@ const crearProductoSchema = Joi.object({
     nombre_producto: nombre_producto.required(),
     precio_producto: precio_producto.required(),
     descripcion_producto: descripcion_producto.required(),
-    stock_producto: stock_producto.required()
+    stock_producto: stock_producto.required(),
+    url_producto: url_producto.required()
 })
 
 const actualizarProductoSchema = Joi.object({
@@ -23,7 +25,8 @@ const actualizarProductoSchema = Joi.object({
     nombre_producto: nombre_producto,
     precio_producto: precio_producto,
     descripcion_producto: descripcion_producto,
-    stock_producto: stock_producto
+    stock_producto: stock_producto,
+    url_producto: url_producto
 })
 
 const obtenerProductoSchema = Joi.object({

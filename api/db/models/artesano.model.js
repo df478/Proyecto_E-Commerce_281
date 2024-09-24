@@ -33,6 +33,11 @@ const ArtesanoSchema = {
             len: [8, 200]
         }
     },
+    recovery_token: {
+        field: 'recovery_token',
+        allowNull: true,
+        type: DataTypes.STRING,
+    },
     tipo_usuario: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -73,15 +78,15 @@ class Artesano extends Model {
         });
         this.hasMany(models.Producto, {
             as: "producto",
-            foreignKey: "id_usuario",
+            foreignKey: "id_artesano",
         });
         this.hasMany(models.Pago, {
             as: "pago",
-            foreignKey: "id_usuario",
+            foreignKey: "id_artesano",
         });
         this.hasMany(models.Supervisado, {
             as: "supervisado",
-            foreignKey: "id_usuario",
+            foreignKey: "id_artesano",
         });
         
     }

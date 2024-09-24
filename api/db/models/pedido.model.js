@@ -43,7 +43,8 @@ class Pedido extends Model {
     static associate(models) {
         
         this.belongsTo(models.Carrito, {
-            as: 'carrito'
+            as: 'carrito',
+            foreignKey: "id_carrito"
         });
         this.hasOne(models.Pago, {
             as: "pago",

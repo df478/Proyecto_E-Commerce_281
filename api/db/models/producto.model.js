@@ -44,12 +44,19 @@ const ProductoSchema = {
         allowNull: false,
     },
     descripcion_producto: {  
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,  
     },
     stock_producto: {  
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    url_producto: {
+        type: DataTypes.STRING,
+        allowNull: false, // Hace que el campo sea obligatorio
+        validate: {
+            isUrl: true // Valida que el formato sea una URL
+        }
     }
 }
 
@@ -57,11 +64,13 @@ class Producto extends Model {
     static associate(models) {
         // Una promoción tiene muchos productos (1 : n)
         this.belongsTo(models.Promocion, {
-            as: 'promocion'
+            as: 'promocion',
+            foreignKey: "id_promocion"
         });
         // Una artesano tiene muchos productos (1 : n)
         this.belongsTo(models.Artesano, {
-            as: 'artesano'
+            as: 'artesano',
+            foreignKey: "id_artesano"
         });
         this.hasMany(models.Resenia, {
             as: "resenia",

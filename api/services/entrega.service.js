@@ -15,7 +15,7 @@ class EntregaService {
   }
 
   async findOne(id_entrega) {
-    const entrega = await models.entrega.findOne({
+    const entrega = await models.Entrega.findOne({
       where: { id_entrega },
     }); // Buscar un registro específico por id_entrega
     if (!entrega) {
