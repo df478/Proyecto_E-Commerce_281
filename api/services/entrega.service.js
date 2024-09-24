@@ -5,12 +5,12 @@ class EntregaService {
   constructor() {}
 
   async create(data) {
-    const nuevoEntrega = await models.entrega.create(data); // Crear el registro en la base de datos
+    const nuevoEntrega = await models.Entrega.create(data); // Crear el registro en la base de datos
     return nuevoEntrega;
   }
 
   async find() {
-    const entregas = await models.entrega.findAll(); // Obtener todos los registros
+    const entregas = await models.Entrega.findAll(); // Obtener todos los registros
     return entregas;
   }
 

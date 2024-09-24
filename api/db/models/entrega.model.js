@@ -62,12 +62,15 @@ class Entrega extends Model {
     static associate(models) {
         this.belongsTo(models.Pedido, {
             as: "pedido",
+            foreignKey: "id_pedido",
         });
         this.belongsTo(models.Cliente, {
             as: "cliente",
+            foreignKey: 'id_cliente'
         });
         this.belongsTo(models.Delivery, {
             as: "delivery",
+            foreignKey: 'id_delivery'
         });
     }
 
