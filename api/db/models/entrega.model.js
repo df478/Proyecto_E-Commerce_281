@@ -6,6 +6,12 @@ const { DELIVERY_TABLE } = require("./delivery.model");
 const ENTREGA_TABLE = 'entrega'
 
 const EntregaSchema = {
+    id_entrega: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+    }, 
     id_pedido: {  
         field: "id_pedido",
         allowNull: true,

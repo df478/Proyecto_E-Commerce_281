@@ -11,24 +11,21 @@ const {
 
 router.get('/', async (req, res) => {
     try {
-        const aniadidos = await service.find();
-        res.json(aniadidos);
+        const entregas = await service.find();
+        res.json(entregas);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error al obtener los añadidos', error: error.message });
+        res.status(500).json({ message: 'Error al obtener las entregas', error: error.message });
     }
 });
 
-router.get('/:id_pedido/:id_delivery/:id_cliente', 
+router.get('/:id_entrega', 
     validatorHandler(obtenerEntregaSchema, "params"),
     async (req, res) => {
         try {
-            const { id_pedido, id_delivery, id_cliente } = req.params;
-            const aniadido = await service.findOne(id_pedido, id_delivery, id_cliente);
-            if (!aniadido) {
-                return res.status(404).json({ message: 'Entrega no encontrado' });
-            }
-            res.json(aniadido);
+            const { id_entrega } = req.params;
+            const entrega = await service.findOne(id_entrega);
+            res.json(entrega);
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Error al obtener la entrega', error: error.message });
@@ -41,8 +38,8 @@ router.post('/',
     async (req, res) => {
         try {
             const body = req.body;
-            const nuevoAniadido = await service.create(body);
-            res.status(201).json(nuevoAniadido);
+            const nuevaEntrega = await service.create(body);
+            res.status(201).json(nuevaEntrega);
         } catch (error) {
             console.error(error);
             res.status(400).json({ message: 'Error al crear la entrega', error: error.message });
@@ -50,18 +47,15 @@ router.post('/',
     }
 );
 
-router.patch('/:id_pedido/:id_delivery/:id_cliente', 
+router.patch('/:id_entrega', 
     validatorHandler(obtenerEntregaSchema, "params"),
     validatorHandler(actualizarEntregaSchema, "body"),
     async (req, res) => {
         try {
-            const { id_pedido, id_delivery, id_cliente } = req.params;
+            const { id_entrega } = req.params;
             const body = req.body;
-            const aniadido = await service.update(id_pedido, id_delivery, id_cliente, body);
-            if (!aniadido) {
-                return res.status(404).json({ message: 'Entrega no encontrada' });
-            }
-            res.json(aniadido);
+            const entrega = await service.update(id_entrega, body);
+            res.json(entrega);
         } catch (error) {
             console.error(error);
             res.status(400).json({ message: 'Error al actualizar la entrega', error: error.message });
@@ -69,15 +63,12 @@ router.patch('/:id_pedido/:id_delivery/:id_cliente',
     }
 );
 
-router.delete('/:id_pedido/:id_delivery/:id_cliente', 
+router.delete('/:id_entrega', 
     validatorHandler(obtenerEntregaSchema, "params"),
     async (req, res) => {
         try {
-            const { id_pedido, id_delivery, id_cliente } = req.params;
-            const rta = await service.delete(id_pedido, id_delivery, id_cliente);
-            if (!rta) {
-                return res.status(404).json({ message: 'Entrega no encontrada' });
-            }
+            const { id_entrega } = req.params;
+            const rta = await service.delete(id_entrega);
             res.json(rta);
         } catch (error) {
             console.error(error);

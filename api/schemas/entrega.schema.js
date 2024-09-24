@@ -1,5 +1,6 @@
 const Joi = require('joi');
 
+const id_entrega = Joi.number().integer();
 const id_pedido = Joi.number().integer();
 const id_cliente = Joi.number().integer();
 const id_delivery = Joi.number().integer();
@@ -23,9 +24,8 @@ const actualizarEntregaSchema = Joi.object({
 })
 
 const obtenerEntregaSchema = Joi.object({
-    id_delivery: id_delivery.required(),  
-    id_cliente: id_cliente.required(),
-    id_pedido: id_pedido.required(),
+    id_entrega: id_entrega.required(),  
+   
 })
 module.exports = {
     crearEntregaSchema,

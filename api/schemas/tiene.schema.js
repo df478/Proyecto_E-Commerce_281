@@ -1,8 +1,9 @@
-const Joi = require('joi')
+const Joi = require('joi');
 
-const id_pedido = Joi.number().integer()
-const id_notificacion = Joi.number().integer()
-const  fecha_ped_not = Joi.date() // YYYY-MM-DD
+const id_tiene = Joi.number().integer();
+const id_pedido = Joi.number().integer();
+const id_notificacion = Joi.number().integer();
+const  fecha_ped_not = Joi.date().iso(); // YYYY-MM-DD
 
 const crearTieneSchema = Joi.object({
     id_pedido:id_pedido.required(),
@@ -17,8 +18,7 @@ const actualizarTieneSchema = Joi.object({
 })
 
 const obtenerTieneSchema = Joi.object({
-    id_pedido: id_pedido.required(),
-    id_notificacion: id_notificacion.required()
+    id_tiene: id_tiene.required(),
 })
 
 module.exports = {

@@ -4,7 +4,7 @@ const CLIENTE_TABLE = 'cliente';
 
 const ClienteSchema = {
     id_usuario: {
-        allowNull: false,
+        llowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER

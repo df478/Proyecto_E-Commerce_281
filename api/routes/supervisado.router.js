@@ -11,27 +11,24 @@ const {
 
 router.get('/', async (req, res) => {
     try {
-        const aniadidos = await service.find();
-        res.json(aniadidos);
+        const supervisados = await service.find();
+        res.json(supervisados);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error al obtener los añadidos', error: error.message });
+        res.status(500).json({ message: 'Error al obtener los supervisados', error: error.message });
     }
 });
 
-router.get('/:id_producto/:id_carrito/:id_cliente', 
+router.get('/:id_supervisado', 
     validatorHandler(obtenerSupervisadoSchema, "params"),
     async (req, res) => {
         try {
-            const { id_producto, id_carrito, id_cliente } = req.params;
-            const aniadido = await service.findOne(id_producto, id_carrito, id_cliente);
-            if (!aniadido) {
-                return res.status(404).json({ message: 'Añadido no encontrado' });
-            }
-            res.json(aniadido);
+            const { id_supervisado } = req.params;
+            const supervisado = await service.findOne(id_supervisado);
+            res.json(supervisado);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Error al obtener el añadido', error: error.message });
+            res.status(500).json({ message: 'Error al obtener el supervisado', error: error.message });
         }
     }
 );
@@ -41,47 +38,41 @@ router.post('/',
     async (req, res) => {
         try {
             const body = req.body;
-            const nuevoAniadido = await service.create(body);
-            res.status(201).json(nuevoAniadido);
+            const nuevoSupervisado = await service.create(body);
+            res.status(201).json(nuevoSupervisado);
         } catch (error) {
             console.error(error);
-            res.status(400).json({ message: 'Error al crear el añadido', error: error.message });
+            res.status(400).json({ message: 'Error al crear el supervisado', error: error.message });
         }
     }
 );
 
-router.patch('/:id_producto/:id_carrito/:id_cliente', 
+router.patch('/:id_supervisado', 
     validatorHandler(obtenerSupervisadoSchema, "params"),
     validatorHandler(actualizarSupervisadoSchema, "body"),
     async (req, res) => {
         try {
-            const { id_producto, id_carrito, id_cliente } = req.params;
+            const { id_supervisado } = req.params;
             const body = req.body;
-            const aniadido = await service.update(id_producto, id_carrito, id_cliente, body);
-            if (!aniadido) {
-                return res.status(404).json({ message: 'Añadido no encontrado' });
-            }
-            res.json(aniadido);
+            const supervisado = await service.update(id_supervisado, body);
+            res.json(supervisado);
         } catch (error) {
             console.error(error);
-            res.status(400).json({ message: 'Error al actualizar el añadido', error: error.message });
+            res.status(400).json({ message: 'Error al actualizar el supervisado', error: error.message });
         }
     }
 );
 
-router.delete('/:id_producto/:id_carrito/:id_cliente', 
+router.delete('/:id_supervisado', 
     validatorHandler(obtenerSupervisadoSchema, "params"),
     async (req, res) => {
         try {
-            const { id_producto, id_carrito, id_cliente } = req.params;
-            const rta = await service.delete(id_producto, id_carrito, id_cliente);
-            if (!rta) {
-                return res.status(404).json({ message: 'Añadido no encontrado' });
-            }
-            res.json(rta);
+            const { id_supervisado } = req.params;
+            await service.delete(id_supervisado);
+            res.status(204).send(); // Devuelve un 204 No Content para indicar que la eliminación fue exitosa
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Error al eliminar el añadido', error: error.message });
+            res.status(500).json({ message: 'Error al eliminar el supervisado', error: error.message });
         }
     }
 );

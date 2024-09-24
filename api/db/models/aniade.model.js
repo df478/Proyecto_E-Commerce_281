@@ -5,6 +5,12 @@ const { CLIENTE_TABLE } = require("./cliente.model");
 
 const ANIADE_TABLE = "aniade";
 const AniadeSchema = {
+  id_aniade: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataTypes.INTEGER
+},
   id_producto: {
     field: "id_producto",
     allowNull: true,
