@@ -52,15 +52,15 @@ class Delivery extends Model {
     static associate(models) {
         this.hasMany(models.Pago, {
             as: "pago",
-            foreignKey: "id_usuario",
+            foreignKey: 'id_delivery'
         });
         this.hasMany(models.Entrega, {
             as: "entrega",
-            foreignKey: "id_usuario",
+            foreignKey: 'id_delivery'
         });
         this.hasMany(models.Supervisado, {
             as: "supervisado",
-            foreignKey: "id_usuario",
+            foreignKey: 'id_delivery'
         });
     }
 
