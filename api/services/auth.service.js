@@ -93,7 +93,7 @@ class AuthService {
     }
     const payload = { sub: user.id_usuario };
     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "15min" });
-    const link = `http://http://localhost:3000/recovery?token=${token}`;
+    const link = `http://http://localhost:3000/change-password?token=${token}`;
     await this.service.update(user.id_usuario, { recoveryToken: token });
     const mail = {
       from: config.smtpEmail,
