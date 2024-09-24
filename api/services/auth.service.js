@@ -94,7 +94,7 @@ class AuthService {
     const payload = { sub: user.id_usuario };
     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "15min" });
     const link = `http://http://localhost:3000/change-password?token=${token}`;
-    await this.service.update(user.id_usuario, { recoveryToken: token });
+    await this.service.update(user.id_usuario, { recovery_token: token });
     const mail = {
       from: config.smtpEmail,
       to: `${user.email_usuario}`,
@@ -110,13 +110,17 @@ class AuthService {
     try {
       const payload = jwt.verify(token, config.jwtSecret);
       const user = await this.service.findOne(payload.sub);
-      if (user.recoveryToken !== token) {
+      if (user.recovery_token !== token) {
         throw boom.unauthorized();
       }
+
+      
       const hash = await bcrypt.hash(newPassword, 10);
-      await this.service.update(user.id, {
-        recoveryToken: null,
-        password: hash,
+      console.log("paso :D");
+
+      await this.service.update(user.id_usuario, {
+        recovery_token: null,
+        password_usuario: hash,
       });
 
       return { message: "password changed" };

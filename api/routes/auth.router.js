@@ -33,10 +33,14 @@ router.post("/recovery", async (req, res, next) => {
 
 router.post("/change-password", async (req, res, next) => {
   try {
-    const { token, newPassword, tipo_usuario } = req.body;
+    const { recovery_token, password_usuario, tipo_usuario } = req.body;
+    console.log(recovery_token);
+    console.log(password_usuario);
+    console.log(tipo_usuario);
+    
+    
     const service = new AuthService(tipo_usuario);
-    service.defineService(tipo_usuario);
-    const rta = await service.changePassword(token, newPassword);
+    const rta = await service.changePassword(recovery_token, password_usuario);
     res.json(rta);
   } catch (error) {
     next(error);
