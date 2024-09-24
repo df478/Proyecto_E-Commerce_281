@@ -44,7 +44,7 @@ const ProductoSchema = {
         allowNull: false,
     },
     descripcion_producto: {  
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,  
     },
     stock_producto: {  

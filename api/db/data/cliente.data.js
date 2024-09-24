@@ -1,9 +1,8 @@
 const { faker } = require("@faker-js/faker");
 const bcrypt = require("bcrypt");
 
-const limite = 100;
 
-async function generate(limit) {
+async function generate() {
   let clientes = [];
   
   const clientesData = [
@@ -265,7 +264,7 @@ async function generate(limit) {
 
 // Function to generate and export the data
 async function generarCliente() {
-  const clienteData = await generate(limite);
+  const clienteData = await generate();
   return clienteData;
 }
 

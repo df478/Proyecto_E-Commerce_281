@@ -10,7 +10,7 @@ const PromocionSchema = {
         type: DataTypes.INTEGER
     },
     descuento_promocion: {  
-        type: DataTypes.INTEGER,  
+        type: DataTypes.DECIMAL,  
         allowNull: false,  
     },
     fecha_ini: {  
