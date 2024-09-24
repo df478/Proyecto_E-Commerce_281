@@ -31,6 +31,7 @@ class Provincia extends Model {
   static associate(models) {
     this.belongsTo(models.Departamento, {
       as: "departamento",
+      foreignKey: "id_departamento"
     });
 
     this.hasMany(

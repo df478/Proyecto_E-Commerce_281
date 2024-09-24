@@ -44,9 +44,11 @@ class Tiene extends Model {
         
         this.belongsTo(models.Notificacion, {
             as: "notificacion",
+            foreignKey: "id_notificacion"
         });
         this.belongsTo(models.Pedido, {
             as: "pedido",
+            foreignKey: "id_pedido"
         });
     }
 
