@@ -33,7 +33,7 @@ async function generate() {
       precio_producto: producto.precio_producto,
       descripcion_producto: producto.descripcion_producto,
       stock_producto: producto.stock_producto,
-      // url_producto:producto.url_producto
+      url_producto:producto.url_producto
     });
   }
 

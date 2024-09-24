@@ -50,6 +50,13 @@ const ProductoSchema = {
     stock_producto: {  
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    url_producto: {
+        type: DataTypes.STRING,
+        allowNull: false, // Hace que el campo sea obligatorio
+        validate: {
+            isUrl: true // Valida que el formato sea una URL
+        }
     }
 }
 
