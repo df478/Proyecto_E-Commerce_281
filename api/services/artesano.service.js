@@ -39,6 +39,8 @@ class ArtesanoService {
   }
 
   async update(id_usuario, cambios) {
+    console.log("paso :D");
+
     console.log(id_usuario, cambios);
     
     const artesano = await this.findOne(id_usuario);

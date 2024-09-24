@@ -33,6 +33,11 @@ const ArtesanoSchema = {
             len: [8, 200]
         }
     },
+    recovery_token: {
+        field: 'recovery_token',
+        allowNull: true,
+        type: DataTypes.STRING,
+    },
     tipo_usuario: {
         type: DataTypes.STRING,
         allowNull: false,

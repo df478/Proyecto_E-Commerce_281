@@ -10,7 +10,7 @@ const { config } = require("../config/config");
 
 const clienteService = require("./cliente.service");
 const deliveryService = require("./delivery.service");
-const artesanoService = require('./artesano.service');
+const artesanoService = require("./artesano.service");
 const administradorService = require("./administrador.service");
 
 class AuthService {
@@ -24,6 +24,39 @@ class AuthService {
     } else if (tipo_usuario === "artesano") {
       this.service = new artesanoService();
     }
+  }
+
+  async register(userData) {
+    // Crear el usuario
+    const user = await this.service.create(userData);
+
+    // Enviar correo de verificación
+    await this.sendVerificationEmail(user);
+
+    return user;
+  }
+
+  async sendVerificationEmail(user) {
+    // Generar un token de verificación
+    const payload = { sub: user.id_usuario };
+    const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "1h" });
+
+    
+    // Crear enlace de verificación
+    const link = `http://localhost:3000/verify-account?token=${token}`;
+    console.log("------------token", token);
+    
+    // Configurar el correo
+    const mail = {
+      from: config.smtpEmail,
+      to: user.email_usuario,
+      subject: "Verificación de cuenta",
+      html: `<b>Por favor verifica tu cuenta haciendo clic en este enlace: <a href="${link}">Verificar cuenta</a></b>`,
+    };
+
+    // Enviar el correo
+    const rta = await this.sendMail(mail);
+    return rta;
   }
 
   async getUser(email, password) {
@@ -60,8 +93,8 @@ class AuthService {
     }
     const payload = { sub: user.id_usuario };
     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "15min" });
-    const link = `http://myfrontend.com/recovery?token=${token}`;
-    await this.service.update(user.id_usuario, { recoveryToken: token });
+    const link = `http://http://localhost:3000/change-password?token=${token}`;
+    await this.service.update(user.id_usuario, { recovery_token: token });
     const mail = {
       from: config.smtpEmail,
       to: `${user.email_usuario}`,
@@ -77,13 +110,17 @@ class AuthService {
     try {
       const payload = jwt.verify(token, config.jwtSecret);
       const user = await this.service.findOne(payload.sub);
-      if (user.recoveryToken !== token) {
+      if (user.recovery_token !== token) {
         throw boom.unauthorized();
       }
+
+      
       const hash = await bcrypt.hash(newPassword, 10);
-      await this.service.update(user.id, {
-        recoveryToken: null,
-        password: hash,
+      console.log("paso :D");
+
+      await this.service.update(user.id_usuario, {
+        recovery_token: null,
+        password_usuario: hash,
       });
 
       return { message: "password changed" };
@@ -93,13 +130,12 @@ class AuthService {
   }
   async sendMail(infoMail) {
     const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
+      host: "smtp.gmail.com",
       secure: true,
       port: 465,
       auth: {
         user: config.smtpEmail,
         pass: config.smtpPassword,
-        
       },
     });
     await transporter.sendMail(infoMail);
