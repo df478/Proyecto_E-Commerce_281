@@ -57,11 +57,13 @@ class Producto extends Model {
     static associate(models) {
         // Una promoción tiene muchos productos (1 : n)
         this.belongsTo(models.Promocion, {
-            as: 'promocion'
+            as: 'promocion',
+            foreignKey: "id_promocion"
         });
         // Una artesano tiene muchos productos (1 : n)
         this.belongsTo(models.Artesano, {
-            as: 'artesano'
+            as: 'artesano',
+            foreignKey: "id_artesano"
         });
         this.hasMany(models.Resenia, {
             as: "resenia",

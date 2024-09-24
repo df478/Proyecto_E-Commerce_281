@@ -41,7 +41,7 @@ class Administrador extends Model {
   static associate(models) {
     this.hasMany(models.Supervisado, {
       as: "supervisado",
-      foreignKey: "id_usuario",
+      foreignKey: "id_administrador",
     });
   }
   static config(sequelize) {

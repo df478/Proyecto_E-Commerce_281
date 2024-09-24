@@ -55,12 +55,15 @@ class Aniade extends Model {
     
     this.belongsTo(models.Producto, {
         as: "producto",
+        foreignKey: "id_producto"
     });
     this.belongsTo(models.Carrito, {
         as: "carrito",
+        foreignKey: "id_carrito"
     });
     this.belongsTo(models.Cliente, {
         as: "cliente",
+        foreignKey: "id_cliente"
     });
   }
   static config(sequelize) {

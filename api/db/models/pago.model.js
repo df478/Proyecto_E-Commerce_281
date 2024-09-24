@@ -69,17 +69,21 @@ class Pago extends Model {
     static associate(models) {
         this.belongsTo(models.Pedido,{
             as: 'pedido',
+            foreignKey: "id_pedido",
         });
         this.belongsTo(models.Artesano, {
-            as: 'artesano'
+            as: 'artesano',
+            foreignKey: "id_artesano",
         });
 
         this.belongsTo(models.Cliente, {
-            as: 'cliente'
+            as: 'cliente',
+            foreignKey: "id_cliente",
         });
 
         this.belongsTo(models.Delivery, {
-            as: 'delivery'
+            as: 'delivery',
+            foreignKey: "id_delivery",
         });
     }
 

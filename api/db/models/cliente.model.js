@@ -61,7 +61,7 @@ class Cliente extends Model {
         
         this.hasMany(models.Resenia, {
             as: "resenia",
-            foreignKey: "id_usuario",
+            foreignKey: "id_cliente",
         });
         this.hasMany(models.Entrega, {
             as: "entrega",
@@ -69,7 +69,7 @@ class Cliente extends Model {
         });
         this.hasMany(models.Aniade, {
             as: "aniade",
-            foreignKey: "id_usuario",
+            foreignKey: "id_cliente",
         });
         this.hasMany(models.Pago, {
             as: "pago",

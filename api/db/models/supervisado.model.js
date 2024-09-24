@@ -13,7 +13,7 @@ const SupervisadoSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  id_usuario_admin: {
+  id_administrador: {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
@@ -23,7 +23,7 @@ const SupervisadoSchema = {
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
   },
-  id_usuario_artesano: {
+  id_artesano: {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
@@ -33,7 +33,7 @@ const SupervisadoSchema = {
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
   },
-  id_usuario_cliente: {
+  id_cliente: {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
@@ -43,7 +43,7 @@ const SupervisadoSchema = {
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
   },
-  id_usuario_delivery: {
+  id_delivery: {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
@@ -60,18 +60,22 @@ class Supervisado extends Model {
     
     this.belongsTo(models.Artesano, {
       as: 'artesano',
+      foreignKey: "id_artesano",
     });
 
     this.belongsTo(models.Cliente, {
       as: 'cliente',
+      foreignKey: "id_cliente",
     });
 
     this.belongsTo(models.Administrador, {
       as: 'administrador',
+      foreignKey: "id_administrado",
     });
 
     this.belongsTo(models.Delivery, {
       as: 'delivery',
+      foreignKey: "id_delivery",
     });
   }
 

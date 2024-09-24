@@ -78,15 +78,15 @@ class Artesano extends Model {
         });
         this.hasMany(models.Producto, {
             as: "producto",
-            foreignKey: "id_usuario",
+            foreignKey: "id_artesano",
         });
         this.hasMany(models.Pago, {
             as: "pago",
-            foreignKey: "id_usuario",
+            foreignKey: "id_artesano",
         });
         this.hasMany(models.Supervisado, {
             as: "supervisado",
-            foreignKey: "id_usuario",
+            foreignKey: "id_artesano",
         });
         
     }
