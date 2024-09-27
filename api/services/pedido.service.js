@@ -1,57 +1,45 @@
-const { faker } = require('@faker-js/faker');
-
+const boom = require("@hapi/boom");
+const { models } = require("../libs/sequelize");
 class PedidoService {
   constructor() {
-    this.pedidos = [];
-    this.generate();
+
   }
 
-  generate() {
-    const limite = 100;
-    for (let index = 0; index < limite; index++) {
-      this.pedidos.push({
-        id_pedido: index,
-        id_carrito: parseInt(Math.random() * 500),
-        fecha_pedido: faker.date.past(),
-        estado_pedido: faker.helpers.arrayElement(['pendiente', 'procesado', 'enviado', 'entregado', 'cancelado']),
-        monto_pago: parseFloat(faker.commerce.price()),
-      });
-    }
-  }
-
-  create(data) {
-    const nuevoPedido = {
-      id_pedido: this.pedidos.length,
+  async create(data) {
+    const nuevoData = {
       ...data,
     };
-    this.pedidos.push(nuevoPedido);
+    const nuevoPedido = await models.Pedido.create(nuevoData);
     return nuevoPedido;
   }
 
-  find() {
-    return this.pedidos;
+  async find() {
+    const rta = await models.Pedido.findAll();
+
+    return rta;
   }
 
-  findOne(id_pedido) {
-    return this.pedidos.find(item => item.id_pedido === parseInt(id_pedido));
-  }
-
-  update(id_pedido, cambios) {
-    const index = this.pedidos.findIndex(item => item.id_pedido === parseInt(id_pedido));
-    if (index === -1) {
-      throw new Error('Pedido no encontrado');
-    }
+  async findOne(id_pedido) {
     
-    this.pedidos[index] = { ...this.pedidos[index], ...cambios };
-    return this.pedidos[index];
+    const pedido = await models.Pedido.findByPk(id_pedido);
+    if (!pedido) {
+      throw boom.notFound("Pedido no encontrado");
+    }
+    return pedido;
   }
 
-  delete(id_pedido) {
-    const index = this.pedidos.findIndex(item => item.id_pedido === parseInt(id_pedido));
-    if (index === -1) {
-      throw new Error('Pedido no encontrado');
-    }
-    this.pedidos.splice(index, 1);
+  async update(id_pedido, cambios) {
+    
+    console.log(id_pedido, cambios);
+    
+    const pedido = await this.findOne(id_pedido);
+    const rta = await pedido.update(cambios);
+    return rta;
+  }
+
+  async delete(id_pedido) {
+    const pedido = await this.findOne(id_pedido);
+    await pedido.destroy();
     return { id_pedido };
   }
 }

@@ -11,7 +11,7 @@ const password_usuario = Joi.string()
   .pattern(new RegExp("(?=.*[0-9])"))
   .pattern(new RegExp("(?=.*[!@#$%^&*])"));
 const tipo_usuario = Joi.string().valid("delivery");
-const estado_delivery = Joi.string().min(2).max(50);
+const estado_delivery = Joi.string().min(2).max(50).valid("Activo","Inactivo","En camino");
 const fecha_registro = Joi.date();
 
 const crearDeliverySchema = Joi.object({

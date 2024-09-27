@@ -1,60 +1,45 @@
-const { faker } = require('@faker-js/faker');
-const boom = require('@hapi/boom');
-const bcrypt = require('bcrypt');
-
-
+const boom = require("@hapi/boom");
+const { models } = require("../libs/sequelize");
 class PagoService {
   constructor() {
-    this.pagos = [];
-    this.generate();
+
   }
 
-  generate() {
-    const limite = 100;
-    for (let index = 0; index < limite; index++) {
-      this.pagos.push({
-        id_pago: index,
-        id_pedido: parseInt(Math.random() * 500),
-        id_artesano: parseInt(Math.random() * 500),
-        id_cliente: parseInt(Math.random() * 500),
-        id_delivery: parseInt(Math.random() * 500),
-        fecha_pago: faker.date.past(),
-      });
-    }
-  }
-
-  create(data) {
-    const nuevoPago = {
-      id_pago: this.pagos.length, 
+  async create(data) {
+    const nuevoData = {
       ...data,
     };
-    this.pagos.push(nuevoPago);
+    const nuevoPago = await models.Pago.create(nuevoData);
     return nuevoPago;
   }
 
-  find() {
-    return this.pagos;
+  async find() {
+    const rta = await models.Pago.findAll();
+
+    return rta;
   }
 
-  findOne(id_pago) {
-    return this.pagos.find(item => item.id_pago === parseInt(id_pago));
-  }
-
-  update(id_pago, cambios) {
-    const index = this.pagos.findIndex(item => item.id_pago === parseInt(id_pago));
-    if (index === -1) {
-      throw new Error('Pago no encontrado');
+  async findOne(id_pago) {
+    
+    const pago = await models.Pago.findByPk(id_pago);
+    if (!pago) {
+      throw boom.notFound("Pago no encontrado");
     }
-    this.pagos[index] = { ...this.pagos[index], ...cambios };
-    return this.pagos[index];
+    return pago;
   }
 
-  delete(id_pago) {
-    const index = this.pagos.findIndex(item => item.id_pago === parseInt(id_pago));
-    if (index === -1) {
-      throw new Error('Pago no encontrado');
-    }
-    this.pagos.splice(index, 1);
+  async update(id_pago, cambios) {
+    
+    console.log(id_pago, cambios);
+    
+    const pago = await this.findOne(id_pago);
+    const rta = await pago.update(cambios);
+    return rta;
+  }
+
+  async delete(id_pago) {
+    const pago = await this.findOne(id_pago);
+    await pago.destroy();
     return { id_pago };
   }
 }

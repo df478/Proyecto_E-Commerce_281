@@ -1,54 +1,47 @@
-const { faker } = require("@faker-js/faker");
-const UsuarioService = require("./usuario.service");
-
+const boom = require("@hapi/boom");
+const bcrypt = require("bcrypt");
+const { models } = require("../libs/sequelize");
 class ProductoService {
   constructor() {
-    this.products = [];
-    this.generate();
+
   }
-  generate() {
-    const limite = 100;
-    for (let index = 0; index < limite; index++) {
-      this.products.push({
-        id_producto: index,
-        id_artesano: parseInt(Math.random() * 500),
-        nombre_producto: faker.commerce.productName(),
-        precio_producto: parseInt(faker.commerce.price(), 10),
-        descripcion_producto: faker.commerce.productDescription(),
-        stock_producto: parseInt(Math.random() * 1000),
-        imagen_producto: faker.image.url
-      });
-    }
-  }
-  create(data) {
-    const nuevoProducto = {
-        id: this.products.length,
-        ...data,
-    }
-    this.products.push(nuevoProducto);
+
+  async create(data) {
+    const nuevoData = {
+      ...data,
+    };
+    const nuevoProducto = await models.Producto.create(nuevoData);
     return nuevoProducto;
   }
-  find() {  
-    return this.products;
+
+  async find() {
+    const rta = await models.Producto.findAll();
+
+    return rta;
   }
-  findOne(id_producto) {
-    return this.products.find(item => item.id_producto == id_producto);
-  }
-  update(id, cambios) {
-    const index = this.products.findIndex(item => item.id == id);
-    if(index == -1) {
-        throw new Error('Producto no encontrado');
+
+  async findOne(id_producto) {
+    
+    const producto = await models.Producto.findByPk(id_producto);
+    if (!producto) {
+      throw boom.notFound("Producto no encontrado");
     }
-    this.products[index] = cambios;
-    return this.products[index];
+    return producto;
   }
-  delete(id) {
-    const index = this.products.findIndex(item => item.id == id);
-    if(index == -1) {
-        throw new Error('Producto no encontrado');
-    }
-    this.products.splice(index,1);
-    return { id };
+
+  async update(id_producto, cambios) {
+    
+    console.log(id_producto, cambios);
+    
+    const producto = await this.findOne(id_producto);
+    const rta = await producto.update(cambios);
+    return rta;
+  }
+
+  async delete(id_producto) {
+    const producto = await this.findOne(id_producto);
+    await producto.destroy();
+    return { id_producto };
   }
 }
 

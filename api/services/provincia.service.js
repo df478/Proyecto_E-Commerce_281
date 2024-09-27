@@ -1,60 +1,45 @@
-const { faker } = require("@faker-js/faker");
-const boom = require('@hapi/boom');
-const bcrypt = require('bcrypt');
-
+const boom = require("@hapi/boom");
+const { models } = require("../libs/sequelize");
 class ProvinciaService {
   constructor() {
-    this.provincia = [];
-    this.generate();
+
   }
 
-  generate() {
-    const limite = 100;
-    for (let index = 0; index < limite; index++) {
-      this.provincia.push({
-        id_provincia: index,
-        nombre_provincia: faker.location.state(),
-        id_departamento: parseInt(Math.random() * 100),
-      });
-    }
-  }
-
-  create(data) {
-    const nuevoCliente = {
-      id_provincia: this.provincia.length,
+  async create(data) {
+    const nuevoData = {
       ...data,
     };
-    this.provincia.push(nuevoCliente);
-    return nuevoCliente;
+    const nuevoProvincia = await models.Provincia.create(nuevoData);
+    return nuevoProvincia;
   }
 
-  find() {
-    return this.provincia;
+  async find() {
+    const rta = await models.Provincia.findAll();
+
+    return rta;
   }
 
-  findOne(id_provincia) {
-    return this.provincia.find((item) => item.id_provincia === parseInt(id_provincia));
-  }
-
-  update(id_provincia, cambios) {
-    const index = this.provincia.findIndex(
-      (item) => item.id_provincia === parseInt(id_provincia)
-    );
-    if (index === -1) {
-      throw new Error("Cliente no encontrado");
+  async findOne(id_provincia) {
+    
+    const provincia = await models.Provincia.findByPk(id_provincia);
+    if (!provincia) {
+      throw boom.notFound("Provincia no encontrado");
     }
-    this.provincia[index] = { ...this.provincia[index], ...cambios };
-    return this.provincia[index];
+    return provincia;
   }
 
-  delete(id_provincia) {
-    const index = this.provincia.findIndex(
-      (item) => item.id_provincia === parseInt(id_provincia
-    ));
-    if (index === -1) {
-      throw new Error("Cliente no encontrado");
-    }
-    this.provincia.splice(index, 1);
+  async update(id_provincia, cambios) {
+    
+    console.log(id_provincia, cambios);
+    
+    const provincia = await this.findOne(id_provincia);
+    const rta = await provincia.update(cambios);
+    return rta;
+  }
+
+  async delete(id_provincia) {
+    const provincia = await this.findOne(id_provincia);
+    await provincia.destroy();
     return { id_provincia };
   }
 }

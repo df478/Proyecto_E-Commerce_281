@@ -1,59 +1,44 @@
-const { faker } = require('@faker-js/faker');
-
+const boom = require("@hapi/boom");
+const { models } = require("../libs/sequelize");
 class ComunidadService {
   constructor() {
-    this.comunidades = [];
-    this.generate();
   }
 
-  
-  generate() {
-    const limite = 100;
-    for (let index = 0; index < limite; index++) {
-      this.comunidades.push({
-        id_comunidad: index,
-        nombre_comunidad: faker.location.state(), 
-      });
-    }
-  }
-
-  
-  create(data) {
-    const nuevaComunidad = {
-      id_comunidad: this.comunidades.length, 
-      ...data, 
+  async create(data) {
+    const nuevoData = {
+      ...data,
     };
-    this.comunidades.push(nuevaComunidad); 
-    return nuevaComunidad;
+    const nuevoComunidad = await models.Comunidad.create(nuevoData);
+    return nuevoComunidad;
   }
 
-  
-  find() {
-    return this.comunidades;
+  async find() {
+    const rta = await models.Comunidad.findAll();
+
+    return rta;
   }
 
-  
-  findOne(id_comunidad) {
-    return this.comunidades.find(item => item.id_comunidad === id_comunidad);
-  }
-
-  
-  update(id_comunidad, cambios) {
-    const index = this.comunidades.findIndex(item => item.id_comunidad === id_comunidad);
-    if (index === -1) {
-      throw new Error('Comunidad no encontrada');
+  async findOne(id_comunidad) {
+    
+    const comunidad = await models.Comunidad.findByPk(id_comunidad);
+    if (!comunidad) {
+      throw boom.notFound("Comunidad no encontrado");
     }
-    this.comunidades[index] = { ...this.comunidades[index], ...cambios }; 
-    return this.comunidades[index];
+    return comunidad;
   }
 
- 
-  delete(id_comunidad) {
-    const index = this.comunidades.findIndex(item => item.id_comunidad === id_comunidad);
-    if (index === -1) {
-      throw new Error('Comunidad no encontrada');
-    }
-    this.comunidades.splice(index, 1);
+  async update(id_comunidad, cambios) {
+    
+    console.log(id_comunidad, cambios);
+    
+    const comunidad = await this.findOne(id_comunidad);
+    const rta = await comunidad.update(cambios);
+    return rta;
+  }
+
+  async delete(id_comunidad) {
+    const comunidad = await this.findOne(id_comunidad);
+    await comunidad.destroy();
     return { id_comunidad };
   }
 }

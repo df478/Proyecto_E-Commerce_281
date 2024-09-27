@@ -1,56 +1,45 @@
-const { faker } = require('@faker-js/faker');
-
+const boom = require("@hapi/boom");
+const bcrypt = require("bcrypt");
+const { models } = require("../libs/sequelize");
 class PromocionService {
   constructor() {
-    this.promociones = [];
-    this.generate();
   }
 
-  generate() {
-    const limite = 100;
-    for (let index = 0; index < limite; index++) {
-        this.promociones.push({
-        id_promocion: index,
-        nombre_promocion: faker.commerce.productName(),
-        descuento_promocion: parseFloat(faker.number.float({ min: 5, max: 50, precision: 0.01 })).toFixed(1), // Discounts between 5% and 50%
-        fecha_ini: faker.date.past().toISOString().split('T')[0],
-        fecha_fin: faker.date.future().toISOString().split('T')[0],
-      });
-    }
-  }
-
-  create(data) {
-    const nuevaPromocion = {
-      id_promocion: this.promociones.length,
+  async create(data) {
+    const nuevoData = {
       ...data,
     };
-    this.promociones.push(nuevaPromocion);
-    return nuevaPromocion;
+    const nuevoPromocion = await models.Promocion.create(nuevoData);
+    return nuevoPromocion;
   }
 
-  find() {
-    return this.promociones;
+  async find() {
+    const rta = await models.Promocion.findAll();
+
+    return rta;
   }
 
-  findOne(id_promocion) {
-    return this.promociones.find(item => item.id_promocion == id_promocion);
-  }
-
-  update(id_promocion, cambios) {
-    const index = this.promociones.findIndex(item => item.id_promocion == id_promocion);
-    if (index == -1) {
-      throw new Error('Promoción no encontrada');
+  async findOne(id_promocion) {
+    
+    const promocion = await models.Promocion.findByPk(id_promocion);
+    if (!promocion) {
+      throw boom.notFound("Promocion no encontrado");
     }
-    this.promociones[index] = { ...this.promociones[index], ...cambios };
-    return this.promociones[index];
+    return promocion;
   }
 
-  delete(id_promocion) {
-    const index = this.promociones.findIndex(item => item.id_promocion == id_promocion);
-    if (index == -1) {
-      throw new Error('Promoción no encontrada');
-    }
-    this.promociones.splice(index, 1);
+  async update(id_promocion, cambios) {
+    
+    console.log(id_promocion, cambios);
+    
+    const promocion = await this.findOne(id_promocion);
+    const rta = await promocion.update(cambios);
+    return rta;
+  }
+
+  async delete(id_promocion) {
+    const promocion = await this.findOne(id_promocion);
+    await promocion.destroy();
     return { id_promocion };
   }
 }
