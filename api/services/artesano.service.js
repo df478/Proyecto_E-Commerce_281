@@ -21,11 +21,20 @@ class ArtesanoService {
   }
 
   async findOne(id_usuario) {
-    const artesano = await models.Artesano.findByPk(id_usuario);
+    const artesano = await models.Artesano.findByPk(id_usuario,
+      {
+        include: [{
+          association: 'comunidad',
+          include: ["municipio"]
+        }]
+      }
+    );
     if (!artesano) {
       throw boom.notFound("Artesano no encontrado");
     }
     return artesano;
+    
+
   }
 
   async findByEmail(email_usuario) {

@@ -75,6 +75,7 @@ class Artesano extends Model {
     static associate(models) {
         this.belongsTo(models.Comunidad, {
             as: "comunidad",
+            foreignKey: "id_comunidad"
         });
         this.hasMany(models.Producto, {
             as: "producto",
