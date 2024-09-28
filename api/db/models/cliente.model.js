@@ -53,7 +53,15 @@ const ClienteSchema = {
         validate: {
             min: 0
         }
-    }
+    },
+    celular: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            len: [8, 15],       
+            isNumeric: true   
+        }
+    },
 };
 
 class Cliente extends Model {

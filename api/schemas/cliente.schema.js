@@ -7,6 +7,7 @@ const password_usuario = Joi.string().min(8).max(20).pattern(new RegExp('(?=.*[a
 const tipo_usuario = Joi.string().valid('cliente');
 const fecha_registro = Joi.date();
 const nro_compras = Joi.number().integer().min(0);
+const celular = Joi.number().integer();
 
 const crearClienteSchema = Joi.object({
     nombre_usuario: nombre_usuario.required(),  

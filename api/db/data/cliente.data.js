@@ -12,7 +12,8 @@ async function generate() {
       password_usuario: "*MariMl1*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-08-25",
-      nro_compra: 10
+      nro_compra: 10,
+      celular:78451257
     },
     {
       nombre_usuario: "Ana Torres",
@@ -20,7 +21,8 @@ async function generate() {
       password_usuario: "*AnaT1*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-08-26",
-      nro_compra: 5
+      nro_compra: 5,
+      celular:78451254,
     },
     {
       nombre_usuario: "Juan Perez",
@@ -28,7 +30,8 @@ async function generate() {
       password_usuario: "*JuanP2*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-08-27",
-      nro_compra: 15
+      nro_compra: 15,
+      celular:78458965
     },
     {
       nombre_usuario: "Elena Rojas",
@@ -36,7 +39,8 @@ async function generate() {
       password_usuario: "*ElenaR3*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-08-28",
-      nro_compra: 8
+      nro_compra: 8,
+      celular:78435789
     },
     {
       nombre_usuario: "Carlos Lopez",
@@ -44,7 +48,8 @@ async function generate() {
       password_usuario: "*CarlosL4*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-08-29",
-      nro_compra: 12
+      nro_compra: 12,
+      celular:78945668
     },
     {
       nombre_usuario: "Teresa Jimenez",
@@ -52,7 +57,8 @@ async function generate() {
       password_usuario: "*TeresaJ5*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-08-30",
-      nro_compra: 20
+      nro_compra: 20,
+      celular:68778457
     },
     {
       nombre_usuario: "Lucas Pato",
@@ -60,7 +66,8 @@ async function generate() {
       password_usuario: "*LucasP6*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-08-31",
-      nro_compra: 3
+      nro_compra: 3,
+      celular:68741002
     },
     {
       nombre_usuario: "Roberto Garcia",
@@ -68,7 +75,8 @@ async function generate() {
       password_usuario: "*RobertoG7*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-01",
-      nro_compra: 7
+      nro_compra: 7,
+      celular:78458975
     },
     {
       nombre_usuario: "Sofia Morales",
@@ -76,7 +84,8 @@ async function generate() {
       password_usuario: "*SofiaM8*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-02",
-      nro_compra: 9
+      nro_compra: 9,
+      celular:68798457
     },
     {
       nombre_usuario: "David Fernandez",
@@ -84,7 +93,8 @@ async function generate() {
       password_usuario: "*DavidF9*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-03",
-      nro_compra: 4
+      nro_compra: 4,
+      celular:67456210
     },
     {
       nombre_usuario: "Gabriela Castro",
@@ -92,7 +102,8 @@ async function generate() {
       password_usuario: "*GabrielaC0*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-04",
-      nro_compra: 11
+      nro_compra: 11,
+      celular:78945612
     },
     {
       nombre_usuario: "Javier Ruiz",
@@ -100,7 +111,8 @@ async function generate() {
       password_usuario: "*JavierR1*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-05",
-      nro_compra: 6
+      nro_compra: 6,
+      celular:69875689
     },
     {
       nombre_usuario: "Mariana Lopez",
@@ -108,7 +120,8 @@ async function generate() {
       password_usuario: "*MarianaL2*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-06",
-      nro_compra: 13
+      nro_compra: 13,
+      celular:68758970
     },
     {
       nombre_usuario: "Fernando Diaz",
@@ -116,7 +129,8 @@ async function generate() {
       password_usuario: "*FernandoD3*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-07",
-      nro_compra: 2
+      nro_compra: 2,
+      celular:69896368
     },
     {
       nombre_usuario: "Valentina Romero",
@@ -124,7 +138,8 @@ async function generate() {
       password_usuario: "*ValentinaR4*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-08",
-      nro_compra: 14
+      nro_compra: 14,
+      celular:78741023
     },
     {
       nombre_usuario: "Andres Jimenez",
@@ -132,7 +147,8 @@ async function generate() {
       password_usuario: "*AndresJ5*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-09",
-      nro_compra: 1
+      nro_compra: 1,
+      celular:79458975
     },
     {
       nombre_usuario: "Paula Aguirre",
@@ -140,7 +156,8 @@ async function generate() {
       password_usuario: "*PaulaA6*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-10",
-      nro_compra: 17
+      nro_compra: 17,
+      celular:69863021
     },
     {
       nombre_usuario: "Nicolas Castro",
@@ -148,7 +165,8 @@ async function generate() {
       password_usuario: "*NicolasC7*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-11",
-      nro_compra: 10
+      nro_compra: 10,
+      celular:78945652
     },
     {
       nombre_usuario: "Laura Medina",
@@ -156,7 +174,8 @@ async function generate() {
       password_usuario: "*LauraM8*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-12",
-      nro_compra: 19
+      nro_compra: 19,
+      celular:78977778
     },
     {
       nombre_usuario: "Manuel Torres",
@@ -164,7 +183,8 @@ async function generate() {
       password_usuario: "*ManuelT9*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-13",
-      nro_compra: 16
+      nro_compra: 16,
+      celular:66666587
     },
     {
       nombre_usuario: "Claudia Herrera",
@@ -172,7 +192,8 @@ async function generate() {
       password_usuario: "*ClaudiaH0*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-14",
-      nro_compra: 3
+      nro_compra: 3,
+      celular:78974788
     },
     {
       nombre_usuario: "Tomas Villanueva",
@@ -180,7 +201,8 @@ async function generate() {
       password_usuario: "*TomasV1*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-15",
-      nro_compra: 12
+      nro_compra: 12,
+      celular:78948562
     },
     {
       nombre_usuario: "Jimena Salazar",
@@ -188,7 +210,8 @@ async function generate() {
       password_usuario: "*JimenaS2*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-16",
-      nro_compra: 9
+      nro_compra: 9,
+      celular:66633554
     },
     {
       nombre_usuario: "Felipe Gomez",
@@ -196,7 +219,8 @@ async function generate() {
       password_usuario: "*FelipeG3*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-17",
-      nro_compra: 20
+      nro_compra: 20,
+      celular:78945620
     },
     {
       nombre_usuario: "Sofia Leon",
@@ -204,7 +228,8 @@ async function generate() {
       password_usuario: "*SofiaL4*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-18",
-      nro_compra: 11
+      nro_compra: 11,
+      celular:79456897
     },
     {
       nombre_usuario: "Andres Ortega",
@@ -212,7 +237,8 @@ async function generate() {
       password_usuario: "*AndresO5*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-19",
-      nro_compra: 6
+      nro_compra: 6,
+      celular:69878989
     },
     {
       nombre_usuario: "Ines Castro",
@@ -220,7 +246,8 @@ async function generate() {
       password_usuario: "*InesC6*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-20",
-      nro_compra: 15
+      nro_compra: 15,
+      celular:69878945
     },
     {
       nombre_usuario: "Raul Méndez",
@@ -228,7 +255,8 @@ async function generate() {
       password_usuario: "*RaulM7*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-21",
-      nro_compra: 8
+      nro_compra: 8,
+      celular:69878742
     },
     {
       nombre_usuario: "Lila Serrano",
@@ -236,7 +264,8 @@ async function generate() {
       password_usuario: "*LilaS8*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-22",
-      nro_compra: 5
+      nro_compra: 5,
+      celular:78945868
     },
     {
       nombre_usuario: "Victor Romero",
@@ -244,7 +273,8 @@ async function generate() {
       password_usuario: "*VictorR9*",
       tipo_usuario: "cliente",
       fecha_registro: "2024-09-23",
-      nro_compra: 2
+      nro_compra: 2,
+      celular:66689748
     }
   ];
 
@@ -256,7 +286,8 @@ async function generate() {
       password_usuario: hash,
       tipo_usuario: cliente.tipo_usuario,
       fecha_registro: cliente.fecha_registro,
-      nro_compras: cliente.nro_compra
+      nro_compras: cliente.nro_compra,
+      celular:cliente.celular
     });
   }
   return clientes;

@@ -20,6 +20,7 @@ const provinciaRouter = require('./provincia.router');
 //const reseniaRouter = require('./resenia.router');
 //const usuNorAdminRouter = require('./usu_nor_Admin.router');
 const usuarioRouter = require('./usuario.router');
+const imagenRouter = require('./imagen.router');
 
 
 //authentication
@@ -50,8 +51,7 @@ function routerApi(app) {
   //router.use('/resenia', reseniaRouter);
   //router.use('/usuNorAdmin', usuNorAdminRouter);
   router.use('/usuario', usuarioRouter);
-
-
+  router.use('/imagen', imagenRouter);
 
 
 }

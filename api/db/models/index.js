@@ -8,6 +8,7 @@ const { Administrador, AdministradorSchema } = require("./administrador.model");
 const { Municipio, MunicipioSchema } = require("./municipio.model");
 const { Comunidad, ComunidadSchema  } = require("./comunidad.model");
 const { Promocion,PromocionSchema } = require("./promocion.model");
+const { Imagen, ImagenSchema } = require("./imagen.model");
 const { Producto, ProductoSchema } = require("./producto.model");
 const { Resenia, ReseniaSchema } = require("./resenia.model");
 const { Carrito, CarritoSchema } = require("./carrito.model");
@@ -30,6 +31,7 @@ function setUpModels(sequelize) {
   Delivery.init(DeliverySchema, Delivery.config(sequelize));
   Administrador.init(AdministradorSchema, Administrador.config(sequelize));
 
+  Imagen.init(ImagenSchema, Imagen.config(sequelize));
   Promocion.init(PromocionSchema, Promocion.config(sequelize));
   Producto.init(ProductoSchema, Producto.config(sequelize));
   Resenia.init(ReseniaSchema, Resenia.config(sequelize));
@@ -53,6 +55,7 @@ function setUpModels(sequelize) {
   Cliente.associate(sequelize.models);
   Delivery.associate(sequelize.models);
   Administrador.associate(sequelize.models);
+  Imagen.associate(sequelize.models);
   Promocion.associate(sequelize.models);
   Producto.associate(sequelize.models);
   Resenia.associate(sequelize.models);

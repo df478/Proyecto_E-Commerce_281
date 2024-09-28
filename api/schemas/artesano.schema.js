@@ -15,6 +15,7 @@ const especialidad = Joi.string().min(2).max(50);
 const calificacion = Joi.number().integer();
 const id_comunidad = Joi.number().integer();
 const fecha_registro = Joi.date();
+const celular = Joi.number().integer();
 
 const crearArtesanoSchema = Joi.object({
   nombre_usuario: nombre_usuario.required(),

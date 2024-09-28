@@ -1,7 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize')
 const { PROMOCION_TABLE } = require("./promocion.model");
 const { ARTESANO_TABLE } = require("./artesano.model");
-
+const { ARTESANO_TABLE } = require("./imagen.model");
 
 
 const PRODUCTO_TABLE = 'producto'
@@ -78,6 +78,10 @@ class Producto extends Model {
         });
         this.hasMany(models.Aniade, {
             as: "aniade",
+            foreignKey: "id_producto",
+        });
+        this.hasMany(models.Imagen, {
+            as: "imagen",
             foreignKey: "id_producto",
         });
     }

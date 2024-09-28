@@ -13,6 +13,7 @@ const password_usuario = Joi.string()
 const tipo_usuario = Joi.string().valid("delivery");
 const estado_delivery = Joi.string().min(2).max(50).valid("Activo","Inactivo","En camino");
 const fecha_registro = Joi.date();
+const celular = Joi.number().integer();
 
 const crearDeliverySchema = Joi.object({
   nombre_usuario: nombre_usuario.required(),

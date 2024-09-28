@@ -51,6 +51,14 @@ const DeliverySchema = {
       len: [3, 50],
     },
   },
+  celular: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+        len: [8, 15],       
+        isNumeric: true   
+    }
+  },
 };
 
 class Delivery extends Model {

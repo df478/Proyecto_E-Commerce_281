@@ -57,6 +57,14 @@ const ArtesanoSchema = {
             min: 1
         }
     },
+    celular: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            len: [8, 15],       
+            isNumeric: true   
+        }
+    },
     id_comunidad: {
         field: "id_comunidad",
         allowNull: true,

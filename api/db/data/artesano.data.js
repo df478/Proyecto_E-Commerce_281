@@ -1,4 +1,4 @@
-const { faker } = require("@faker-js/faker");
+const { faker, ar } = require("@faker-js/faker");
 const bcrypt = require("bcrypt");
 
 async function generate() {
@@ -12,6 +12,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "tallado de madera",
       calificacion: 10,
+      celular:74075124,
       id_comunidad: 2
     },
     {
@@ -21,6 +22,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "alfarero",
       calificacion: 0,
+      celular:67541587,
       id_comunidad: 2
     },
     {
@@ -30,6 +32,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "tejido de canasta",
       calificacion: 9,
+      celular:78945615,
       id_comunidad: 1
     },
     {
@@ -39,6 +42,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "cerámica",
       calificacion: 8,
+      celular:68745892,
       id_comunidad: 3
     },
     {
@@ -48,6 +52,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "joyería",
       calificacion: 7,
+      celular:78246103,
       id_comunidad: 1
     },
     {
@@ -57,6 +62,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "forja",
       calificacion: 6,
+      celular:78452874,
       id_comunidad: 2
     },
     {
@@ -66,6 +72,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "pintura",
       calificacion: 10,
+      celular:78459815,
       id_comunidad: 3
     },
     {
@@ -75,6 +82,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "marquetería",
       calificacion: 5,
+      celular:78477562,
       id_comunidad: 2
     },
     {
@@ -84,6 +92,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "encuadernación",
       calificacion: 9,
+      celular:78495612,
       id_comunidad: 1
     },
     {
@@ -93,6 +102,7 @@ async function generate() {
       tipo_usuario: "artesano",
       especialidad: "vidrio soplado",
       calificacion: 8,
+      celular:68745178,
       id_comunidad: 3
     }
   ];
@@ -106,6 +116,7 @@ async function generate() {
       tipo_usuario: artesano.tipo_usuario,
       especialidad: artesano.especialidad,
       calificacion: artesano.calificacion,
+      celular: artesano.celular,
       id_comunidad: artesano.id_comunidad
     });
   }
