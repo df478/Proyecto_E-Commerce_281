@@ -1,7 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize')
 const { PROMOCION_TABLE } = require("./promocion.model");
 const { ARTESANO_TABLE } = require("./artesano.model");
-const { ARTESANO_TABLE } = require("./imagen.model");
+
 
 
 const PRODUCTO_TABLE = 'producto'

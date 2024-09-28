@@ -49,4 +49,4 @@ class Imagen extends Model {
     }
 }
 
-module.exports = { Imagen,ImagenSchemaSchema, IMAGEN_TABLE}
+module.exports = { Imagen,ImagenSchema, IMAGEN_TABLE}

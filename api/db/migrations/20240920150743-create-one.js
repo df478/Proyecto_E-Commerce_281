@@ -11,6 +11,7 @@ const { AdministradorSchema, ADMINISTRADOR_TABLE } = require('./../models/admini
 
 const { PromocionSchema, PROMOCION_TABLE } = require('./../models/promocion.model')
 const { ProductoSchema, PRODUCTO_TABLE } = require('./../models/producto.model')
+const { ImagenSchema, IMAGEN_TABLE } = require('./../models/imagen.model');
 const { RESENIA_TABLE, ReseniaSchema } = require('../models/resenia.model');
 const { PAGO_TABLE, PagoSchema } = require('../models/pago.model');
 const { NOTIFICACION_TABLE, notificacionSchema } = require('../models/notificacion.model');
@@ -37,6 +38,7 @@ module.exports = {
 
     await queryInterface.createTable(PROMOCION_TABLE, PromocionSchema);
     await queryInterface.createTable(PRODUCTO_TABLE, ProductoSchema);
+    await queryInterface.createTable(IMAGEN_TABLE, ImagenSchema);
     await queryInterface.createTable(RESENIA_TABLE, ReseniaSchema);
     
     await queryInterface.createTable(CARRITO_TABLE, CarritoSchema);
@@ -65,9 +67,9 @@ module.exports = {
     await queryInterface.dropTable(CARRITO_TABLE)
 
     await queryInterface.dropTable(RESENIA_TABLE);
+    await queryInterface.dropTable(IMAGEN_TABLE);
     await queryInterface.dropTable(PRODUCTO_TABLE);
     await queryInterface.dropTable(PROMOCION_TABLE);
-
 
     await queryInterface.dropTable(ADMINISTRADOR_TABLE);
     await queryInterface.dropTable(DELIVERY_TABLE);

@@ -10,7 +10,7 @@ const crearImagenSchema = Joi.object({
   });
   const actualizarImagenSchema = Joi.object({
     url_imagen: url_imagen,
-    id_producto: id_promocion,
+    id_producto: id_producto,
 })
 
 const obtenerImagenSchema = Joi.object({

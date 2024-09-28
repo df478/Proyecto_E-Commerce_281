@@ -1,5 +1,5 @@
 const express = require("express");
-const ArtesanoService = require("./../services/imagen.service");
+const ImagenService = require("./../services/imagen.service");
 const validatorHandler = require("../middlewares/validator.handler");
 const router = express.Router();
 const service = new ImagenService();
