@@ -33,6 +33,7 @@ const actualizarArtesanoSchema = Joi.object({
   calificacion: calificacion,
   id_comunidad: id_comunidad,
   tipo_usuario: tipo_usuario,
+  celular:celular
 });
 
 const obtenerArtesanoSchema = Joi.object({

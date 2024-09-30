@@ -24,6 +24,7 @@ const actualizarClienteSchema = Joi.object({
     tipo_usuario: tipo_usuario,
     fecha_registro: fecha_registro,
     nro_compras: nro_compras,
+    celular: celular
 })
 
 const obtenerClienteSchema = Joi.object({

@@ -28,6 +28,7 @@ const actualizarDeliverySchema = Joi.object({
   email_usuario: email_usuario,
   password_usuario: password_usuario,
   estado_delivery: estado_delivery,
+  celular:celular
 });
 
 const obtenerDeliverySchema = Joi.object({
