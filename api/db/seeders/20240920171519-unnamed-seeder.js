@@ -6,6 +6,7 @@ const { generarCliente } = require("../data/cliente.data");
 const { generarComunidad} = require("../data/comunidad.data");
 const { generarDelivery } = require("../data/delivery.data");
 const { generarDepartamento } = require("../data/departamento.data");
+const { generarImagen } = require("../data/imagen.data");
 const { generarMunicipio } = require("../data/municipio.data");
 const { generarNotificacion} = require("../data/notificacion.data");
 const { generarProducto } = require("../data/producto.data");
@@ -40,12 +41,17 @@ module.exports = {
     await queryInterface.bulkInsert("promocion", promocionData);
     const notificacionData = await generarNotificacion();
     await queryInterface.bulkInsert("notificacion", notificacionData);
+
+    
     const productoData = await generarProducto();
     await queryInterface.bulkInsert("producto", productoData);
+    const imagenData = await generarImagen();
+    await queryInterface.bulkInsert("imagen", imagenData);
   
   },
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("imagen", null);
     await queryInterface.bulkDelete("producto", null);
     await queryInterface.bulkDelete("notificacion", null);
     await queryInterface.bulkDelete("promocion", null);

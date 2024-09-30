@@ -59,7 +59,7 @@ const ArtesanoSchema = {
     },
     celular: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: {
             len: [8, 15],       
             isNumeric: true   

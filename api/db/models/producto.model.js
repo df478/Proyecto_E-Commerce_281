@@ -51,13 +51,30 @@ const ProductoSchema = {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    url_producto: {
+    categoria_producto: {  
         type: DataTypes.STRING,
-        allowNull: false, // Hace que el campo sea obligatorio
-        validate: {
-            isUrl: true // Valida que el formato sea una URL
-        }
-    }
+        allowNull: false,
+    },
+    peso_producto: {  
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true, 
+    },
+    largo_producto: {  
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true, 
+    },
+    ancho_producto: {  
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true, 
+    },
+    alto_producto: {  
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true, 
+    },
+    envio_gratuito: {  
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
 }
 
 class Producto extends Model {

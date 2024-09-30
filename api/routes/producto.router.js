@@ -19,12 +19,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', 
+router.get('/:id_producto', 
     validatorHandler(obtenerProductoSchema, "params"), 
     async (req, res) => {
     try {
-        const { id } = req.params;
-        const producto = await service.findOne(id);
+        const { id_producto } = req.params;
+        const producto = await service.findOne(id_producto);
         if (!producto) {
             return res.status(404).json({ message: 'producto no encontrado' });
         }

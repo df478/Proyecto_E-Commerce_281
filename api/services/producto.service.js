@@ -15,14 +15,21 @@ class ProductoService {
   }
 
   async find() {
-    const rta = await models.Producto.findAll();
+    const rta = await models.Producto.findAll(
+      {
+        include: ["imagen"]
+      });
 
     return rta;
   }
 
   async findOne(id_producto) {
     
-    const producto = await models.Producto.findByPk(id_producto);
+    const producto = await models.Producto.findByPk(id_producto,
+      {
+        include: ["imagen"]
+      }
+    );
     if (!producto) {
       throw boom.notFound("Producto no encontrado");
     }
