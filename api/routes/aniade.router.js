@@ -12,6 +12,8 @@ const {
 router.get('/', async (req, res) => {
     try {
         const aniadidos = await service.find();
+        console.log("service working");
+        
         res.json(aniadidos);
     } catch (error) {
         console.error(error);

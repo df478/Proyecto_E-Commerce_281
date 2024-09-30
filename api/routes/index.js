@@ -5,7 +5,7 @@ const administradorRouter = require('./administrador.router');
 const clienteRouter = require('./cliente.router');
 const artesanoRouter = require('./artesano.router');
 const deliveryRouter = require('./delivery.router');
-const carritoRouter = require('./producto.router');
+const carritoRouter = require('./carrito.router');
 const comunidadRouter = require('./comunidad.router');
 const municipioRouter = require('./municipio.router');
 const notificacionRouter = require('./notificacion.router')
@@ -22,7 +22,7 @@ const reseniaRouter = require('./resenia.router');
 const supervisadoRouter = require('./supervisado.router');
 const usuarioRouter = require('./usuario.router');
 const imagenRouter = require('./imagen.router');
-
+const aniadeRouter = require('./aniade.router');
 
 //authentication
 const authRouter = require('./auth.router');
@@ -43,6 +43,7 @@ function routerApi(app) {
   router.use('/cliente', clienteRouter);
   router.use('/pago', pagoRouter);
   router.use('/entrega', entregaRouter);
+  router.use('/aniade', aniadeRouter);
   //router.use('/pedNot',pedNotRouter);
   router.use('/pedido', pedidoRouter);
   //router.use('/proPromCliCar', proPromCliCarRouter);
