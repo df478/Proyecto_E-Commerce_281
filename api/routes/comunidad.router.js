@@ -9,7 +9,8 @@ const {
     actualizarComunidadSchema,
   } = require("./../schemas/comunidad.schema");
   
-  router.get("/", async (req, res) => {
+  router.get("/", 
+    async (req, res) => {
     try {
       const comunidades = await service.find();
       res.json(comunidades);
@@ -36,54 +37,57 @@ const {
   );
   
   router.post(
-     "/ ",
-    validatorHandler(crearComunidadSchema,  "body "),
+    "/",
+    validatorHandler(crearComunidadSchema, "body"),
     async (req, res) => {
       try {
         const body = req.body;
-        const nuevaComunidad = await service.create(body);
-        res.status(201).json(nuevaComunidad);
+        const nuevoComunidad = await service.create(body);
+        console.log(nuevoComunidad);
+        res.status(201).json(nuevoComunidad);
       } catch (error) {
-        res.status(400).json({ message:  "Error al crear la comunidad ", error });
+        res.status(400).json({ message: "Error al crear el comunidad", error });
       }
     }
   );
   
   router.patch(
-     "/:id_comunidad ",
-    validatorHandler(obtenerComunidadSchema,  "params "),
-    validatorHandler(actualizarComunidadSchema,  "body "),
+    "/:id_comunidad",
+    validatorHandler(obtenerComunidadSchema, "params"),
+    validatorHandler(actualizarComunidadSchema, "body"),
     async (req, res) => {
       try {
         const { id_comunidad } = req.params;
         const body = req.body;
         const comunidad = await service.update(id_comunidad, body);
         if (!comunidad) {
-          return res.status(404).json({ message:  "Comunidad no encontrada " });
+          return res.status(404).json({ message: "comunidad no encontrado" });
         }
         res.json(comunidad);
       } catch (error) {
-        console.error(error); 
+        console.error(error); // Imprimir el error para depuración
         res
           .status(400)
           .json({
-            message: "Error al actualizar la comunidad",
+            message: "Error al actualizar el delivery",
             error: error.message || error,
           });
       }
     }
   );
   
-  router.delete( "/:id_comunidad ", async (req, res) => {
+  router.delete("/:id_comunidad", 
+    validatorHandler(obtenerComunidadSchema, "params"),
+    async (req, res) => {
     try {
       const { id_comunidad } = req.params;
       const rta = await service.delete(id_comunidad);
       if (!rta) {
-        return res.status(404).json({ message:  "Comunidad no encontrada " });
+        return res.status(404).json({ message: "Delivery no encontrado" });
       }
       res.json(rta);
     } catch (error) {
-      res.status(500).json({ message:  "Error al eliminar la comunidad ", error });
+      res.status(500).json({ message: "Error al eliminar el delivery", error });
     }
   });
   

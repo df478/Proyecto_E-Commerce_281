@@ -44,7 +44,7 @@ const ClienteSchema = {
         }
     },
     fecha_registro: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     nro_compras: {

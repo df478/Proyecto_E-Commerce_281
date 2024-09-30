@@ -1,25 +1,25 @@
 const Joi = require('joi');
 
 const id_supervisado = Joi.number().integer();
-const id_usuario_admin = Joi.number().integer();  
-const id_usuario_artesano = Joi.number().integer();
-const id_usuario_cliente = Joi.number().integer();
-const id_usuario_delivery = Joi.number().integer();     
+const id_administrador = Joi.number().integer();  
+const id_artesano = Joi.number().integer();
+const id_cliente = Joi.number().integer();
+const id_delivery = Joi.number().integer();     
 
 
 const crearSupervisadoSchema = Joi.object({
-    id_usuario_admin: id_usuario_admin.required(),  
-    id_usuario_artesano: id_usuario_artesano.required(),
-    id_usuario_cliente: id_usuario_cliente.required(),
-    id_usuario_delivery: id_usuario_delivery.required()
+    id_administrador: id_administrador.required(),  
+    id_artesano: id_artesano.required(),
+    id_cliente: id_cliente.required(),
+    id_delivery: id_delivery.required()
 });
 
 
 const actualizarSupervisadoSchema = Joi.object({
-    id_usuario_admin: id_usuario_admin,  
-    id_usuario_artesano: id_usuario_artesano,
-    id_usuario_cliente: id_usuario_cliente,
-    id_usuario_delivery: id_usuario_delivery
+    id_administrador: id_administrador,  
+    id_artesano: id_artesano,
+    id_cliente: id_cliente,
+    id_delivery: id_delivery
 });
 
 

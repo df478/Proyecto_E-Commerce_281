@@ -48,8 +48,14 @@ class ArtesanoService {
   }
 
   async update(id_usuario, cambios) {
-    console.log("paso :D");
-
+    if(cambios.password_usuario!=null){
+      const hash = await bcrypt.hash(cambios.password_usuario, 10);
+      const newCambios = {
+        ...cambios,
+        password_usuario: hash,
+      };
+      cambios=newCambios
+    }
     console.log(id_usuario, cambios);
     
     const artesano = await this.findOne(id_usuario);

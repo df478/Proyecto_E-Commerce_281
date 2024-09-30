@@ -1,7 +1,7 @@
 const Joi = require ('joi');
 
 const id_comunidad = Joi.number().integer();
-const nombre_comunidad = Joi.string().min(3).max(5);
+const nombre_comunidad = Joi.string().min(3).max(50);
 const id_municipio = Joi.number().integer();
 
 const crearComunidadSchema =  Joi.object({

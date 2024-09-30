@@ -63,18 +63,21 @@ router.patch('/:id_supervisado',
     }
 );
 
-router.delete('/:id_supervisado', 
+router.delete(
+    "/:id_supervisado",
     validatorHandler(obtenerSupervisadoSchema, "params"),
     async (req, res) => {
-        try {
-            const { id_supervisado } = req.params;
-            await service.delete(id_supervisado);
-            res.status(204).send(); // Devuelve un 204 No Content para indicar que la eliminación fue exitosa
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Error al eliminar el supervisado', error: error.message });
+      try {
+        const { id_supervisado } = req.params;
+        const rta = await service.delete(id_supervisado);
+        if (!rta) {
+          return res.status(404).json({ message: "supervisado no encontrado" });
         }
+        res.json(rta);
+      } catch (error) {
+        res.status(500).json({ message: "Error al eliminar el supervisasdo", error });
+      }
     }
-);
+  );
 
 module.exports = router;

@@ -17,8 +17,9 @@ const pedidoRouter = require('./pedido.router');
 const productoRouter = require('./producto.router');
 const promocionRouter = require('./promocion.router');
 const provinciaRouter = require('./provincia.router');
-//const reseniaRouter = require('./resenia.router');
-//const usuNorAdminRouter = require('./usu_nor_Admin.router');
+const departamentoRouter = require('./departamento.router');
+const reseniaRouter = require('./resenia.router');
+const supervisadoRouter = require('./supervisado.router');
 const usuarioRouter = require('./usuario.router');
 const imagenRouter = require('./imagen.router');
 
@@ -48,8 +49,9 @@ function routerApi(app) {
   router.use('/producto', productoRouter);
   router.use('/promocion',promocionRouter);
   router.use('/provincia', provinciaRouter);
-  //router.use('/resenia', reseniaRouter);
-  //router.use('/usuNorAdmin', usuNorAdminRouter);
+  router.use('/departamento', departamentoRouter);
+  router.use('/resenia', reseniaRouter);
+  router.use('/supervisado', supervisadoRouter);
   router.use('/usuario', usuarioRouter);
   router.use('/imagen', imagenRouter);
 

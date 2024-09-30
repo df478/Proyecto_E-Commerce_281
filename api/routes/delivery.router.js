@@ -42,9 +42,11 @@ router.post(
     try {
       const body = req.body;
       const nuevoDelivery = await service.create(body);
+      console.log(nuevoDelivery);
+      await authService.sendVerificationEmail(nuevoDelivery);
       res.status(201).json(nuevoDelivery);
     } catch (error) {
-      res.status(400).json({ message: "Error al crear el delivery", error });
+      res.status(400).json({ message: "Error al crear el cliente", error });
     }
   }
 );
@@ -74,10 +76,12 @@ router.patch(
   }
 );
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id_usuario", 
+  validatorHandler(obtenerDeliverySchema, "params"),
+  async (req, res) => {
   try {
-    const { id } = req.params;
-    const rta = await service.delete(id);
+    const { id_usuario } = req.params;
+    const rta = await service.delete(id_usuario);
     if (!rta) {
       return res.status(404).json({ message: "Delivery no encontrado" });
     }

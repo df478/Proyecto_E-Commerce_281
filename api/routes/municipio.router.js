@@ -10,7 +10,8 @@ const {
     obtenerMunicipioSchema
   } = require( "../schemas/municipio.schema");
   
-  router.get( "/ ", async (req, res) => {
+  router.get( "/", 
+    async (req, res) => {
     try {
       const municipios = await service.find();
       res.json(municipios);
@@ -19,8 +20,7 @@ const {
     }
   });
   
-  router.get(
-     "/:id_municipio ",
+  router.get("/:id_municipio",
     validatorHandler(obtenerMunicipioSchema,  "params "),
     async (req, res) => {
       try {
@@ -36,46 +36,42 @@ const {
     }
   );
   
-  router.post(
-     "/ ",
-    validatorHandler(crearMunicipioSchema,  "body "),
+  router.post('/', 
+    validatorHandler(crearMunicipioSchema, "body"),
     async (req, res) => {
-      try {
+    try {
         const body = req.body;
-        const nuevoMunicipio = await service.create(body);
-        res.status(201).json(nuevoMunicipio);
-      } catch (error) {
-        res.status(400).json({ message:  "Error al crear el municipio ", error });
-      }
+        const nuevaMunicipio = await service.create(body);
+        res.status(201).json(nuevaMunicipio);
+    } catch (error) {
+        res.status(400).json({ message: 'Error al crear el Municipio', error });
     }
-  );
+});
   
-  router.patch(
-     "/:id_municipio ",
-    validatorHandler(obtenerMunicipioSchema,  "params "),
-    validatorHandler(actualizarMunicipioSchema,  "body "),
-    async (req, res) => {
-      try {
-        const { id_municipio } = req.params;
-        const body = req.body;
-        const municipio = await service.update(id_municipio, body);
-        if (!municipio) {
-          return res.status(404).json({ message:  "Municipio no encontrado " });
-        }
-        res.json(municipio);        
-      } catch (error) {
-        console.error(error); 
-        res
-          .status(400)
-          .json({
-            message: "Error al actualizar el municipio",
-            error: error.message || error,
-          });
+router.patch(
+  "/:id_municipio",
+  validatorHandler(obtenerMunicipioSchema, "params"),
+  validatorHandler(actualizarMunicipioSchema, "body"),
+  async (req, res) => {
+    try {
+      const { id_municipio } = req.params;
+      const body = req.body;
+      const municipio = await service.update(id_municipio, body);
+      if (!municipio) {
+        return res.status(404).json({ message: "Cliente no encontrado" });
       }
+      res.json(municipio);
+    } catch (error) {
+      console.error(error); // Imprimir el error para depuración
+      res.status(400).json({
+        message: "Error al actualizar el Municipio",
+        error: error.message || error,
+      });
     }
-  );
+  }
+);
   
-  router.delete( "/:id_municipio ", async (req, res) => {
+  router.delete( "/:id_municipio", async (req, res) => {
     try {
       const { id_municipio } = req.params;
       const rta = await service.delete(id_municipio);
