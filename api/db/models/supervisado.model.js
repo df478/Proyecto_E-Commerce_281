@@ -11,14 +11,14 @@ const SupervisadoSchema = {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
   },
   id_administrador: {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
-      model: ADMINISTRADOR_TABLE,         
-      key: 'id_usuario',         
+      model: ADMINISTRADOR_TABLE,
+      key: 'id_usuario',  // Ajustado a la clave primaria correcta
     },
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
@@ -27,8 +27,8 @@ const SupervisadoSchema = {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
-      model: ARTESANO_TABLE,         
-      key: 'id_usuario',          
+      model: ARTESANO_TABLE,
+      key: 'id_usuario',  // Ajustado a la clave primaria correcta
     },
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
@@ -37,8 +37,8 @@ const SupervisadoSchema = {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
-      model: CLIENTE_TABLE,         
-      key: 'id_usuario',          
+      model: CLIENTE_TABLE,         // Referencia a la tabla cliente
+      key: 'id_usuario',            // Clave primaria de la tabla cliente
     },
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
@@ -47,8 +47,8 @@ const SupervisadoSchema = {
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
-      model: DELIVERY_TABLE,         
-      key: 'id_usuario',          
+      model: DELIVERY_TABLE,
+      key: 'id_usuario',  // Ajustado a la clave primaria correcta
     },
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
@@ -57,7 +57,6 @@ const SupervisadoSchema = {
 
 class Supervisado extends Model {
   static associate(models) {
-    
     this.belongsTo(models.Artesano, {
       as: 'artesano',
       foreignKey: "id_artesano",
@@ -70,7 +69,7 @@ class Supervisado extends Model {
 
     this.belongsTo(models.Administrador, {
       as: 'administrador',
-      foreignKey: "id_administrado",
+      foreignKey: "id_administrador",
     });
 
     this.belongsTo(models.Delivery, {
@@ -84,7 +83,7 @@ class Supervisado extends Model {
       sequelize,
       tableName: SUPERVISADO_TABLE,
       modelName: "Supervisado",
-      timestamps: false,          
+      timestamps: false,
     };
   }
 }

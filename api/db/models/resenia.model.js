@@ -12,7 +12,6 @@ const ReseniaSchema = {
     type: DataTypes.INTEGER,
   },
   id_producto: {
-    field: "id_producto",
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
@@ -23,7 +22,6 @@ const ReseniaSchema = {
     onDelete: "SET NULL",
   },
   id_usuario: {
-    field: "id_usuario",
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
@@ -35,7 +33,10 @@ const ReseniaSchema = {
   },
   descripcion_resenia: {
     type: DataTypes.TEXT,        
-    allowNull: true,             
+    allowNull: true,   
+    validate: {
+      len: [4, 100]
+    }          
   },
   fecha_resenia: {
     type: DataTypes.DATEONLY,    
@@ -53,7 +54,7 @@ class Resenia extends Model {
 
     this.belongsTo(models.Cliente, {
       as: 'cliente',
-      foreignKey: "id_cliente"
+      foreignKey: "id_usuario"
     });
   }
 

@@ -7,7 +7,7 @@ const password_usuario = Joi.string().min(8).max(20).pattern(new RegExp('(?=.*[a
 const tipo_usuario = Joi.string().valid('cliente');
 const fecha_registro = Joi.date();
 const nro_compras = Joi.number().integer().min(0);
-const celular = Joi.number().integer();
+const celular = Joi.number().integer().min(10000000).message('celular debe tener min 8 dígitos');
 
 const crearClienteSchema = Joi.object({
     nombre_usuario: nombre_usuario.required(),  
@@ -15,6 +15,7 @@ const crearClienteSchema = Joi.object({
     password_usuario: password_usuario.required(),
     tipo_usuario: tipo_usuario.required(),
     fecha_registro: fecha_registro.required(),
+    celular:celular.required()
 })
 
 const actualizarClienteSchema = Joi.object({
@@ -24,7 +25,7 @@ const actualizarClienteSchema = Joi.object({
     tipo_usuario: tipo_usuario,
     fecha_registro: fecha_registro,
     nro_compras: nro_compras,
-    celular: celular
+    celular:celular
 })
 
 const obtenerClienteSchema = Joi.object({

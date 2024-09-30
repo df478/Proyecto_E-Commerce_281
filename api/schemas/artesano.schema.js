@@ -1,3 +1,4 @@
+const { es } = require("@faker-js/faker");
 const Joi = require("joi");
 
 const id_usuario = Joi.number().integer();
@@ -13,16 +14,19 @@ const password_usuario = Joi.string()
 const tipo_usuario = Joi.string().valid("artesano");
 const especialidad = Joi.string().min(2).max(50);
 const calificacion = Joi.number().integer();
-const id_comunidad = Joi.number().integer();
 const fecha_registro = Joi.date();
-const celular = Joi.number().integer();
+const celular = Joi.number().integer().min(10000000).message('celular debe tener min 8 dígitos');
+const id_comunidad = Joi.number().integer();
 
 const crearArtesanoSchema = Joi.object({
   nombre_usuario: nombre_usuario.required(),
   email_usuario: email_usuario.required(),
   password_usuario: password_usuario.required(),
   tipo_usuario: tipo_usuario.required(),
-  fecha_registro: fecha_registro.required(),
+  especialidad: especialidad.required(),
+  
+  celular:celular.required(),
+  id_comunidad: id_comunidad.required()
 });
 
 const actualizarArtesanoSchema = Joi.object({
@@ -33,7 +37,8 @@ const actualizarArtesanoSchema = Joi.object({
   calificacion: calificacion,
   id_comunidad: id_comunidad,
   tipo_usuario: tipo_usuario,
-  celular:celular
+  celular: celular,
+  id_comunidad: id_comunidad
 });
 
 const obtenerArtesanoSchema = Joi.object({

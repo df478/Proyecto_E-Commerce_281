@@ -77,7 +77,6 @@ const ArtesanoSchema = {
         onDelete: "SET NULL",
     },
 }
-
 class Artesano extends Model {
     
     static associate(models) {

@@ -9,9 +9,10 @@ const {
     actualizarProvinciaSchema,
   } = require("../schemas/provincia.schema");
 
-router.get('/', async (req, res) => {
+router.get('/',
+    async (req, res) => {
     try {
-        const provincias = service.find();
+        const provincias = await service.find();
         res.json(provincias);
     } catch (error) {
         res.status(500).json({ message: 'Error al obtener los provincias', error });
@@ -23,7 +24,7 @@ router.get('/:id_provincia',
     async (req, res) => {
     try {
         const { id_provincia } = req.params;
-        const provincia = service.findOne(id_provincia);
+        const provincia = await service.findOne(id_provincia);
         if (!provincia) {
             return res.status(404).json({ message: 'provincia no encontrado' });
         }
@@ -38,7 +39,7 @@ router.post('/',
     async (req, res) => {
     try {
         const body = req.body;
-        const nuevaProvincia = service.create(body);
+        const nuevaProvincia = await service.create(body);
         res.status(201).json(nuevaProvincia);
     } catch (error) {
         res.status(400).json({ message: 'Error al crear el provincia', error });
@@ -52,7 +53,7 @@ router.patch('/:id_provincia',
     try {
         const { id_provincia } = req.params;
         const body = req.body;
-        const provincia = service.update(id_provincia, body);
+        const provincia = await service.update(id_provincia, body);
         if (!provincia) {
             return res.status(404).json({ message: 'provincia no encontrado' });
         }
@@ -67,7 +68,7 @@ router.delete('/:id_provincia',
     async (req, res) => {
     try {
         const { id_provincia } = req.params;
-        const rta = service.delete(id_provincia);
+        const rta = await service.delete(id_provincia);
         if (!rta) {
             return res.status(404).json({ message: 'provincia no encontrado' });
         }

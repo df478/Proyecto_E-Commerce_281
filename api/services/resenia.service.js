@@ -1,10 +1,7 @@
 const boom = require("@hapi/boom");
-const bcrypt = require("bcrypt");
 const { models } = require("../libs/sequelize");
 class ReseniaService {
-  constructor() {
-
-  }
+  constructor() {}
 
   async create(data) {
     const nuevoData = {
@@ -16,7 +13,6 @@ class ReseniaService {
 
   async find() {
     const rta = await models.Resenia.findAll();
-
     return rta;
   }
 

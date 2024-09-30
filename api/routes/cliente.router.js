@@ -77,12 +77,12 @@ router.patch(
 );
 
 router.delete(
-  "/:id",
+  "/:id_usuario",
   validatorHandler(obtenerClienteSchema, "params"),
   async (req, res) => {
     try {
-      const { id } = req.params;
-      const rta = await service.delete(id);
+      const { id_usuario } = req.params;
+      const rta = await service.delete(id_usuario);
       if (!rta) {
         return res.status(404).json({ message: "Cliente no encontrado" });
       }

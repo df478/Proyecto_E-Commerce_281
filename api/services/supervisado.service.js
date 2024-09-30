@@ -5,17 +5,17 @@ class SupervisadoService {
   constructor() {}
 
   async create(data) {
-    const nuevoSupervisado = await models.supervisado.create(data); // Crear el registro en la base de datos
+    const nuevoSupervisado = await models.Supervisado.create(data); // Crear el registro en la base de datos
     return nuevoSupervisado;
   }
 
   async find() {
-    const supervisados = await models.supervisado.findAll(); // Obtener todos los registros
+    const supervisados = await models.Supervisado.findAll();   // Obtener todos los registros
     return supervisados;
   }
 
   async findOne(id_supervisado) {
-    const supervisado = await models.supervisado.findOne({
+    const supervisado = await models.Supervisado.findOne({
       where: { id_supervisado },
     }); // Buscar un registro específico por id_supervisado
     if (!supervisado) {

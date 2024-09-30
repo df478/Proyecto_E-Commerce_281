@@ -1,16 +1,17 @@
 const express = require("express");
 const ReseniaService = require("./../services/resenia.service"); 
-const validatorHandler = require( "./../middlewares/validator.handler");
+const validatorHandler = require("../middlewares/validator.handler");
 const router = express.Router();
 const service = new ReseniaService();
 
 const {
-    crearReseniaSchema,
-    actualizarReseniaSchema,
-    obtenerReseniaSchema
-  } = require( "./../schemas/resenia.schema ");
+  crearReseniaSchema,
+  actualizarReseniaSchema,
+  obtenerReseniaSchema
+  } = require( "./../schemas/resenia.schema");
   
-  router.get( "/ ", async (req, res) => {
+  router.get( "/", 
+    async (req, res) => {
     try {
       const resenias = await service.find();
       res.json(resenias);
@@ -19,8 +20,7 @@ const {
     }
   });
   
-  router.get(
-     "/:id_resenia ",
+  router.get("/:id_resenia",
     validatorHandler(obtenerReseniaSchema,  "params "),
     async (req, res) => {
       try {
@@ -37,45 +37,44 @@ const {
   );
   
   router.post(
-     "/ ",
-    validatorHandler(crearReseniaSchema,  "body "),
+    "/",
+    validatorHandler(crearReseniaSchema, "body"),
     async (req, res) => {
       try {
         const body = req.body;
-        const nuevaResenia = await service.create(body);
-        res.status(201).json(nuevaResenia);
+        const nuevoResenia = await service.create(body);
+        console.log(nuevoResenia);
+        res.status(201).json(nuevoResenia);
       } catch (error) {
-        res.status(400).json({ message:  "Error al crear la reseña ", error });
+        res.status(400).json({ message: "Error al crear el resenia", error });
       }
     }
   );
   
   router.patch(
-     "/:id_resenia ",
-    validatorHandler(obtenerReseniaSchema,  "params "),
-    validatorHandler(actualizarReseniaSchema,  "body "),
+    "/:id_resenia",
+    validatorHandler(obtenerReseniaSchema, "params"),
+    validatorHandler(actualizarReseniaSchema, "body"),
     async (req, res) => {
       try {
         const { id_resenia } = req.params;
         const body = req.body;
         const resenia = await service.update(id_resenia, body);
         if (!resenia) {
-          return res.status(404).json({ message:  "Reseña no encontrada " });
+          return res.status(404).json({ message: "Cliente no encontrado" });
         }
         res.json(resenia);
       } catch (error) {
-        console.error(error); 
-        res
-          .status(400)
-          .json({
-            message: "Error al actualizar la resenia",
-            error: error.message || error,
-          });
+        console.error(error); // Imprimir el error para depuración
+        res.status(400).json({
+          message: "Error al actualizar el Resenia",
+          error: error.message || error,
+        });
       }
     }
   );
   
-  router.delete( "/:id_resenia ", async (req, res) => {
+  router.delete( "/:id_resenia", async (req, res) => {
     try {
       const { id_resenia } = req.params;
       const rta = await service.delete(id_resenia);
