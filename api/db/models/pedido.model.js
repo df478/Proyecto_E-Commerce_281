@@ -36,6 +36,13 @@ const pedidoSchema = {
     monto_pago: {
         type: DataTypes.FLOAT,
         allowNull: false,
+    },
+    tipo_de_pedido: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isIn: [['estandar','rapido','recoger de tienda','gratuito']]
+        }
     }
 };
 
