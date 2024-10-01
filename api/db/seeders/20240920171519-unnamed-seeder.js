@@ -12,6 +12,7 @@ const { generarNotificacion} = require("../data/notificacion.data");
 const { generarProducto } = require("../data/producto.data");
 const { generarPromocion} = require("../data/promocion.data");
 const { generarProvincia } = require("../data/provincia.data");
+const { generarResenias } = require("../data/resenia.data");
 
 
 /** @type {import('sequelize-cli').Migration} */
@@ -47,6 +48,10 @@ module.exports = {
     await queryInterface.bulkInsert("producto", productoData);
     const imagenData = await generarImagen();
     await queryInterface.bulkInsert("imagen", imagenData);
+
+    const reseniaData = await generarResenias();
+    await queryInterface.bulkInsert("resenia", reseniaData);
+
   
   },
 
@@ -65,6 +70,9 @@ module.exports = {
     await queryInterface.bulkDelete("municipio", null);
     await queryInterface.bulkDelete("provincia", null);
     await queryInterface.bulkDelete("departamento", null);
+
+    await queryInterface.bulkDelete("resenia", null);
+
 
     
   },
