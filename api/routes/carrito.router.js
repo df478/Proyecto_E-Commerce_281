@@ -1,22 +1,21 @@
-const express = require('express');
-const CarritoService = require('./../services/carrito.service');
+const express = require("express");
+const CarritoService = require("./../services/carrito.service");
 const router = express.Router();
 const service = new CarritoService();
 const validatorHandler = require("../middlewares/validator.handler");
 const {
-    crearCarritoSchema,
-    actualizarCarritoSchema,
-    obtenerCarritoSchema
-    } = require("../schemas/carrito.schema");
+  crearCarritoSchema,
+  actualizarCarritoSchema,
+  obtenerCarritoSchema,
+} = require("../schemas/carrito.schema");
 
-
-router.get('/', async (req, res) => {
-    try {
-        const carritos = await service.find();
-        res.json(carritos);
-    } catch (error) {
-        res.status(500).json({ message: 'Error al obtener los carritos', error });
-    }
+router.get("/", async (req, res) => {
+  try {
+    const carritos = await service.find();
+    res.json(carritos);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener los carritos", error });
+  }
 });
 
 router.get('/:id_carrito', 
@@ -30,7 +29,7 @@ router.get('/:id_carrito',
         }
         res.json(carrito);
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener el carrito', error });
+      res.status(500).json({ message: "Error al obtener el carrito", error });
     }
 });
 // ruta para obtener el carrito de un cliente con productos añadidos
@@ -53,13 +52,14 @@ router.post('/',
     validatorHandler(crearCarritoSchema, "body"),
     async (req, res) => {
     try {
-        const body = req.body;
-        const nuevoCarrito = await service.create(body);
-        res.status(201).json(nuevoCarrito);
+      const body = req.body;
+      const nuevoCarrito = await service.create(body);
+      res.status(201).json(nuevoCarrito);
     } catch (error) {
-        res.status(400).json({ message: 'Error al crear el carrito', error });
+      res.status(400).json({ message: "Error al crear el carrito", error });
     }
-});
+  }
+);
 
 router.patch('/:id_carrito', 
     validatorHandler(obtenerCarritoSchema, "params"),
@@ -74,9 +74,12 @@ router.patch('/:id_carrito',
         }
         res.json(carrito);
     } catch (error) {
-        res.status(400).json({ message: 'Error al actualizar el carrito', error });
+      res
+        .status(400)
+        .json({ message: "Error al actualizar el carrito", error });
     }
-});
+  }
+);
 
 router.delete('/:id_carrito', async (req, res) => {
     try {
