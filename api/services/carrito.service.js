@@ -31,15 +31,20 @@ class CarritoService {
     return carrito;
   }
   //----------------------------- OBTENER EL CARRITO DEL CLIENTE -------------------------
+
   async obtenerCarritoConProductos(id_usuario) {
-    const carrito = await models.Carrito.findOne({id_usuario,
+    const carrito = await models.Carrito.findOne({
+        where: { id_usuario },  // Filtro por 'id_usuario'
         include: [{
             model: models.Aniade,
             as: "aniade", 
             include: [{
                 model: models.Producto,
-                as: "producto", 
-                attributes: ['id_producto', 'nombre_producto', 'precio_producto'],
+                as: "producto",
+                include: [{
+                    model: models.Imagen,  // Incluir las imágenes del producto
+                    as: "imagen"  // Alias que definimos en el modelo Producto
+                }]
             }],
         }],
     });
@@ -48,17 +53,16 @@ class CarritoService {
         throw boom.notFound("Carrito no encontrado para el cliente");
     }
 
-    // Formatear los productos
-    const productosEnCarrito = carrito.aniade.map((aniade) => ({ 
-        id_producto: aniade.producto.id_producto, 
-        nombre: aniade.producto.nombre_producto, 
-        precio: aniade.producto.precio_producto, 
+    // Formatear los productos con sus imágenes
+    const productosEnCarrito = carrito.aniade.map((aniade) => ({
+        producto: aniade.producto,
         cantidad: aniade.cantidad,
+        imagen: aniade.producto.imagen  // Incluir las imágenes del producto
     }));
 
     return {
         id_carrito: carrito.id_carrito,
-        productos: productosEnCarrito,
+        producto: productosEnCarrito,
     };
 }
 

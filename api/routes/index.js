@@ -6,7 +6,6 @@ const clienteRouter = require('./cliente.router');
 const artesanoRouter = require('./artesano.router');
 const deliveryRouter = require('./delivery.router');
 const carritoRouter = require('./carrito.router');
-const carritoRouter = require('./carrito.router');
 const comunidadRouter = require('./comunidad.router');
 const municipioRouter = require('./municipio.router');
 const notificacionRouter = require('./notificacion.router')
