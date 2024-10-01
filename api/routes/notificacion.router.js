@@ -19,12 +19,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', 
+router.get('/:id_notificacion', 
     validatorHandler(obtenerNotificacionSchema, "params"), 
     async (req, res) => {
     try {
-        const { id } = req.params;
-        const notificacion = await service.findOne(id);
+        const { id_notificacion } = req.params;
+        const notificacion = await service.findOne(id_notificacion);
         if (!notificacion) {
             return res.status(404).json({ message: 'notificacion no encontrado' });
         }
@@ -46,14 +46,14 @@ router.post('/',
     }
 });
 
-router.patch('/:id', 
+router.patch('/:id_notificacion', 
     validatorHandler(obtenerNotificacionSchema, "params"),
     validatorHandler(actualizarNotificacionSchema, "body"),
     async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id_notificacion } = req.params;
         const body = req.body;
-        const notificacion = await service.update(id, body);
+        const notificacion = await service.update(id_notificacion, body);
         if (!notificacion) {
             return res.status(404).json({ message: 'notificacion no encontrado' });
         }
@@ -63,10 +63,10 @@ router.patch('/:id',
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id_notificacion', async (req, res) => {
     try {
-        const { id } = req.params;
-        const rta = await service.delete(id);
+        const { id_notificacion } = req.params;
+        const rta = await service.delete(id_notificacion);
         if (!rta) {
             return res.status(404).json({ message: 'notificacion no encontrado' });
         }

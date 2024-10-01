@@ -5,19 +5,21 @@ class AniadeService {
   constructor() {}
 
   async create(data) {
-    const nuevoAniade = await models.aniade.create(data); // Crear el registro en la base de datos
+    const nuevoAniade = await models.Aniade.create(data); // Crear el registro en la base de datos
     return nuevoAniade;
   }
 
   async find() {
-    const aniades = await models.aniade.findAll(); // Obtener todos los registros
+    const aniades = await models.Aniade.findAll(
+      
+    ); // Obtener todos los registros
     return aniades;
   }
 
   async findOne(id_aniade) {
-    const aniades = await models.aniade.findOne({
-      where: { id_aniade },
-    }); // Buscar un registro específico por id_aniade
+    const aniades = await models.Aniade.findOne(id_aniade,{
+      
+    }); 
     if (!aniades) {
       throw boom.notFound("Registro de aniade no encontrado");
     }

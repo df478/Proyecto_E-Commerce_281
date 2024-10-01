@@ -5,17 +5,17 @@ class TieneService {
   constructor() {}
 
   async create(data) {
-    const nuevoTiene = await models.tiene.create(data); // Crear el registro en la base de datos
+    const nuevoTiene = await models.Tiene.create(data); // Crear el registro en la base de datos
     return nuevoTiene;
   }
 
   async find() {
-    const tienes = await models.tiene.findAll(); // Obtener todos los registros
+    const tienes = await models.Tiene.findAll(); // Obtener todos los registros
     return tienes;
   }
 
   async findOne(id_tiene) {
-    const tiene = await models.tiene.findOne({
+    const tiene = await models.Tiene.findOne({
       where: { id_tiene },
     }); // Buscar un registro específico por id_tiene
     if (!tiene) {

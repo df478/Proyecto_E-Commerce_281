@@ -15,7 +15,9 @@ class CarritoService {
   }
 
   async find() {
-    const rta = await models.Carrito.findAll();
+    const rta = await models.Carrito.findAll({
+      include:["cliente"]
+    });
 
     return rta;
   }
@@ -28,7 +30,39 @@ class CarritoService {
     }
     return carrito;
   }
+  //----------------------------- OBTENER EL CARRITO DEL CLIENTE -------------------------
+  async obtenerCarritoConProductos(id_usuario) {
+    const carrito = await models.Carrito.findOne({id_usuario,
+        include: [{
+            model: models.Aniade,
+            as: "aniade", 
+            include: [{
+                model: models.Producto,
+                as: "producto", 
+                attributes: ['id_producto', 'nombre_producto', 'precio_producto'],
+            }],
+        }],
+    });
 
+    if (!carrito) {
+        throw boom.notFound("Carrito no encontrado para el cliente");
+    }
+
+    // Formatear los productos
+    const productosEnCarrito = carrito.aniade.map((aniade) => ({ 
+        id_producto: aniade.producto.id_producto, 
+        nombre: aniade.producto.nombre_producto, 
+        precio: aniade.producto.precio_producto, 
+        cantidad: aniade.cantidad,
+    }));
+
+    return {
+        id_carrito: carrito.id_carrito,
+        productos: productosEnCarrito,
+    };
+}
+
+  //-----------------------------------------------------------------------------------
   async update(id_carrito, cambios) {
     
     console.log(id_carrito, cambios);

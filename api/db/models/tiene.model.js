@@ -11,7 +11,7 @@ const TieneSchema = {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-    id_pedido: {  
+      id_pedido: {  
         field: "id_pedido",
         allowNull: true,
         type: DataTypes.INTEGER,
@@ -34,7 +34,7 @@ const TieneSchema = {
         onDelete: "SET NULL",
     },
     fecha_tiene: {  
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
     }
 };

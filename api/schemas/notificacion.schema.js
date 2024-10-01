@@ -9,7 +9,7 @@ const crearNotificacionSchema = Joi.object({
     tipo_notificacion: tipo_notificacion.required()
 })
 
-const actualizarNotifiacionSchema = Joi.object({
+const actualizarNotificacionSchema = Joi.object({
     descripcion_notificacion: descripcion_notificacion,
     tipo_notificacion: tipo_notificacion
 })
@@ -20,6 +20,6 @@ const obtenerNotificacionSchema = Joi.object({
 
 module.exports = {
     crearNotificacionSchema,
-    actualizarNotifiacionSchema,
+    actualizarNotificacionSchema,
     obtenerNotificacionSchema
 }

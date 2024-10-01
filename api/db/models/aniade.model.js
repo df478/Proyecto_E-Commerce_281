@@ -1,7 +1,7 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
 const { PRODUCTO_TABLE } = require("./producto.model");
 const { CARRITO_TABLE } = require("./carrito.model");
-const { CLIENTE_TABLE } = require("./cliente.model");
+//const { CLIENTE_TABLE } = require("./cliente.model");
 
 const ANIADE_TABLE = "aniade";
 const AniadeSchema = {
@@ -33,7 +33,7 @@ const AniadeSchema = {
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
   },
-  id_cliente: {
+  /*id_cliente: {
     field: "id_cliente",
     allowNull: true,
     type: DataTypes.INTEGER,
@@ -43,7 +43,7 @@ const AniadeSchema = {
     },
     onUpdate: "CASCADE",
     onDelete: "SET NULL",
-  },
+  },*/
   cantidad: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -61,10 +61,10 @@ class Aniade extends Model {
         as: "carrito",
         foreignKey: "id_carrito"
     });
-    this.belongsTo(models.Cliente, {
+    /*this.belongsTo(models.Cliente, {
         as: "cliente",
         foreignKey: "id_cliente"
-    });
+    });*/
   }
   static config(sequelize) {
     return {

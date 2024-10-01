@@ -66,7 +66,10 @@ const ClienteSchema = {
 
 class Cliente extends Model {
     static associate(models) {
-        
+        this.hasOne(models.Carrito, {
+            as: "carrito",
+            foreignKey: "id_usuario",
+        });
         this.hasMany(models.Resenia, {
             as: "resenia",
             foreignKey: "id_usuario",
@@ -75,10 +78,10 @@ class Cliente extends Model {
             as: "entrega",
             foreignKey: 'id_cliente'
         });
-        this.hasMany(models.Aniade, {
+        /*this.hasMany(models.Aniade, {
             as: "aniade",
             foreignKey: "id_cliente",
-        });
+        });*/
         this.hasMany(models.Pago, {
             as: "pago",
             foreignKey: 'id_cliente'

@@ -5,15 +5,14 @@ const administradorRouter = require('./administrador.router');
 const clienteRouter = require('./cliente.router');
 const artesanoRouter = require('./artesano.router');
 const deliveryRouter = require('./delivery.router');
-const carritoRouter = require('./producto.router');
+const carritoRouter = require('./carrito.router');
 const comunidadRouter = require('./comunidad.router');
 const municipioRouter = require('./municipio.router');
 const notificacionRouter = require('./notificacion.router')
 const pagoRouter = require('./pago.router');
 const entregaRouter = require('./entrega.router');
-//const pedNotRouter = require('./ped_not(tiene).router');
+const tieneRouter = require('./tiene.router');
 const pedidoRouter = require('./pedido.router');
-//const proPromCliCarRouter = require('./pro_prom_cli_car.router');
 const productoRouter = require('./producto.router');
 const promocionRouter = require('./promocion.router');
 const provinciaRouter = require('./provincia.router');
@@ -22,6 +21,7 @@ const reseniaRouter = require('./resenia.router');
 const supervisadoRouter = require('./supervisado.router');
 const usuarioRouter = require('./usuario.router');
 const imagenRouter = require('./imagen.router');
+const aniadeRourter = require('./aniade.router');
 
 
 //authentication
@@ -36,17 +36,16 @@ function routerApi(app) {
   router.use('/artesano', artesanoRouter);
   router.use('/cliente', clienteRouter);
   router.use('/delivery', deliveryRouter);
-  router.use('/carrito', carritoRouter);
   router.use('/comunidad', comunidadRouter);
   router.use('/municipio', municipioRouter);
-  router.use('/notificiacion', notificacionRouter);
+  router.use('/notificacion', notificacionRouter);
   router.use('/cliente', clienteRouter);
   router.use('/pago', pagoRouter);
   router.use('/entrega', entregaRouter);
-  //router.use('/pedNot',pedNotRouter);
+  router.use('/tiene',tieneRouter);
   router.use('/pedido', pedidoRouter);
-  //router.use('/proPromCliCar', proPromCliCarRouter);
   router.use('/producto', productoRouter);
+  router.use('/carrito', carritoRouter);
   router.use('/promocion',promocionRouter);
   router.use('/provincia', provinciaRouter);
   router.use('/departamento', departamentoRouter);
@@ -54,7 +53,7 @@ function routerApi(app) {
   router.use('/supervisado', supervisadoRouter);
   router.use('/usuario', usuarioRouter);
   router.use('/imagen', imagenRouter);
-
+  router.use('/aniade', aniadeRourter);
 
 }
 

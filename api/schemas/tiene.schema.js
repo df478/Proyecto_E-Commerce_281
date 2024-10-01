@@ -3,18 +3,18 @@ const Joi = require('joi');
 const id_tiene = Joi.number().integer();
 const id_pedido = Joi.number().integer();
 const id_notificacion = Joi.number().integer();
-const  fecha_ped_not = Joi.date().iso(); // YYYY-MM-DD
+const  fecha_tiene = Joi.date().iso(); // YYYY-MM-DD
 
 const crearTieneSchema = Joi.object({
     id_pedido:id_pedido.required(),
     id_notificacion:id_notificacion.required(),
-    fecha_ped_not: fecha_ped_not.required()
+    fecha_tiene: fecha_tiene.required()
 })
 
 const actualizarTieneSchema = Joi.object({
     id_pedido:id_pedido,
     id_notificacion:id_notificacion,
-    fecha_ped_not:fecha_ped_not
+    fecha_tiene:fecha_tiene
 })
 
 const obtenerTieneSchema = Joi.object({
