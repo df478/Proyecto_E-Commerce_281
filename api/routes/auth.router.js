@@ -12,6 +12,13 @@ router.post(
       const user = req.user;
       const service = new AuthService(user.tipo_usuario);
 
+      // Inicializa la respuesta con el token
+      const response = {
+        token: service.signToken(user),
+        carrito: null,  // Inicializa 'carrito' como null
+        message: "Login exitoso",  // Mensaje común
+      };
+
       // Verifica si el tipo de usuario es 'cliente'
       if (user.tipo_usuario === 'cliente') {
         // Si es cliente, busca el email en el cuerpo
@@ -25,21 +32,20 @@ router.post(
 
         // Agrega el carrito para el cliente
         const nuevoCliente = await service.agregaCarrito(usuario.id_usuario);
-        
-        return res.status(201).json({
-          usuario: service.signToken(user),  
-          carrito: nuevoCliente,
-        });
-      }else{
+        response.carrito = nuevoCliente;  // Asigna el carrito al objeto de respuesta
+        response.message += " y carrito gestionado";  // Agrega al mensaje
 
-      // Si no es cliente, simplemente firma el token
-      res.json(service.signToken(user));
+        return res.status(201).json(response);  // Devuelve la respuesta completa
+      } else {
+        // Si no es cliente, simplemente firma el token
+        return res.json(response);  // Devuelve el mismo objeto sin carrito
       }
     } catch (error) {
       next(error);
     }
   }
 );
+
 
 router.post("/recovery", async (req, res, next) => {
   try {
