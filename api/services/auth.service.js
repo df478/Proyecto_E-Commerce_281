@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
+const { models } = require("../libs/sequelize");
+
 const { config } = require("../config/config");
 
 // const UserService = require('./users.service');
@@ -25,6 +27,32 @@ class AuthService {
       this.service = new artesanoService();
     }
   }
+
+  async findOneClienteEmail(email_usuario){
+    const cliente = await models.Cliente.findOne({
+      where: { email_usuario },
+    });
+    if (!cliente) {
+      throw boom.notFound("Cliente no encontrado");
+    }
+    return cliente;
+  }
+
+  async agregaCarrito(id_usuario) {
+    const nuevoData = {
+      id_usuario: id_usuario
+    };
+    const carritoExistente = await models.Carrito.findOne({
+      where: { id_usuario: id_usuario }
+    }); 
+    if (carritoExistente) {
+      await carritoExistente.update({ id_usuario: null });
+    }
+    const nuevoCarrito = await models.Carrito.create(nuevoData);
+    
+    return nuevoCarrito;
+  }
+  
 
   async register(userData) {
     // Crear el usuario

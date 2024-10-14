@@ -15,21 +15,6 @@ class ClienteService {
     return nuevoCliente;
   }
 
-  async agregaCarrito(id_usuario) {
-    const nuevoData = {
-      id_usuario: id_usuario
-    };
-    const carritoExistente = await models.Carrito.findOne({
-      where: { id_usuario: id_usuario }
-    }); 
-    if (carritoExistente) {
-      await carritoExistente.update({ id_usuario: null });
-    }
-    const nuevoCarrito = await models.Carrito.create(nuevoData);
-    
-    return nuevoCarrito;
-  }
-  
 
 
   async find() {
