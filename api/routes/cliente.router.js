@@ -2,6 +2,7 @@ const express = require("express");
 const ClienteService = require("./../services/cliente.service");
 const validatorHandler = require("../middlewares/validator.handler");
 const router = express.Router();
+
 const service = new ClienteService();
 const {
   obtenerClienteSchema,

@@ -11,7 +11,7 @@ class ClienteService {
       ...data,
       password_usuario: hash,
     };
-    const nuevoCliente = await models.Cliente.create(nuevoData);
+    const nuevoCliente = await models.Cliente.create(nuevoData);    
     return nuevoCliente;
   }
 
