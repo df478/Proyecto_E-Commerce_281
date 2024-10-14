@@ -2,6 +2,7 @@ const express = require("express");
 const ClienteService = require("./../services/cliente.service");
 const validatorHandler = require("../middlewares/validator.handler");
 const router = express.Router();
+
 const service = new ClienteService();
 const {
   obtenerClienteSchema,
@@ -52,7 +53,28 @@ router.post(
     }
   }
 );
+//-------------------------
+router.get(
+  "/login/:id_usuario",
+  validatorHandler(obtenerClienteSchema, "params"),
+  async (req, res) => {
+    try {
+      const { id_usuario } = req.params;
+      
+      const usuario = await service.findOne(id_usuario);
+      if (!usuario) {
+        return res.status(404).json({ message: "Cliente no encontrado" });
+      }
+      const nuevoCliente = await service.agregaCarrito(id_usuario);
+      
+      res.status(201).json(nuevoCliente);
+    } catch (error) {
+      res.status(500).json({ message: "Error al crear el cliente", error });
+    }
+  }
+);
 
+//--------------------------
 router.patch(
   "/:id_usuario",
   validatorHandler(obtenerClienteSchema, "params"),

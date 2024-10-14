@@ -25,11 +25,18 @@ class ProductoService {
 
   async findOne(id_producto) {
     
-    const producto = await models.Producto.findByPk(id_producto,
-      {
-        include: ["imagen"]
-      }
-    );
+    const producto = await models.Producto.findByPk(id_producto,{
+      include: [
+        {
+            model: models.Imagen,  
+            as: "imagen"
+        },
+        {
+            model: models.Resenia,  
+            as: "resenia"          
+        }
+      ]
+    });
     if (!producto) {
       throw boom.notFound("Producto no encontrado");
     }
