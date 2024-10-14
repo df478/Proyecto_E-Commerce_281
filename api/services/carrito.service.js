@@ -41,9 +41,9 @@ class CarritoService {
             include: [{
                 model: models.Producto,
                 as: "producto",
-                include: [{
-                    model: models.Imagen,  // Incluir las imágenes del producto
-                    as: "imagen"  // Alias que definimos en el modelo Producto
+                include:[{
+                    model: models.Imagen,
+                    as:"imagen"
                 }]
             }],
         }],
@@ -57,7 +57,6 @@ class CarritoService {
     const productosEnCarrito = carrito.aniade.map((aniade) => ({
         producto: aniade.producto,
         cantidad: aniade.cantidad,
-        imagen: aniade.producto.imagen  // Incluir las imágenes del producto
     }));
 
     return {
