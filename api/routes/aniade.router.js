@@ -63,18 +63,14 @@ router.get('/:id_carrito/:id_producto',
             const { id_carrito, id_producto } = req.body;
 
             // Verificar si ya existe un registro con el mismo id_carrito y id_producto
-            const existeAniadido = await service.findOneByCarritoAndProducto(id_carrito, id_producto);
-            
+            const existeAniadido = await service.findOneByCarritoAndProducto2(id_carrito, id_producto);
             if (existeAniadido) {
                 return res.status(400).json({ 
                     message: 'Este producto ya ha sido añadido al carrito.' 
                 });
             }
-
-            // Si no existe, se procede a crear uno nuevo
             const nuevoAniadido = await service.create(req.body);
             res.status(201).json(nuevoAniadido);
-
         } catch (error) {
             console.error(error);
             res.status(500).json({ 

@@ -14,6 +14,7 @@ const { generarProducto } = require("../data/producto.data");
 const { generarPromocion} = require("../data/promocion.data");
 const { generarProvincia } = require("../data/provincia.data");
 const { generarResenias } = require("../data/resenia.data");
+const { generarAniade } = require("../data/aniade.data");
 
 
 /** @type {import('sequelize-cli').Migration} */
@@ -56,11 +57,18 @@ module.exports = {
 
     const reseniaData = await generarResenias();
     await queryInterface.bulkInsert("resenia", reseniaData);
+    const aniadeData = await generarAniade();
+    await queryInterface.bulkInsert("aniade", aniadeData);
+
 
   
   },
 
   async down(queryInterface, Sequelize) {
+    
+    await queryInterface.bulkDelete("aniade", null);
+    await queryInterface.bulkDelete("resenia", null);
+
     await queryInterface.bulkDelete("imagen", null);
     await queryInterface.bulkDelete("producto", null);
     await queryInterface.bulkDelete("notificacion", null);
@@ -77,7 +85,6 @@ module.exports = {
     await queryInterface.bulkDelete("provincia", null);
     await queryInterface.bulkDelete("departamento", null);
 
-    await queryInterface.bulkDelete("resenia", null);
 
 
     
