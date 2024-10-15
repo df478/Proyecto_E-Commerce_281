@@ -92,9 +92,6 @@ async function generate() {
     },
     {
         id_usuario:30
-    },
-    {
-      id_usuario:31 
     }
   ];
 

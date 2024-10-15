@@ -2,8 +2,8 @@
 
 const { generarAdministrador } = require("../data/administrador.data");
 const { generarArtesano } = require("../data/artesano.data");
-const { generarCliente } = require("../data/cliente.data");
 const { generarCarrito } = require("../data/carrito.data");
+const { generarCliente } = require("../data/cliente.data");
 const { generarComunidad} = require("../data/comunidad.data");
 const { generarDelivery } = require("../data/delivery.data");
 const { generarDepartamento } = require("../data/departamento.data");
@@ -33,10 +33,12 @@ module.exports = {
     
     const administradorData = await generarAdministrador();
     await queryInterface.bulkInsert("administrador", administradorData);
+    
     const clienteData = await generarCliente();
     await queryInterface.bulkInsert("cliente", clienteData);
     const carritoData = await generarCarrito();
     await queryInterface.bulkInsert("carrito", carritoData);
+
     const deliveryData = await generarDelivery();
     await queryInterface.bulkInsert("delivery", deliveryData);
     const artesanoData = await generarArtesano();
@@ -65,6 +67,7 @@ module.exports = {
     await queryInterface.bulkDelete("promocion", null);
     
     await queryInterface.bulkDelete("administrador", null);
+    await queryInterface.bulkDelete("carrito", null);
     await queryInterface.bulkDelete("cliente", null);
     await queryInterface.bulkDelete("delivery", null);
     await queryInterface.bulkDelete("artesano", null);
