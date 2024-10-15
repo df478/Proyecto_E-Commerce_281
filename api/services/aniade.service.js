@@ -47,6 +47,29 @@ class AniadeService {
   });
   }
 
+  async updateProductoCantidad(id_carrito, id_producto, cantidadIncremento) {
+    try {
+        const aniade = await models.Aniade.findOne({
+            where: {
+                id_carrito: id_carrito,
+                id_producto: id_producto
+            }
+        });
+        if (!aniade) {
+            throw new Error('El producto no se encuentra en el carrito.');
+        }
+
+        aniade.cantidad += cantidadIncremento; // Incrementar la cantidad en 1
+        await aniade.save(); // Guardar los cambios
+
+        return aniade; // Retornar el registro actualizado
+    } catch (error) {
+        console.error(error);
+        throw new Error('Error al actualizar la cantidad del producto en el carrito.');
+    }
+  }
+  
+
   async update(id_aniade, cambios) {
     const aniade = await this.findOne(id_aniade); // Obtener el registro existente
 
