@@ -4,7 +4,6 @@ const AuthService = require("../services/auth.service");
 // const service = new AuthService();
 
 const router = express.Router();
-
 router.post(
   "/login",
   passport.authenticate("local", { session: false }),
@@ -13,12 +12,40 @@ router.post(
       const user = req.user;
       const service = new AuthService(user.tipo_usuario);
 
-      res.json(service.signToken(user));
+      // Inicializa la respuesta con el token
+      const response = {
+        token: service.signToken(user),
+        carrito: null,  // Inicializa 'carrito' como null
+        message: "Login exitoso",  // Mensaje común
+      };
+
+      // Verifica si el tipo de usuario es 'cliente'
+      if (user.tipo_usuario === 'cliente') {
+        // Si es cliente, busca el email en el cuerpo
+        const { email_usuario } = req.body; 
+
+        // Busca al cliente utilizando el email
+        const usuario = await service.findOneClienteEmail(email_usuario);
+        if (!usuario) {
+          return res.status(404).json({ message: "Cliente no encontrado" });
+        }
+
+        // Agrega el carrito para el cliente
+        const nuevoCliente = await service.agregaCarrito(usuario.id_usuario);
+        response.carrito = nuevoCliente;  // Asigna el carrito al objeto de respuesta
+        response.message += " y carrito gestionado";  // Agrega al mensaje
+
+        return res.status(201).json(response);  // Devuelve la respuesta completa
+      } else {
+        // Si no es cliente, simplemente firma el token
+        return res.json(response);  // Devuelve el mismo objeto sin carrito
+      }
     } catch (error) {
       next(error);
     }
   }
 );
+
 
 router.post("/recovery", async (req, res, next) => {
   try {
