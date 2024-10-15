@@ -126,12 +126,11 @@ router.delete('/:id_carrito', async (req, res) => {
         res.status(500).json({ message: 'Error al eliminar el carrito', error });
     }
 });
-router.delete('/producto/:id_carrito',
+router.delete('/producto/:id_carrito/:id_producto',
   validatorHandler(obtenerCarritoSchema, "params"),
   async (req, res) => {
     try {
-      const { id_carrito } = req.params;
-      const { id_producto } = req.body; // El id_producto debe venir en el body
+      const { id_carrito,id_producto } = req.params;
 
       // Verificar si existe el producto en el carrito
       const productoEnCarrito = await service.findProductoEnCarrito(id_carrito, id_producto);
