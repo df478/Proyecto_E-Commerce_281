@@ -91,6 +91,9 @@ async function generate() {
         id_usuario:28
     },
     {
+        id_usuario:29
+    },
+    {
         id_usuario:30
     }
   ];
