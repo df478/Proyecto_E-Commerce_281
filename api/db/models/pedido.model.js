@@ -14,7 +14,7 @@ const pedidoSchema = {
         field: "id_carrito",
         type: DataTypes.INTEGER,
         allowNull: true,
-        unique: true,  
+        unique: false,  
         references: {
             model: CARRITO_TABLE,
             key: 'id_carrito'
