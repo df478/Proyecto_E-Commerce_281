@@ -17,14 +17,17 @@ class AniadeService {
   }
 
   async findOne(id_aniade) {
-    const aniades = await models.Aniade.findOne(id_aniade,{
-      
-    }); 
-    if (!aniades) {
-      throw boom.notFound("Registro de aniade no encontrado");
+    const aniade = await models.Aniade.findOne({
+        where: { id_aniade: id_aniade } // Especificar el criterio de búsqueda
+    });
+
+    if (!aniade) {
+        throw boom.notFound("Registro de aniade no encontrado");
     }
-    return aniades;
-  }
+
+    return aniade;
+}
+
   async findOneByCarritoAndProducto(id_carrito, id_producto) {
     const aniade = await models.Aniade.findOne({
       where: {
@@ -48,27 +51,42 @@ class AniadeService {
   }
 
   async updateProductoCantidad(id_carrito, id_producto, cantidadIncremento) {
-    try {
-        const aniade = await models.Aniade.findOne({
+    // Buscar el registro del producto en el carrito
+    const aniade = await models.Aniade.findOne({
+        where: {
+            id_carrito: id_carrito,
+            id_producto: id_producto
+        }
+    });
+
+    // Verificar si el producto no existe
+    if (!aniade) {
+        throw boom.notFound("El producto no se encuentra en el carrito.");
+    }
+
+    // Incrementar la cantidad
+    const nuevaCantidad = aniade.cantidad + cantidadIncremento;
+
+    // Actualizar la cantidad en la base de datos
+    const [updatedRowCount, updatedRows] = await models.Aniade.update(
+        { cantidad: nuevaCantidad }, // Nuevos valores
+        {
             where: {
                 id_carrito: id_carrito,
                 id_producto: id_producto
-            }
-        });
-        if (!aniade) {
-            throw new Error('El producto no se encuentra en el carrito.');
+            },
+            returning: true // Para que devuelva el registro actualizado
         }
+    );
 
-        aniade.cantidad += cantidadIncremento; // Incrementar la cantidad en 1
-        await aniade.save(); // Guardar los cambios
-
-        return aniade; // Retornar el registro actualizado
-    } catch (error) {
-        console.error(error);
-        throw new Error('Error al actualizar la cantidad del producto en el carrito.');
+    // Verificar si se actualizó algún registro
+    if (updatedRowCount === 0) {
+        throw new Error("No se pudo actualizar la cantidad del producto en el carrito.");
     }
+
+    // Retornar el registro actualizado
+    return updatedRows[0]; // Devolver el primer registro actualizado
   }
-  
 
   async update(id_aniade, cambios) {
     const aniade = await this.findOne(id_aniade); // Obtener el registro existente
