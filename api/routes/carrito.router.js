@@ -127,7 +127,6 @@ router.delete('/:id_carrito', async (req, res) => {
     }
 });
 router.delete('/producto/:id_carrito/:id_producto',
-  validatorHandler(obtenerCarritoSchema, "params"),
   async (req, res) => {
     try {
       const { id_carrito,id_producto } = req.params;
