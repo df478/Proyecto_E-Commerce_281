@@ -67,12 +67,24 @@ class CarritoService {
 
   //-----------------------------------------------------------------------------------
   async update(id_carrito, cambios) {
-    
-    console.log(id_carrito, cambios);
-    
     const carrito = await this.findOne(id_carrito);
     const rta = await carrito.update(cambios);
     return rta;
+  }
+
+  async findProductoEnCarrito(id_carrito, id_producto) {
+    const productoEnCarrito = await models.Aniade.findOne({
+      where: { id_carrito, id_producto }
+    });
+    return productoEnCarrito;
+  }
+
+  async updateProductoEnCarrito(id_carrito, id_producto, nuevaCantidad) {
+    const productoActualizado = await models.Aniade.update(
+      { cantidad: nuevaCantidad },
+      { where: { id_carrito, id_producto } }
+    );
+    return productoActualizado;
   }
 
   async delete(id_carrito) {
@@ -80,6 +92,15 @@ class CarritoService {
     await carrito.destroy();
     return { id_carrito };
   }
+  
+  async deleteProductoEnCarrito(id_carrito, id_producto) {
+    const resultado = await models.Aniade.destroy({
+      where: { id_carrito, id_producto }
+    });
+    return resultado; // Retorna el número de filas eliminadas
+  }
 }
+
+
 
 module.exports = CarritoService;

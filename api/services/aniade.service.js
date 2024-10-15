@@ -25,6 +25,19 @@ class AniadeService {
     }
     return aniades;
   }
+  async findOneByCarritoAndProducto(id_carrito, id_producto) {
+    const aniade = await models.Aniade.findOne({
+      where: {
+        id_carrito: id_carrito,
+        id_producto: id_producto
+      }
+    });
+    if(!aniade){
+      throw boom.notFound("Registro de aniade no encontrado");
+    }
+    return aniade;
+  }
+  
 
   async update(id_aniade, cambios) {
     const aniade = await this.findOne(id_aniade); // Obtener el registro existente

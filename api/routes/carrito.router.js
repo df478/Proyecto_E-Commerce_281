@@ -81,6 +81,39 @@ router.patch('/:id_carrito',
   }
 );
 
+router.patch('/producto/:id_carrito',
+  validatorHandler(obtenerCarritoSchema, "params"),
+  async (req, res) => {
+    try {
+      const { id_carrito } = req.params;
+      const { id_producto, cantidad } = req.body; // Asegúrate de que estos datos estén en el body
+      // Verificar si existe el producto en el carrito
+      const productoEnCarrito = await service.findProductoEnCarrito(id_carrito, id_producto);
+      
+      if (!productoEnCarrito) {
+        return res.status(404).json({ message: 'El producto no se encuentra en el carrito' });
+      }
+      // Si existe, actualizar la cantidad
+      const carritoActualizado = await service.updateProductoEnCarrito(id_carrito, id_producto, cantidad);
+      if (!carritoActualizado) {
+        return res.status(404).json({ message: 'No se pudo actualizar el producto en el carrito' });
+      }
+
+      res.json({
+        message: 'Carrito actualizado correctamente',
+        carrito: carritoActualizado
+      });
+      
+    } catch (error) {
+      res.status(400).json({
+        message: "Error al actualizar el carrito",
+        error: error.message
+      });
+    }
+  }
+);
+
+
 router.delete('/:id_carrito', async (req, res) => {
     try {
         const { id_carrito } = req.params;
@@ -93,5 +126,38 @@ router.delete('/:id_carrito', async (req, res) => {
         res.status(500).json({ message: 'Error al eliminar el carrito', error });
     }
 });
+router.delete('/producto/:id_carrito',
+  validatorHandler(obtenerCarritoSchema, "params"),
+  async (req, res) => {
+    try {
+      const { id_carrito } = req.params;
+      const { id_producto } = req.body; // El id_producto debe venir en el body
+
+      // Verificar si existe el producto en el carrito
+      const productoEnCarrito = await service.findProductoEnCarrito(id_carrito, id_producto);
+      
+      if (!productoEnCarrito) {
+        return res.status(404).json({ message: 'El producto no se encuentra en el carrito' });
+      }
+
+      // Si existe, eliminar el producto del carrito
+      const productoEliminado = await service.deleteProductoEnCarrito(id_carrito, id_producto);
+
+      if (!productoEliminado) {
+        return res.status(500).json({ message: 'No se pudo eliminar el producto del carrito' });
+      }
+
+      res.json({
+        message: 'Producto eliminado correctamente del carrito'
+      });
+      
+    } catch (error) {
+      res.status(400).json({
+        message: "Error al eliminar el producto del carrito",
+        error: error.message
+      });
+    }
+  }
+);
 
 module.exports = router;

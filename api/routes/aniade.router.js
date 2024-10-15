@@ -38,16 +38,49 @@ router.get('/:id_aniade',
     }
 );
 
-router.post('/', 
+router.get('/:id_carrito/:id_producto', 
+    validatorHandler(obtenerAniadeSchema, "params"),
+    async (req, res) => {
+      try {
+        const { id_carrito, id_producto } = req.params;
+        const aniadido = await service.findOneByCarritoAndProducto(id_carrito, id_producto);
+        if (!aniadido) {
+          return res.status(404).json({ message: 'Elemento no encontrado en el carrito' });
+        }
+        res.json(aniadido);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al obtener el elemento', error: error.message });
+      }
+    }
+  );
+  
+
+  router.post('/', 
     validatorHandler(crearAniadeSchema, "body"),
     async (req, res) => {
         try {
-            const body = req.body;
-            const nuevoAniadido = await service.create(body);
+            const { id_carrito, id_producto } = req.body;
+
+            // Verificar si ya existe un registro con el mismo id_carrito y id_producto
+            const existeAniadido = await service.findOneByCarritoAndProducto(id_carrito, id_producto);
+            
+            if (existeAniadido) {
+                return res.status(400).json({ 
+                    message: 'Este producto ya ha sido añadido al carrito.' 
+                });
+            }
+
+            // Si no existe, se procede a crear uno nuevo
+            const nuevoAniadido = await service.create(req.body);
             res.status(201).json(nuevoAniadido);
+
         } catch (error) {
             console.error(error);
-            res.status(400).json({ message: 'Error al crear la aniade', error: error.message });
+            res.status(500).json({ 
+                message: 'Error al crear la aniade', 
+                error: error.message 
+            });
         }
     }
 );
@@ -70,7 +103,6 @@ router.patch('/:id_aniade',
         }
     }
 );
-
 router.delete('/:id_aniade', 
     validatorHandler(obtenerAniadeSchema, "params"),
     async (req, res) => {
