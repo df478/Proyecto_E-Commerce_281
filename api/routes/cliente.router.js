@@ -53,6 +53,7 @@ router.post(
     }
   }
 );
+
 router.patch(
   "/:id_usuario",
   validatorHandler(obtenerClienteSchema, "params"),

@@ -12,7 +12,7 @@ const ImagenSchema = {
         type: DataTypes.INTEGER
     },
     url_imagen: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
             isUrl: true 
