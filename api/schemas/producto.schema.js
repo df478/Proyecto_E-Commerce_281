@@ -16,7 +16,6 @@ const envio_gratuito = Joi.number().integer();
 
 const crearProductoSchema = Joi.object({
     id_artesano:id_artesano.required(),
-    id_promocion: id_promocion.required(),
     nombre_producto: nombre_producto.required(),
     precio_producto: precio_producto.required(),
     descripcion_producto: descripcion_producto.required(),
