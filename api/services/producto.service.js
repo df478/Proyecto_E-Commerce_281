@@ -7,11 +7,26 @@ class ProductoService {
   }
 
   async create(data) {
-    const nuevoData = {
-      ...data,
-    };
-    const nuevoProducto = await models.Producto.create(nuevoData);
+    const { images, ...productoData } = data;
+    const nuevoProducto = await models.Producto.create(productoData);
+    
+    const id_producto = nuevoProducto.id_producto;
+    // Si hay imágenes, las procesamos y las guardamos en la tabla 'Imagenes'
+    if (images && Object.keys(images).length > 0) {
+        for (const [key, url_imagen] of Object.entries(images)) {
+            await models.Imagen.create({
+                id_producto,
+                url_imagen
+            });
+        }
+    }
+
     return nuevoProducto;
+    // const nuevoData = {
+    //   ...data,
+    // };
+    // const nuevoProducto = await models.Producto.create(nuevoData);
+    // return nuevoProducto;
   }
 
   async find() {

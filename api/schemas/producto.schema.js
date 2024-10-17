@@ -25,7 +25,11 @@ const crearProductoSchema = Joi.object({
     largo_producto: largo_producto.required(),
     ancho_producto:ancho_producto.required(),
     alto_producto: alto_producto.required(),
-    envio_gratuito: envio_gratuito.required()
+    envio_gratuito: envio_gratuito.required(),
+    images: Joi.object().pattern(
+        Joi.string(),  
+        Joi.string().uri()  
+    ).optional()
 })
 
 const actualizarProductoSchema = Joi.object({
