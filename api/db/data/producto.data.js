@@ -81,7 +81,7 @@ async function generate() {
       envio_gratuito: -1 // 1 para sí, 0 para no
   },{
         id_artesano: 6,
-        id_promocion: null,
+        id_promocion: 10,
         nombre_producto: "Adorno Tallado 3 Modelos De Pajaritos.",
         precio_producto: 155,
         descripcion_producto: "Adorno tallado en madera cedro y pintado a mano.",
@@ -96,7 +96,7 @@ async function generate() {
     },
     {
         id_artesano: 7,
-        id_promocion: null,
+        id_promocion: 10,
         nombre_producto: "Angel Tallado Redondo Pequeño",
         precio_producto: 50,
         descripcion_producto: "Adorno tallado en madera cedro y pintado a mano.",
