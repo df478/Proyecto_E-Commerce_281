@@ -13,8 +13,8 @@ async function generate() {
     { descuento_promocion: 2, fecha_ini: '2024-07-01', fecha_fin: '2024-07-10', nombre_promocion: 'Mitad de Año: Promoción en Sombreros' },
     { descuento_promocion: 15, fecha_ini: '2024-08-06', fecha_fin: '2024-08-10', nombre_promocion: 'Descuentos Patrios: Artesanía Boliviana' },
     { descuento_promocion: 35, fecha_ini: '2024-09-10', fecha_fin: '2024-09-20', nombre_promocion: 'Primavera Artesanal: Tapices y Hamacas' },
-    { descuento_promocion: 25, fecha_ini: '2024-10-05', fecha_fin: '2024-10-15', nombre_promocion: 'Octubre Dorado: Descuento en Joyas de Plata' },
-    { descuento_promocion: 5, fecha_ini: '2024-11-01', fecha_fin: '2024-11-10', nombre_promocion: 'Super Black Friday: Artesanías a Mitad de Precio' },
+    { descuento_promocion: 25, fecha_ini: '2024-10-05', fecha_fin: '2024-10-31', nombre_promocion: 'Octubre Dorado: Descuento en Joyas de Plata' },
+    { descuento_promocion: 5, fecha_ini: '2024-11-01', fecha_fin: '2024-11-30', nombre_promocion: 'Super Black Friday: Artesanías a Mitad de Precio' },
     { descuento_promocion: 3, fecha_ini: '2024-12-01', fecha_fin: '2024-12-25', nombre_promocion: 'Navidad Artesanal: Promoción en Decoración' },
     { descuento_promocion: 45, fecha_ini: '2024-12-26', fecha_fin: '2024-12-31', nombre_promocion: 'Fin de Año: Liquidación de Productos Andinos' },
   ];
