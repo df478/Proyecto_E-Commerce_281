@@ -16,6 +16,7 @@ router.post(
       const response = {
         token: service.signToken(user),
         carrito: null,  // Inicializa 'carrito' como null
+        pedidos: [],     // Inicializa 'pedidos' como un array vacío
         message: "Login exitoso",  // Mensaje común
       };
 
@@ -30,10 +31,23 @@ router.post(
           return res.status(404).json({ message: "Cliente no encontrado" });
         }
 
-        // Agrega el carrito para el cliente
-        const nuevoCliente = await service.agregaCarrito(usuario.id_usuario);
-        response.carrito = nuevoCliente;  // Asigna el carrito al objeto de respuesta
-        response.message += " y carrito gestionado";  // Agrega al mensaje
+        // Verifica si ya existe un carrito para el cliente
+        const carritoExistente = await service.encontrarCarrito(usuario.id_usuario);
+        
+        if (carritoExistente) {
+          // Si ya hay un carrito existente, lo asigna a la respuesta
+          response.carrito = carritoExistente;  // Asigna el carrito existente
+          response.message += " y carrito existente gestionado";  // Modifica el mensaje
+        } else {
+          // Si no hay carrito existente, crea uno nuevo
+          const nuevoCliente = await service.agregaCarrito(usuario.id_usuario);
+          response.carrito = nuevoCliente;  // Asigna el nuevo carrito
+          response.message += " y carrito gestionado";  // Modifica el mensaje
+        }
+
+        // Obtener todos los pedidos a través de la tabla de Entrega
+        const pedidos = await service.obtenerPedidosPorUsuario(usuario.id_usuario);
+        response.pedidos = pedidos;  // Asigna los pedidos al objeto de respuesta
 
         return res.status(201).json(response);  // Devuelve la respuesta completa
       } else {
@@ -45,6 +59,7 @@ router.post(
     }
   }
 );
+
 
 
 router.post("/recovery", async (req, res, next) => {

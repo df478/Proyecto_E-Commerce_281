@@ -60,12 +60,12 @@ router.get('/:id_carrito/:id_producto',
     validatorHandler(crearAniadeSchema, "body"),
     async (req, res) => {
         try {
-            const { id_carrito, id_producto } = req.body;
+            const { id_carrito, id_producto, cantidad } = req.body;
 
             // Verificar si ya existe un registro con el mismo id_carrito y id_producto
             const existeAniadido = await service.findOneByCarritoAndProducto2(id_carrito, id_producto);
             if (existeAniadido) {
-                const nuevoCarrito = await service.updateProductoCantidad(id_carrito, id_producto, 1);
+                const nuevoCarrito = await service.updateProductoCantidad(id_carrito, id_producto, cantidad);
                 return res.status(200).json(nuevoCarrito);
             }
             const nuevoAniadido = await service.create(req.body);

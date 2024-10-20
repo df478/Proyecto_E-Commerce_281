@@ -38,6 +38,27 @@ class AuthService {
     return cliente;
   }
 
+  async obtenerPedidosPorUsuario(id_cliente) {
+    try {
+      const entregas = await models.Entrega.findAll({
+        include: {
+          model: models.Pedido,  // Suponiendo que tienes un modelo de Pedido
+          as: 'pedido'
+        },
+        where: {
+          id_cliente
+        }
+      });
+    
+      return entregas;  // Devuelve las entregas que contienen los pedidos
+    } catch (error) {
+      console.error('Error al obtener los pedidos:', error);
+      throw error;  // Vuelve a lanzar el error para que sea manejado más arriba
+    }
+  }
+  
+  
+
   async agregaCarrito(id_usuario) {
     const nuevoData = {
       id_usuario: id_usuario
@@ -51,6 +72,22 @@ class AuthService {
     const nuevoCarrito = await models.Carrito.create(nuevoData);
     
     return nuevoCarrito;
+  }
+
+  async encontrarCarrito(id_usuario) {
+    try {
+      // Busca el carrito asociado al id_usuario
+      const carrito = await models.Carrito.findOne({
+        where: {
+          id_usuario: id_usuario,
+        },
+      });
+
+      return carrito; // Retorna el carrito encontrado o null si no existe
+    } catch (error) {
+      // Manejo de errores si es necesario
+      throw new Error("Error al buscar el carrito: " + error.message);
+    }
   }
   
 
