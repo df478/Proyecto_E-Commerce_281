@@ -55,7 +55,7 @@ class AniadeService {
     const aniade = await models.Aniade.findOne({
         where: {
             id_carrito: id_carrito,
-            id_producto: id_producto
+            id_producto: id_producto,
         }
     });
 

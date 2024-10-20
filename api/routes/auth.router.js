@@ -30,10 +30,19 @@ router.post(
           return res.status(404).json({ message: "Cliente no encontrado" });
         }
 
-        // Agrega el carrito para el cliente
-        const nuevoCliente = await service.agregaCarrito(usuario.id_usuario);
-        response.carrito = nuevoCliente;  // Asigna el carrito al objeto de respuesta
-        response.message += " y carrito gestionado";  // Agrega al mensaje
+        // Verifica si ya existe un carrito para el cliente
+        const carritoExistente = await service.encontrarCarrito(usuario.id_usuario);
+        
+        if (carritoExistente) {
+          // Si ya hay un carrito existente, lo asigna a la respuesta
+          response.carrito = carritoExistente;  // Asigna el carrito existente
+          response.message += " y carrito existente gestionado";  // Modifica el mensaje
+        } else {
+          // Si no hay carrito existente, crea uno nuevo
+          const nuevoCliente = await service.agregaCarrito(usuario.id_usuario);
+          response.carrito = nuevoCliente;  // Asigna el nuevo carrito
+          response.message += " y carrito gestionado";  // Modifica el mensaje
+        }
 
         return res.status(201).json(response);  // Devuelve la respuesta completa
       } else {
@@ -45,6 +54,7 @@ router.post(
     }
   }
 );
+
 
 
 router.post("/recovery", async (req, res, next) => {

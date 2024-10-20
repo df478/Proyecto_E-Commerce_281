@@ -52,6 +52,22 @@ class AuthService {
     
     return nuevoCarrito;
   }
+
+  async encontrarCarrito(id_usuario) {
+    try {
+      // Busca el carrito asociado al id_usuario
+      const carrito = await models.Carrito.findOne({
+        where: {
+          id_usuario: id_usuario,
+        },
+      });
+
+      return carrito; // Retorna el carrito encontrado o null si no existe
+    } catch (error) {
+      // Manejo de errores si es necesario
+      throw new Error("Error al buscar el carrito: " + error.message);
+    }
+  }
   
 
   async register(userData) {
