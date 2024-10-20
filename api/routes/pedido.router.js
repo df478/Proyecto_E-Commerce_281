@@ -33,6 +33,9 @@ router.get('/:id_pedido',
     }
 });
 
+// ruta para obtener los pedidos de un cliente con el contacto del delivery
+
+/* ----------------------------------------------------------*/
 router.post('/', 
     validatorHandler(crearPedidoSchema, "body"),
     async (req, res) => {

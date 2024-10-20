@@ -27,7 +27,9 @@ class PedidoService {
     }
     return pedido;
   }
+//*******************  obtener pedido con contactos *****************************/
 
+/*************************************************/
   async update(id_pedido, cambios) {
     
     console.log(id_pedido, cambios);
