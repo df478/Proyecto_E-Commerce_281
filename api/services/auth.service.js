@@ -38,6 +38,27 @@ class AuthService {
     return cliente;
   }
 
+  async obtenerPedidosPorUsuario(id_cliente) {
+    try {
+      const entregas = await models.Entrega.findAll({
+        include: {
+          model: models.Pedido,  // Suponiendo que tienes un modelo de Pedido
+          as: 'pedido'
+        },
+        where: {
+          id_cliente
+        }
+      });
+    
+      return entregas;  // Devuelve las entregas que contienen los pedidos
+    } catch (error) {
+      console.error('Error al obtener los pedidos:', error);
+      throw error;  // Vuelve a lanzar el error para que sea manejado más arriba
+    }
+  }
+  
+  
+
   async agregaCarrito(id_usuario) {
     const nuevoData = {
       id_usuario: id_usuario

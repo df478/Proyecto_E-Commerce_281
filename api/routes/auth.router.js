@@ -16,6 +16,7 @@ router.post(
       const response = {
         token: service.signToken(user),
         carrito: null,  // Inicializa 'carrito' como null
+        pedidos: [],     // Inicializa 'pedidos' como un array vacío
         message: "Login exitoso",  // Mensaje común
       };
 
@@ -43,6 +44,10 @@ router.post(
           response.carrito = nuevoCliente;  // Asigna el nuevo carrito
           response.message += " y carrito gestionado";  // Modifica el mensaje
         }
+
+        // Obtener todos los pedidos a través de la tabla de Entrega
+        const pedidos = await service.obtenerPedidosPorUsuario(usuario.id_usuario);
+        response.pedidos = pedidos;  // Asigna los pedidos al objeto de respuesta
 
         return res.status(201).json(response);  // Devuelve la respuesta completa
       } else {

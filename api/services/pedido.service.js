@@ -10,7 +10,7 @@ class PedidoService {
         const carrito = await models.Carrito.findOne({
             where: { id_carrito: data.id_carrito }
         });
-
+        console.log(carrito)
         // Verificando si el carrito existe
         if (!carrito) {
             throw new Error("El carrito no existe");
@@ -41,12 +41,15 @@ class PedidoService {
         // Creando la entrega
         const nuevaEntrega = await models.Entrega.create({
             id_pedido: nuevoPedido.id_pedido,
+            id_cliente: carrito.id_usuario,
             estado_entrega: "En preparación" // Cambia a un valor apropiado según tu lógica
         });
 
+        const nuevoCliente = await this.agregaCarrito(carrito.id_usuario);
         return {
             nuevoPedido,
             nuevaEntrega,
+            nuevoCliente
         };
     } catch (error) {
         console.error("Error al crear el pedido:", error);
@@ -54,6 +57,20 @@ class PedidoService {
     }
 }
 
+async agregaCarrito(id_usuario) {
+  const nuevoData = {
+    id_usuario: id_usuario
+  };
+  const carritoExistente = await models.Carrito.findOne({
+    where: { id_usuario: id_usuario }
+  }); 
+  if (carritoExistente) {
+    await carritoExistente.update({ id_usuario: null });
+  }
+  const nuevoCarrito = await models.Carrito.create(nuevoData);
+  
+  return nuevoCarrito;
+}
 
   async find() {
     const rta = await models.Pedido.findAll();
