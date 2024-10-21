@@ -32,7 +32,23 @@ router.get('/:id_entrega',
         }
     }
 );
-
+//********************  obtener el contacto de delivery ***************************
+router.get('/pedido/:id_pedido', 
+    async (req, res) => {
+        try {
+            const { id_pedido } = req.params;
+            const pedidoContacto = await service.ObtenerContactoDelivery(id_pedido);
+            if (!pedidoContacto) {
+                return res.status(404).json({ message: 'No se encontró el contacto Delivery' });
+            }
+            res.json(pedidoContacto);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Error al obtener la contacto de Delivery', error: error.message });
+        }
+    }
+);
+//********************************************************************************
 router.post('/', 
     validatorHandler(crearEntregaSchema, "body"),
     async (req, res) => {

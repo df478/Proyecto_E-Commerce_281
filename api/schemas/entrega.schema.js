@@ -10,6 +10,7 @@ const fecha_entrega = Joi.date()
 const crearEntregaSchema = Joi.object({
     id_cliente: id_cliente.required(),
     id_pedido: id_pedido.required(),
+    id_delivery: id_delivery.required(),
     estado_entrega: estado_entrega.required()
 })
 
