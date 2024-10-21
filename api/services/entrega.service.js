@@ -15,8 +15,7 @@ class EntregaService {
   }
 
   async findOne(id_entrega) {
-    const entrega = await models.Entrega.findOne({
-      where: { id_entrega },
+    const entrega = await models.Entrega.findByPk(id_entrega,{
       include:[{
         model:models.Pedido,
         as: "pedido",
@@ -24,8 +23,16 @@ class EntregaService {
           model:models.Carrito,
           as: "carrito",
           include:[{
-            model:models.Cliente,
-            as:"cliente"
+            model:models.Aniade,
+            as:"aniade",
+            include: [{
+              model:models.Producto,
+              as: "producto",
+              include:[{
+                model: models.Artesano,
+                as: "artesano"
+              }]
+            }]
           }]
         }]
       }]
