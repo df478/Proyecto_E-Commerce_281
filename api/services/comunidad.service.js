@@ -13,14 +13,46 @@ class ComunidadService {
   }
 
   async find() {
-    const rta = await models.Comunidad.findAll();
-
+    const rta = await models.Comunidad.findAll({
+    include: [
+      {
+          model: models.Municipio,  
+          as: "municipio",
+          include:[{
+            model: models.Provincia,
+            as:"provincia",
+            include:[{
+              model: models.Departamento,
+              as: "departamento"
+            }]
+          }]
+      }
+    ]});
     return rta;
   }
 
   async findOne(id_comunidad) {
     
-    const comunidad = await models.Comunidad.findByPk(id_comunidad);
+    const comunidad = await models.Comunidad.findByPk(id_comunidad,{
+      include: [
+        {
+            model: models.Municipio,  
+            as: "municipio",
+            include:[{
+              model: models.Provincia,
+              as:"provincia",
+              include:[{
+                model: models.Departamento,
+                as: "departamento"
+              }]
+            }]
+        },
+        {
+          model: models.Artesano,
+          as: "artesano"
+        }
+      ]
+    });
     if (!comunidad) {
       throw boom.notFound("Comunidad no encontrado");
     }
