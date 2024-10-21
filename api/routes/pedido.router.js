@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id_pedido',
+/*router.get('/:id_pedido',
     validatorHandler(obtenerPedidoSchema, "params"),
     async (req, res) => {
     try {
@@ -31,11 +31,25 @@ router.get('/:id_pedido',
     } catch (error) {
         res.status(500).json({ message: 'Error al obtener el pedido', error });
     }
-});
+});*/
 
-// ruta para obtener los pedidos de un cliente con el contacto del delivery
-
-/* ----------------------------------------------------------*/
+// ruta para obtener los pedidos de un cliente mas contacto del delivery
+router.get('/:id_pedido', 
+    async (req, res) => {
+        try {
+            const { id_pedido } = req.params;
+            const pedidoContacto = await service.ObtenerContactoDelivery(id_pedido);
+            if (!pedidoContacto) {
+                return res.status(404).json({ message: 'No se encontró el contacto Delivery' });
+            }
+            res.json(pedidoContacto);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Error al obtener la contacto de Delivery', error: error.message });
+        }
+    }
+);
+//********************************************************************************
 router.post('/', 
     validatorHandler(crearPedidoSchema, "body"),
     async (req, res) => {

@@ -86,9 +86,27 @@ async agregaCarrito(id_usuario) {
     }
     return pedido;
   }
-//*******************  obtener pedido con contactos *****************************/
-
-/*************************************************/
+//*********************  contacto de delivery ****************************
+async ObtenerContactoDelivery(id_pedido) {
+  const contacto = await models.Pedido.findByPk(id_pedido,
+    {
+      include: [{
+        model: models.Entrega,  
+        as: 'entrega',
+        include:[
+          {model: models.Delivery,
+          as: 'delivery'},
+          {model: models.Cliente,
+          as:"cliente"}
+        ]
+      }]    
+    });
+  if (!contacto) {
+    throw boom.notFound("contacto no encontrado");
+  }
+  return contacto;
+}
+//************************************************************************************
   async update(id_pedido, cambios) {
     
     console.log(id_pedido, cambios);

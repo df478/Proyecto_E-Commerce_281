@@ -14,37 +14,37 @@ const EntregaSchema = {
     }, 
     id_pedido: {  
         field: "id_pedido",
-        allowNull: true,
+        allowNull: false, // Cambiado a false
         type: DataTypes.INTEGER,
         references: {
             model: PEDIDO_TABLE,
             key: "id_pedido",
         },
         onUpdate: "CASCADE",
-        onDelete: "SET NULL",
+        onDelete: "CASCADE", // Cambiado a CASCADE
     },
     id_cliente: {  
         field: "id_cliente",
-        allowNull: true,
+        allowNull: false, // Cambiado a false
         type: DataTypes.INTEGER,
         references: {
             model: CLIENTE_TABLE,
             key: "id_usuario",
         },
         onUpdate: "CASCADE",
-        onDelete: "SET NULL",
+        onDelete: "CASCADE", // Cambiado a CASCADE
     },
     id_delivery: {  
         field: "id_delivery",
-        allowNull: true,
+        allowNull: false, // Cambiado a false
         type: DataTypes.INTEGER,
         references: {
             model: DELIVERY_TABLE,
             key: "id_usuario",
         },
         onUpdate: "CASCADE",
-        onDelete: "SET NULL",
-    },
+        onDelete: "CASCADE", // Cambiado a CASCADE
+    },    
     estado_entrega: {  
         type: DataTypes.STRING,
         allowNull: false,

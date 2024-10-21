@@ -54,8 +54,9 @@ router.get('/:id_carrito/:id_producto',
       }
     }
   );
-  
+ //*********************** DESPLIEGA CARRITO CON PRODUCTO Y ARTSANOS********************* */ 
 
+//****************************************************************** */
   router.post('/', 
     validatorHandler(crearAniadeSchema, "body"),
     async (req, res) => {

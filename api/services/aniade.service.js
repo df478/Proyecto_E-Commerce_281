@@ -27,7 +27,9 @@ class AniadeService {
 
     return aniade;
 }
+//*********************   carrito con productos  ************* */
 
+//*********************************************************** */
   async findOneByCarritoAndProducto(id_carrito, id_producto) {
     const aniade = await models.Aniade.findOne({
       where: {

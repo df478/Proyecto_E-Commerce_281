@@ -20,7 +20,6 @@ const crearDeliverySchema = Joi.object({
   email_usuario: email_usuario.required(),
   password_usuario: password_usuario.required(),
   tipo_usuario: tipo_usuario.required(),
-  celular:celular.required()
 });
 
 const actualizarDeliverySchema = Joi.object({
