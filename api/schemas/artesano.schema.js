@@ -23,10 +23,8 @@ const crearArtesanoSchema = Joi.object({
   email_usuario: email_usuario.required(),
   password_usuario: password_usuario.required(),
   tipo_usuario: tipo_usuario.required(),
-  especialidad: especialidad.required(),
-  
+  fecha_registro: fecha_registro.required(),
   celular:celular.required(),
-  id_comunidad: id_comunidad.required()
 });
 
 const actualizarArtesanoSchema = Joi.object({

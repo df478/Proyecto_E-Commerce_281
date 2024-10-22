@@ -9,6 +9,9 @@ const {
   actualizarDeliverySchema,
 } = require("../schemas/delivery.schema");
 
+const AuthService = require("./../services/auth.service");
+const authService = new AuthService("delivery");
+
 router.get("/", async (req, res) => {
   try {
     const deliverys = await service.find();

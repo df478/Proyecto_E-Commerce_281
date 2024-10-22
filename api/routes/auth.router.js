@@ -11,7 +11,6 @@ router.post(
     try {
       const user = req.user;
       const service = new AuthService(user.tipo_usuario);
-
       // Inicializa la respuesta con el token
       const response = {
         token: service.signToken(user),
@@ -48,8 +47,8 @@ router.post(
         // Obtener todos los pedidos a través de la tabla de Entrega
         const pedidos = await service.obtenerPedidosPorUsuario(usuario.id_usuario);
         response.pedidos = pedidos;  // Asigna los pedidos al objeto de respuesta
-
         return res.status(201).json(response);  // Devuelve la respuesta completa
+        
       } else {
         // Si no es cliente, simplemente firma el token
         return res.json(response);  // Devuelve el mismo objeto sin carrito

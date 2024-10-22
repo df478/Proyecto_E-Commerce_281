@@ -9,6 +9,9 @@ const {
   actualizarArtesanoSchema,
 } = require("../schemas/artesano.schema");
 
+const AuthService = require("./../services/auth.service");
+const authService = new AuthService("artesano");
+
 router.get("/", async (req, res) => {
   try {
     const artesanos = await service.find();
@@ -42,6 +45,7 @@ router.post(
     try {
       const body = req.body;
       const nuevoArtesano = await service.create(body);
+      await authService.sendVerificationEmail(nuevoArtesano);
       res.status(201).json(nuevoArtesano);
     } catch (error) {
       res.status(400).json({ message: "Error al crear el artesano", error });
