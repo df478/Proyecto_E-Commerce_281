@@ -87,18 +87,20 @@ async agregaCarrito(id_usuario) {
     return pedido;
   }
 //*********************  contacto de delivery ****************************
-async ObtenerContactoDelivery(id_pedido) {
+async ObtenerProductoPedido(id_pedido) {
   const contacto = await models.Pedido.findByPk(id_pedido,
     {
       include: [{
-        model: models.Entrega,  
-        as: 'entrega',
-        include:[
-          {model: models.Delivery,
-          as: 'delivery'},
-          {model: models.Cliente,
-          as:"cliente"}
-        ]
+        model: models.Carrito,  
+        as: 'carrito',
+        include:[{
+          model: models.Aniade,
+          as:"aniade",
+          include:[{
+            model:models.Producto,
+            as:"producto"
+          }]
+        }]
       }]    
     });
   if (!contacto) {
