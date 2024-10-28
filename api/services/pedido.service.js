@@ -5,6 +5,7 @@ class PedidoService {
 
   }
   async create(data) {
+    console.log(data)
     try {
         // Buscando el carrito asociado
         const carrito = await models.Carrito.findOne({
@@ -42,7 +43,7 @@ class PedidoService {
         const nuevaEntrega = await models.Entrega.create({
             id_pedido: nuevoPedido.id_pedido,
             id_cliente: carrito.id_usuario,
-            estado_entrega: "En preparación" // Cambia a un valor apropiado según tu lógica
+            estado_entrega: "En preparación" 
         });
 
         const nuevoCliente = await this.agregaCarrito(carrito.id_usuario);

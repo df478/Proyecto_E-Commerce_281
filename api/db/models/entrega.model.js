@@ -36,7 +36,7 @@ const EntregaSchema = {
     },
     id_delivery: {  
         field: "id_delivery",
-        allowNull: false, // Cambiado a false
+        allowNull: true, // Cambiado a false
         type: DataTypes.INTEGER,
         references: {
             model: DELIVERY_TABLE,
@@ -44,6 +44,7 @@ const EntregaSchema = {
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE", // Cambiado a CASCADE
+        defaultValue: null,  
     },    
     estado_entrega: {  
         type: DataTypes.STRING,
@@ -55,6 +56,16 @@ const EntregaSchema = {
     fecha_entrega: {  
         type: DataTypes.DATE,
         allowNull: true,
+    },
+    cliente_confirm: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,  
+    },
+    delivery_confirm: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,  
     }
 }
 

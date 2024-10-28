@@ -48,6 +48,17 @@ const AniadeSchema = {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  artesano_confirm: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false,  
+  },
+  delivery_confirm: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false,  
+  }
+  
 };
 
 class Aniade extends Model {

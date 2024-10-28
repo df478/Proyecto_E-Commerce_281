@@ -51,7 +51,6 @@ router.get('/:id_pedido',
 );
 //********************************************************************************
 router.post('/', 
-    validatorHandler(crearPedidoSchema, "body"),
     async (req, res) => {
     try {
         const body = req.body;

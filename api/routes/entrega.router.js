@@ -33,7 +33,6 @@ router.get('/:id_entrega',
     }
 );
 router.post('/', 
-    validatorHandler(crearEntregaSchema, "body"),
     async (req, res) => {
         try {
             const body = req.body;
