@@ -74,7 +74,18 @@ async agregaCarrito(id_usuario) {
 }
 
   async find() {
-    const rta = await models.Pedido.findAll();
+    const rta = await models.Pedido.findAll(
+      {
+        include: [{
+          model: models.Carrito,  
+          as: 'carrito',
+        },
+      {
+        model: models.Entrega,
+        as: "entrega"
+      }]    
+      }
+    );
 
     return rta;
   }
