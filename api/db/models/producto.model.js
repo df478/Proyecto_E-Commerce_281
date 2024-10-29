@@ -75,6 +75,19 @@ const ProductoSchema = {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    calificacion: {  
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+        validate: {
+            min: 1
+        }
+    },
+    cantidad_calificacion: {  
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
 }
 
 class Producto extends Model {

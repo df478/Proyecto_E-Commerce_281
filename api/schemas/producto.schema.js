@@ -13,6 +13,8 @@ const largo_producto= Joi.number().positive();
 const ancho_producto= Joi.number().positive();
 const alto_producto= Joi.number().positive();
 const envio_gratuito = Joi.number().integer();
+const calificacion = Joi.number().integer();
+const cantidad_calificacion = Joi.number().integer();
 
 const crearProductoSchema = Joi.object({
     id_artesano:id_artesano.required(),
@@ -44,7 +46,9 @@ const actualizarProductoSchema = Joi.object({
     largo_producto: largo_producto,
     ancho_producto:ancho_producto,
     alto_producto: alto_producto,
-    envio_gratuito: envio_gratuito
+    envio_gratuito: envio_gratuito,
+    calificacion: calificacion,
+    cantidad_calificacion: cantidad_calificacion
 })
 
 const obtenerProductoSchema = Joi.object({
