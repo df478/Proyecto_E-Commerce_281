@@ -59,15 +59,30 @@ class ProductoService {
   }
 
   async update(id_producto, cambios) {
-    
-    console.log(id_producto, cambios);
-    
+    // Obtener el producto actual
     const producto = await this.findOne(id_producto);
+    if (!producto) {
+        throw new Error('Producto no encontrado'); // Lanza un error si el producto no existe
+    }
+
+    // Verificar si hay una nueva calificación en cambios
+    if (cambios.calificacion) {
+        // Acumular calificaciones y cantidad
+        const nuevaCalificacion = cambios.calificacion;
+        const calificacionAcumulada = producto.calificacion + nuevaCalificacion;
+        const cantidadCalificacionAcumulada = producto.cantidad_calificacion + 1;
+
+        // Actualizar los cambios para la acumulación
+        cambios.calificacion = calificacionAcumulada;
+        cambios.cantidad_calificacion = cantidadCalificacionAcumulada;
+    }
+
+    // Realiza la actualización del producto
     const rta = await producto.update(cambios);
     return rta;
-  }
+}
 
-  async delete(id_producto) {
+async delete(id_producto) {
     const producto = await this.findOne(id_producto);
     await producto.destroy();
     return { id_producto };
