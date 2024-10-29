@@ -46,7 +46,9 @@ const actualizarProductoSchema = Joi.object({
     largo_producto: largo_producto,
     ancho_producto:ancho_producto,
     alto_producto: alto_producto,
-    envio_gratuito: envio_gratuito
+    envio_gratuito: envio_gratuito,
+    calificacion: calificacion,
+    cantidad_calificacion: cantidad_calificacion
 })
 
 const obtenerProductoSchema = Joi.object({

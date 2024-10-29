@@ -79,6 +79,14 @@ const ProductoSchema = {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
+        validate: {
+            min: 1, 
+            isPositive(value) {
+                if (value <= 0) { // Cambiado a <= 0 para asegurar que sea mayor que 0
+                    throw new Error('La calificación debe ser un valor positivo mayor que 0.');
+                }
+            }
+        }
     },
     cantidad_calificacion: {  
         type: DataTypes.INTEGER,
