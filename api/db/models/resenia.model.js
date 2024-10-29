@@ -42,11 +42,18 @@ const ReseniaSchema = {
     type: DataTypes.DATEONLY,    
     allowNull: true,             
   },
+  calificacion_resenia: {
+    type: DataTypes.DECIMAL(3, 1),
+    allowNull: true,
+    validate: {
+      min: 1,
+      max: 5,
+    }
+  },
 };
 
 class Resenia extends Model {
   static associate(models) {
-    
     this.belongsTo(models.Producto, {
       as: 'producto',
       foreignKey: "id_producto"
