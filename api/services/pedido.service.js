@@ -112,6 +112,16 @@ async ObtenerProductoPedido(id_pedido) {
             model:models.Producto,
             as:"producto"
           }]
+        },
+      ]
+      },
+    
+      {
+        model: models.Entrega,
+        as: "entrega",
+        include:[{
+          model: models.Delivery,
+          as:"delivery"
         }]
       }]    
     });
