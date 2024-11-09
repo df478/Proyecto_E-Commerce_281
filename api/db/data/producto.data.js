@@ -119,7 +119,7 @@ async function generate() {
   },
   {
     id_artesano: 8,
-    id_promocion: null,
+    id_promocion: 11,
     nombre_producto: "Azucarera Cerámica Tentayape mediano",
     precio_producto: 36,
     descripcion_producto: "Piezas de cerámica realizadas con la técnica prehispánica de los rollos de arcilla y decoradas con pigmentos naturales.",
@@ -151,7 +151,7 @@ async function generate() {
   },
   {
     id_artesano: 10,
-    id_promocion: null,
+    id_promocion: 12,
     nombre_producto: "Bombonera Jipijapa tapa de madera Mediana",
     precio_producto: 95,
     descripcion_producto: "Bombonera Tejido en palma Jipijapa tapa de madera.",
