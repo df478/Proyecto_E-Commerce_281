@@ -48,10 +48,11 @@ const EntregaSchema = {
     },    
     estado_entrega: {  
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
             len: [3, 50]
-        }
+        },
+        defaultValue: "Pendiente",
     },
     fecha_entrega: {  
         type: DataTypes.DATE,

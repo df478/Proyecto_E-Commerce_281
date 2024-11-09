@@ -74,7 +74,18 @@ async agregaCarrito(id_usuario) {
 }
 
   async find() {
-    const rta = await models.Pedido.findAll();
+    const rta = await models.Pedido.findAll(
+      {
+        include: [{
+          model: models.Carrito,  
+          as: 'carrito',
+        },
+      {
+        model: models.Entrega,
+        as: "entrega"
+      }]    
+      }
+    );
 
     return rta;
   }
@@ -101,6 +112,16 @@ async ObtenerProductoPedido(id_pedido) {
             model:models.Producto,
             as:"producto"
           }]
+        },
+      ]
+      },
+    
+      {
+        model: models.Entrega,
+        as: "entrega",
+        include:[{
+          model: models.Delivery,
+          as:"delivery"
         }]
       }]    
     });
