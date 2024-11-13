@@ -1,21 +1,21 @@
 services:
   mysql:
-    image: mysql:5
+    image: mysql:9
     environment:
-      - MYSQL_DATABASE=my_store
-      - MYSQL_USER=grupo
-      - MYSQL_PASSWORD=admin123
-      - MYSQL_ROOT_PASSWORD=admin123
-      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PORT=${MYSQL_PORT}
     ports:
-      - 3306:3306
+      - "${MYSQL_PORT}:3306"
     volumes: 
       - ./mysql_data:/var/lib/mysql
     
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      - MYSQL_ROOT_PASSWORD=admin123
-      - PMA_HOST=mysql
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - PMA_HOST=${PMA_HOST}
     ports:
       - 8080:80
