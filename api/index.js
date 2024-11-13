@@ -27,7 +27,7 @@ const whitelist = [
 // };
 
 const corsOptions = {
-  origin:'https://ecommerce281-frontend.vercel.app/', 
+  origin:'https://ecommerce281-frontend.vercel.app', 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
