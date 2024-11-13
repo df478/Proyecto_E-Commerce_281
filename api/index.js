@@ -27,17 +27,10 @@ const whitelist = [
 // };
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (['http://localhost:3000', 'https://ecommerce281-frontend-mei5fntt0-eleazars-projects-1336a03f.vercel.app'].includes(origin)) {
-      callback(null, true); // Permite la solicitud
-    } else {
-      callback(new Error('CORS no permitido para este origen'), false);
-    }
-  },
-  methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type,Authorization',
-};
-
+  origin:'https://ecommerce281-frontend-mei5fntt0-eleazars-projects-1336a03f.vercel.app', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
 app.use(cors(corsOptions));
 require('./utils/auth')
 
