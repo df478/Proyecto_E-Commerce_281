@@ -77,15 +77,12 @@ const ProductoSchema = {
     },
     calificacion: {  
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0,
-        validate: {
-            min: 1
-        }
     },
     cantidad_calificacion: {  
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0,
     },
 }
