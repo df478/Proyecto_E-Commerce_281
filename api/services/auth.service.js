@@ -108,7 +108,7 @@ class AuthService {
 
     
     // Crear enlace de verificación
-    const link = `http://localhost:3000/verify-account?token=${token}`;
+    const link = `https://artiisninc.vercel.app/verify-account?token=${token}`;
     console.log("------------token", token);
     
     // Configurar el correo
@@ -160,7 +160,7 @@ class AuthService {
     }
     const payload = { sub: user.id_usuario };
     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "15min" });
-    const link = `http://http://localhost:3000/change-password?token=${token}`;
+    const link = `https://artiisninc.vercel.app/change-password?token=${token}`;
     await this.service.update(user.id_usuario, { recovery_token: token });
     const mail = {
       from: config.smtpEmail,
