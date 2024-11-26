@@ -1,0 +1,21 @@
+services:
+  mysql:
+    image: mysql:9
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PORT=${MYSQL_PORT}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes: 
+      - ./mysql_data:/var/lib/mysql
+    
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - PMA_HOST=${PMA_HOST}
+    ports:
+      - 8080:80
