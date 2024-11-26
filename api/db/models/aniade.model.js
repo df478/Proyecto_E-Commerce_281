@@ -51,7 +51,7 @@ const AniadeSchema = {
   artesano_confirm: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
-    defaultValue: true,  
+    defaultValue: false,  
   },
   delivery_confirm: {
     type: DataTypes.BOOLEAN,
