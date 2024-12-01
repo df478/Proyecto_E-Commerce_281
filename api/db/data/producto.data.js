@@ -7,7 +7,7 @@ async function generate() {
   const productoData = [
     {
         id_artesano: 1,
-        id_promocion: null,
+        id_promocion: 11,
         nombre_producto: "Canasta Palma Sunkha Mediano",
         precio_producto: 25,
         descripcion_producto: "Este quiboro es una pieza única tejida a mano por artesanas de Vallegrande, utilizando fibra natural de palma zunjka. Su diseño artesanal y su material natural lo convierten en un objeto decorativo y funcional. Con medidas de 36 cm x 5 cm, es perfecto para llevar pequeños objetos o como elemento decorativo.",
@@ -87,7 +87,7 @@ async function generate() {
   },
   {
     id_artesano: 6,
-    id_promocion: 10,
+    id_promocion: null,
     nombre_producto: "Adorno Tallado 3 Modelos De Pajaritos.",
     precio_producto: 155,
     descripcion_producto: "Adorno tallado en madera cedro y pintado a mano.",
@@ -103,7 +103,7 @@ async function generate() {
   },
   {
     id_artesano: 7,
-    id_promocion: 10,
+    id_promocion: 12,
     nombre_producto: "Angel Tallado Redondo Pequeño",
     precio_producto: 50,
     descripcion_producto: "Adorno tallado en madera cedro y pintado a mano.",
@@ -119,7 +119,7 @@ async function generate() {
   },
   {
     id_artesano: 8,
-    id_promocion: 11,
+    id_promocion: 12,
     nombre_producto: "Azucarera Cerámica Tentayape mediano",
     precio_producto: 36,
     descripcion_producto: "Piezas de cerámica realizadas con la técnica prehispánica de los rollos de arcilla y decoradas con pigmentos naturales.",
