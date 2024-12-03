@@ -53,6 +53,9 @@ const EntregaSchema = {
             len: [3, 50]
         },
         defaultValue: "Pendiente",
+        validate: {
+            isIn: [['Pendiente', 'En preparacion', 'En camino', 'Entregado', 'Cancelado']]
+        }
     },
     fecha_entrega: {  
         type: DataTypes.DATE,

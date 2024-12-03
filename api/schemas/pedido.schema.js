@@ -3,7 +3,7 @@ const Joi = require('joi');
 const id_pedido = Joi.number().integer();
 const id_carrito = Joi.number().integer();
 const fecha_pedido = Joi.date();
-const estado_pedido = Joi.string().valid('pendiente', 'procesado', 'enviado', 'entregado', 'cancelado');
+const estado_pedido = Joi.string();
 const monto_pago = Joi.number().positive();
 const tipo_de_pedido = Joi.string().valid('estandar','rapido','recoger de tienda','gratuito')
 

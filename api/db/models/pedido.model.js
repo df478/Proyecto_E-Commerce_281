@@ -29,8 +29,9 @@ const pedidoSchema = {
     estado_pedido: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "Pendiente",
         validate: {
-            isIn: [['pendiente', 'procesado', 'enviado', 'entregado', 'cancelado']]
+            isIn: [['Pendiente', 'En preparacion', 'En camino', 'Entregado', 'Cancelado']]
         }
     },
     monto_pago: {

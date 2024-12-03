@@ -81,23 +81,41 @@ router.get('/:id_carrito/:id_producto',
     }
 );
 
-router.patch('/:id_aniade', 
-    validatorHandler(obtenerAniadeSchema, "params"),
-    validatorHandler(actualizarAniadeSchema, "body"),
-    async (req, res) => {
-        try {
-            const { id_aniade } = req.params;
-            const body = req.body;
-            const aniadido = await service.update(id_aniade, body);
-            if (!aniadido) {
-                return res.status(404).json({ message: 'Aniade no encontrada' });
-            }
-            res.json(aniadido);
-        } catch (error) {
-            console.error(error);
-            res.status(400).json({ message: 'Error al actualizar la aniade', error: error.message });
-        }
+router.patch('/:id_carrito/:id_producto', async (req, res) => {
+  try {
+    const { id_carrito, id_producto } = req.params; // Obtiene id_carrito e id_producto de params
+    const { cantidad } = req.body; // Obtiene cantidad de body
+
+    // Verificar si ya existe un registro con el mismo id_carrito y id_producto
+    const existeAniadido = await service.findOneByCarritoAndProducto2(id_carrito, id_producto);
+    if (existeAniadido) {
+      const nuevoCarrito = await service.updateProductoCantidad(id_carrito, id_producto, cantidad);
+      return res.status(200).json(nuevoCarrito);
+    } else {
+      return res.status(404).json({ message: 'Aniade no encontrada' });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: 'Error al actualizar la aniade', error: error.message });
+  }
+});
+router.patch('/:id_aniade', 
+  validatorHandler(obtenerAniadeSchema, "params"),
+  validatorHandler(actualizarAniadeSchema, "body"),
+  async (req, res) => {
+      try {
+          const { id_aniade } = req.params;
+          const body = req.body;
+          const aniadido = await service.update(id_aniade, body);
+          if (!aniadido) {
+              return res.status(404).json({ message: 'Aniade no encontrada' });
+          }
+          res.json(aniadido);
+      } catch (error) {
+          console.error(error);
+          res.status(400).json({ message: 'Error al actualizar la aniade', error: error.message });
+      }
+  }
 );
 router.delete('/:id_aniade', 
     validatorHandler(obtenerAniadeSchema, "params"),

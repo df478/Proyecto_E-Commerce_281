@@ -43,7 +43,7 @@ class PedidoService {
         const nuevaEntrega = await models.Entrega.create({
             id_pedido: nuevoPedido.id_pedido,
             id_cliente: carrito.id_usuario,
-            estado_entrega: "En preparación" 
+            estado_entrega: "Pendiente" 
         });
 
         const nuevoCliente = await this.agregaCarrito(carrito.id_usuario);

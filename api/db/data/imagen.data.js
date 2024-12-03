@@ -31,10 +31,6 @@ const imagenData = [
     },
     {
         id_producto: 2,
-        url_imagen: "https://scontent.flpb4-1.fna.fbcdn.net/v/t39.30808-6/312278154_5416514168478121_4458542032555671337_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=WD82WVZzgxUQ7kNvgEGMEeb&_nc_ht=scontent.flpb4-1.fna&_nc_gid=ANjS4ejGvLMnzkSy5QVqdI3&oh=00_AYDyc4Q-L27BLrtl_ouHXbu45wmEiboGOgDsU-Q1l6x3PQ&oe=67136E96"
-    },
-    {
-        id_producto: 2,
         url_imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_757101-MLA20272073985_032015-F.webp"
     },
     {
@@ -44,11 +40,6 @@ const imagenData = [
     {
         id_producto: 2,
         url_imagen: "https://www.vajillassantis.com/wp-content/uploads/bandejas-ceramica-asas.jpg"
-    },
-
-    {
-        id_producto: 3,
-        url_imagen: "https://scontent.flpb4-1.fna.fbcdn.net/v/t39.30808-6/460820355_18242460079286520_5571294012797782979_n.jpg?stp=dst-jpg&_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=qXfdtlUcaSEQ7kNvgF6yzT-&_nc_ht=scontent.flpb4-1.fna&_nc_gid=A_c5BSz2sxqWEJwm2qEbxgH&oh=00_AYDBpl9i2iwb-Su_Cq0zW8vTc22cFfOgaU1fYTTgK47oxw&oe=67135605"
     },
     {
         id_producto: 3,
@@ -61,10 +52,6 @@ const imagenData = [
     {
         id_producto: 3,
         url_imagen: "https://artecampo.com.bo/wp-content/uploads/2023/12/140202A.webp"
-    },
-    {
-        id_producto: 3,
-        url_imagen: "https://scontent.flpb4-1.fna.fbcdn.net/v/t39.30808-6/287712472_4924547127657252_7245824291291924550_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=77nWsSWUvbIQ7kNvgGKiaE2&_nc_ht=scontent.flpb4-1.fna&_nc_gid=AwTEkiuvxO_r851Ew_kAvMX&oh=00_AYACzHNvV1poZWmVfGWefGvOpVGKXVAXTpTMBpE1Lzelyw&oe=67135D0C"
     },
     {
         id_producto: 4,
@@ -93,10 +80,6 @@ const imagenData = [
     {
         id_producto: 5,
         url_imagen: "https://i0.wp.com/venbo.shop/wp-content/uploads/2019/08/artecampo_munecachalascz_1809_1.jpg?resize=768%2C768&ssl=1"
-    },
-    {
-        id_producto: 5,
-        url_imagen: "https://scontent.flpb4-1.fna.fbcdn.net/v/t39.30808-6/258835871_5145428568859124_4645471203122427633_n.jpg?stp=dst-jpg_s600x600&_nc_cat=106&ccb=1-7&_nc_sid=3a1ebe&_nc_ohc=XGa4f_pibWQQ7kNvgHvS82p&_nc_ht=scontent.flpb4-1.fna&_nc_gid=AVMDfTpztYIoFbvlvMCG4ch&oh=00_AYC8NqdICr6abtkhYPmLF5CjDpAO-haN40QZzqWGL0svsA&oe=67136553"
     },
     {
         id_producto: 5,
@@ -152,19 +135,11 @@ const imagenData = [
     },
     {
         id_producto: 8,
-        url_imagen: "https://scontent.flpb4-1.fna.fbcdn.net/v/t31.18172-8/17545263_1158923360903911_7566977588359853150_o.jpg?_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=zSFnh-c0cCwQ7kNvgFTavd-&_nc_ht=scontent.flpb4-1.fna&_nc_gid=Aq5g_V6RhhtOEwICJBc9kyr&oh=00_AYDRcz9tFmFEYlIox2pE22A2oDPzXAYkgSgN3213eryjjA&oe=673517E1"
-    },
-    {
-        id_producto: 8,
         url_imagen: "https://pbs.twimg.com/media/F6gmqQQX0AAUw-u?format=jpg&name=medium"
     },
     {
         id_producto: 8,
         url_imagen: "https://media.sketchfab.com/models/e7a59ab8d30547e292483ea77806ea56/thumbnails/fd72dad389a8422aa17c4effe13a549f/46b776149fcd4888accf519ce95cccb0.jpeg"
-    },
-    {
-        id_producto: 8,
-        url_imagen: "https://scontent.flpb4-1.fna.fbcdn.net/v/t39.30808-6/415751175_755057313305526_3466031404666854053_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=BC4YG3X8ZPQQ7kNvgGfZ5_E&_nc_ht=scontent.flpb4-1.fna&_nc_gid=AnupXaUq6s4VymBF9sMd-gF&oh=00_AYADCZQOVuUrNVVQ18mCq5XZGQgCKefCgs9nFrVfvLJAUQ&oe=67137878"
     },
     {
         id_producto: 9,
