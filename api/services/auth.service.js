@@ -100,17 +100,15 @@ class AuthService {
 
     return user;
   }
-
   async sendVerificationEmail(user) {
-    // Generar un token de verificación
+    // Generar un token de verificación con expiración de 1 hora
     const payload = { sub: user.id_usuario };
     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "1h" });
-
-    
+  
     // Crear enlace de verificación
     const link = `http://localhost:3000/verify-account?token=${token}`;
     console.log("------------token", token);
-    
+  
     // Configurar el correo
     const mail = {
       from: config.smtpEmail,
@@ -118,17 +116,24 @@ class AuthService {
       subject: "Verificación de cuenta",
       html: `<b>Por favor verifica tu cuenta haciendo clic en este enlace: <a href="${link}">Verificar cuenta</a></b>`,
     };
-
+  
     // Enviar el correo
     const rta = await this.sendMail(mail);
     return rta;
   }
-
+  
   async getUser(email, password) {
     const user = await this.service.findByEmail(email);
     if (!user) {
       throw boom.unauthorized();
     }
+
+    //Quitar el Comentario de las lineas de abajo para la verificacion correcta de los usuarios
+
+    // if (!user.is_verified) {
+    //     throw boom.unauthorized("Por favor, verifica tu cuenta antes de iniciar sesión");
+    // }
+
 
     const isMatch = await bcrypt.compare(password, user.password_usuario);
     const isMatch2 = password === user.password_usuario
@@ -196,18 +201,56 @@ class AuthService {
     }
   }
   async sendMail(infoMail) {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      secure: true,
-      port: 465,
-      auth: {
-        user: config.smtpEmail,
-        pass: config.smtpPassword,
-      },
-    });
-    await transporter.sendMail(infoMail);
-    return { message: "mail sent" };
+    try {
+      const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        secure: true,
+        port: 465,
+        auth: {
+          user: config.smtpEmail,
+          pass: config.smtpPassword,
+        },
+      });
+  
+      // Enviar el correo
+      await transporter.sendMail(infoMail);
+      return { message: "Correo enviado exitosamente" };
+    } catch (error) {
+      console.error("Error al enviar el correo:", error);
+      throw boom.internal("Error al enviar el correo de verificación");
+    }
   }
+  async verifyAccount(token) {
+    try {
+        // Verificar el token JWT
+        const payload = jwt.verify(token, config.jwtSecret);
+        const user = await this.service.findOne(payload.sub); // Encuentra al usuario por ID
+
+        if (!user) {
+            throw new Error("Usuario no encontrado");
+        }
+
+        // Verifica si el usuario ya está verificado
+        if (user.is_verified) {
+            throw new Error("La cuenta ya está verificada.");
+        }
+
+        // Actualiza el estado del usuario para marcarlo como verificado
+        user.is_verified = true;
+        user.recovery_token = null; // Limpiar el recovery_token después de la verificación
+        await user.save();  // Guardar los cambios en la base de datos
+
+
+        return { message: "Cuenta verificada exitosamente" };
+    } catch (error) {
+        // Capturar errores y devolver un mensaje adecuado
+        throw new Error("Error al verificar cuenta: " + error.message);
+    }
 }
+
+
+    
+}
+
 
 module.exports = AuthService;

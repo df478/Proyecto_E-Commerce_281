@@ -76,6 +76,11 @@ const ArtesanoSchema = {
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
     },
+    is_verified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false, // Por defecto, no verificado
+        allowNull: false,
+    },
 }
 class Artesano extends Model {
     
