@@ -135,9 +135,11 @@ class PedidoService {
       await transporter.sendMail(mailOptions);
       console.log("Correo enviado con éxito.");
   
+      const nuevoCliente = await this.agregaCarrito(carrito.id_usuario);
       return {
         nuevoPedido,
         nuevaEntrega,
+        nuevoCliente,
         nuevaRelacion, // Devolvemos la relación creada en la tabla 'tiene'
         emailSent: true, // Confirmación de que el correo fue enviado
       };
