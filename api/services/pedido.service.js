@@ -1,9 +1,11 @@
 const boom = require("@hapi/boom");
 const { models } = require("../libs/sequelize");
-class PedidoService {
-  constructor() {
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
-  }
+class PedidoService {
+  constructor() {}
+
   async create(data) {
     console.log(data);
     try {
@@ -17,18 +19,27 @@ class PedidoService {
       if (!carrito) {
         throw new Error("El carrito no existe");
       }
-  
+
+      // Obteniendo el correo del cliente
+      const cliente = await models.Cliente.findOne({
+        where: { id_usuario: carrito.id_usuario }
+      });
+
+      if (!cliente || !cliente.email_usuario) {
+        throw new Error("No se encontró un correo electrónico para el cliente.");
+      }
+
       // Verificando si ya existe un pedido activo para este carrito
       const pedidoExistente = await models.Pedido.findOne({
         where: {
           id_carrito: carrito.id_carrito
         }
       });
-  
+
       if (pedidoExistente) {
         throw new Error("Ya existe un pedido activo para este carrito.");
       }
-  
+
       // Creando el pedido
       const nuevoData = {
         id_carrito: carrito.id_carrito,
@@ -37,22 +48,22 @@ class PedidoService {
         monto_pago: data.monto_pago,
         tipo_de_pedido: data.tipo_de_pedido
       };
-  
+
       const nuevoPedido = await models.Pedido.create(nuevoData);
-  
+
       // Creando la entrega
       const nuevaEntrega = await models.Entrega.create({
         id_pedido: nuevoPedido.id_pedido,
         id_cliente: carrito.id_usuario,
         estado_entrega: "Pendiente"
       });
-  
+
       // Procesando los productos del carrito y actualizando el stock
       for (const item of data.items) { // Aquí recibimos los items del carrito
         const producto = await models.Producto.findOne({
           where: { id_producto: item.id_producto }
         });
-  
+
         if (producto) {
           if (producto.stock_producto >= item.cantidad) {
             // Reduciendo el stock del producto
@@ -66,31 +77,65 @@ class PedidoService {
           throw new Error(`Producto con ID ${item.id_producto} no encontrado`);
         }
       }
-  
+
       // Crear la entrada en la tabla 'tiene' asociando el pedido con la notificación
       const tieneData = {
         id_pedido: nuevoPedido.id_pedido,   // Agarramos el ID del pedido recién creado
         id_notificacion: 9,                 // Asignamos el ID de notificación como 9 por defecto
         fecha_tiene: new Date()             // Fecha actual
       };
-  
+
       const nuevaRelacion = await models.Tiene.create(tieneData);
-  
+
       const nuevoCliente = await this.agregaCarrito(carrito.id_usuario);
-      
+
+      // **Enviando el correo al cliente**
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        secure: true,
+        port: 465,
+        auth: {
+          user: process.env.SMTP_EMAIL, // Email del archivo .env
+          pass: process.env.SMTP_PASSWORD, // Contraseña del archivo .env
+        },
+      });
+
+      const mailOptions = {
+        from: process.env.SMTP_EMAIL,
+        to: cliente.email_usuario,
+        subject: "Confirmación de Pedido",
+        html: `
+          <h1>¡Gracias por tu pedido!</h1>
+          <p>Estimado/a ${cliente.nombre_usuario},</p>
+          <p>Tu pedido ha sido creado con éxito. Aquí están los detalles:</p>
+          <ul>
+            <li>Fecha del Pedido: ${data.fecha_pedido}</li>
+            <li>Monto: $${data.monto_pago}</li>
+            <li>Tipo de Pedido: ${data.tipo_de_pedido}</li>
+          </ul>
+          <p>Nos pondremos en contacto contigo para los detalles de la entrega.</p>
+          <p>Gracias por confiar en nosotros.</p>
+        `,
+      };
+
+      await transporter.sendMail(mailOptions);
+      console.log("Correo enviado con éxito.");
+
       return {
         nuevoPedido,
         nuevaEntrega,
         nuevoCliente,
-        nuevaRelacion // Devolvemos la relación creada en la tabla 'tiene'
+        nuevaRelacion, // Devolvemos la relación creada en la tabla 'tiene'
+        emailSent: true, // Confirmación de que el correo fue enviado
       };
-  
+
     } catch (error) {
       console.error("Error al crear el pedido:", error);
       throw new Error("Error al crear el pedido: " + error.message);
     }
-}  
+  }
 
+//*********************************    ---    ********************************************* */
 async agregaCarrito(id_usuario) {
   const nuevoData = {
     id_usuario: id_usuario
