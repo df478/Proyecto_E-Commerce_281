@@ -12,6 +12,7 @@ class PedidoService {
         where: { id_carrito: data.id_carrito }
       });
       console.log(carrito);
+      
       // Verificando si el carrito existe
       if (!carrito) {
         throw new Error("El carrito no existe");
@@ -66,18 +67,29 @@ class PedidoService {
         }
       }
   
+      // Crear la entrada en la tabla 'tiene' asociando el pedido con la notificación
+      const tieneData = {
+        id_pedido: nuevoPedido.id_pedido,   // Agarramos el ID del pedido recién creado
+        id_notificacion: 9,                 // Asignamos el ID de notificación como 9 por defecto
+        fecha_tiene: new Date()             // Fecha actual
+      };
+  
+      const nuevaRelacion = await models.Tiene.create(tieneData);
+  
       const nuevoCliente = await this.agregaCarrito(carrito.id_usuario);
+      
       return {
         nuevoPedido,
         nuevaEntrega,
-        nuevoCliente
+        nuevoCliente,
+        nuevaRelacion // Devolvemos la relación creada en la tabla 'tiene'
       };
+  
     } catch (error) {
       console.error("Error al crear el pedido:", error);
       throw new Error("Error al crear el pedido: " + error.message);
     }
-  }
-  
+}  
 
 async agregaCarrito(id_usuario) {
   const nuevoData = {
