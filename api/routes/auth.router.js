@@ -87,4 +87,17 @@ router.post("/change-password", async (req, res, next) => {
     next(error);
   }
 });
+router.post("/verify", async (req, res, next) => {
+  try {
+    const { tipo_usuario, token } = req.body;
+    console.log(tipo_usuario)
+    const authService = new AuthService(tipo_usuario);
+    console.log(tipo_usuario)
+    const user = await authService.verifyAccount(token);
+    res.status(200).json({ message: "Cuenta verificada con éxito", user });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

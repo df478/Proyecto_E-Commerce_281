@@ -62,6 +62,12 @@ const ClienteSchema = {
             isNumeric: true   
         }
     },
+    is_verified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false, // Por defecto, no verificado
+        allowNull: false,
+    },
+    
 };
 
 class Cliente extends Model {
