@@ -12,6 +12,7 @@ async function generate() {
     { descripcion_notificacion: 'Recuerda dejar una reseña sobre tu compra.', tipo_notificacion: 'Reseña Pendiente' },
     { descripcion_notificacion: 'Tu carrito tiene artículos que podrían interesarte.', tipo_notificacion: 'Recordatorio de Carrito' },
     { descripcion_notificacion: '	Nuevos productos artesanales han sido añadidos.', tipo_notificacion: 'Nuevos Productos' },
+    { descripcion_notificacion: '	Nuevos pedidos artesanales han sido añadidos.', tipo_notificacion: 'Nuevos Pedidos' },
   ];
   
   for (const noticacion of notificacionData) {

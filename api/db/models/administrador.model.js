@@ -35,6 +35,11 @@ const AdministradorSchema = {
     allowNull: true,
     type: DataTypes.STRING,
   },
+  is_verified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true, // Por defecto, no verificado
+      allowNull: false,
+  },
 };
 
 class Administrador extends Model {

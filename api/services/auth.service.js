@@ -130,9 +130,9 @@ class AuthService {
 
     //Quitar el Comentario de las lineas de abajo para la verificacion correcta de los usuarios
 
-    // if (!user.is_verified) {
-    //     throw boom.unauthorized("Por favor, verifica tu cuenta antes de iniciar sesión");
-    // }
+    if (!user.is_verified) {
+        throw boom.unauthorized("Por favor, verifica tu cuenta antes de iniciar sesión");
+    }
 
 
     const isMatch = await bcrypt.compare(password, user.password_usuario);
