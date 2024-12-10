@@ -58,28 +58,47 @@ class EntregaService {
   }
   
   async update(id_entrega, cambios) {
-    const entrega = await this.findOne(id_entrega); // Obtener el registro existente
-  
+    // Obtener el registro existente de la entrega
+    const entrega = await this.findOne(id_entrega);
+    if (!entrega) {
+        throw new Error('La entrega no existe.');
+    }
+
+    // Obtener el pedido relacionado con la entrega
+    const pedido = await models.Pedido.findOne({
+        where: { id_pedido: entrega.id_pedido }, // Asumiendo que `id_pedido` está en el modelo de entrega
+    });
+    if (!pedido) {
+        throw new Error('El pedido relacionado no existe.');
+    }
+
     // Verificar si el estado de la entrega está cambiando a 'Entregado'
     if (cambios.estado_entrega && cambios.estado_entrega === 'Entregado' && entrega.estado_entrega !== 'Entregado') {
-      // Buscar al cliente asociado con esta entrega
-      const cliente = await models.Cliente.findOne({
-        where: { id_usuario: entrega.id_cliente }
-      });
-  
-      // Si el cliente existe, actualizar su nro_compras
-      if (cliente) {
-        await cliente.update({
-          nro_compras: cliente.nro_compras + 1
+        // Buscar al cliente asociado con esta entrega
+        const cliente = await models.Cliente.findOne({
+            where: { id_usuario: entrega.id_cliente },
         });
-        console.log("nro_compras del cliente actualizado a:", cliente.nro_compras + 1);
-      }
+
+        // Si el cliente existe, actualizar su nro_compras
+        if (cliente) {
+            await cliente.update({
+                nro_compras: cliente.nro_compras + 1,
+            });
+            console.log("nro_compras del cliente actualizado a:", cliente.nro_compras);
+        }
+
     }
-  
+
+    await pedido.update({
+      estado_pedido: 'Entregado',
+      });
+      console.log('Estado del pedido actualizado a "Entregado".');
     // Actualizar el registro de la entrega con los cambios
     const updatedEntrega = await entrega.update(cambios);
+
     return updatedEntrega;
-  }
+}
+
   
   async delete(id_entrega) {
     const entrega = await this.findOne(id_entrega); // Obtener el registro específico
