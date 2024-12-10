@@ -242,7 +242,7 @@ async update(id_pedido, cambios) {
     // Si el cliente existe, actualizamos su nro_compras
     if (cliente) {
       await cliente.update({
-        nro_compras: cliente.nro_compras + 1
+        //nro_compras: cliente.nro_compras + 1
       });
       console.log("nro_compras del cliente actualizado a:", cliente.nro_compras + 1);
     }

@@ -62,8 +62,6 @@ router.post('/',
 });
 
 router.patch('/:id_pedido', 
-    validatorHandler(obtenerPedidoSchema, "params"),
-    validatorHandler(actualizarPedidoSchema, "body"),
     async (req, res) => {
     try {
         const { id_pedido } = req.params;
