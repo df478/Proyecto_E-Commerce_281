@@ -1,11 +1,11 @@
-const { mysql } = require('mysql2/promise');
+const { Pool } = require('pg');
 const { config } = require('../config/config');
 
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
-const URI = `mysql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+const URI = `postgresql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
 
-const pool = mysql.createPool({
+const pool = new Pool({
     host: config.dbHost,
     user: config.dbUSer,
     password: config.dbPassword,
@@ -13,6 +13,7 @@ const pool = mysql.createPool({
     port: config.dbPort,
     waitForConnection: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
+    ssl: { rejectUnauthorized: false } 
 })
 module.exports = pool;
